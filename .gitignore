@@ -1,0 +1,26 @@
+# Caches (rebuilt locally from public datasets)
+*.pkl
+.comma_cache.pkl
+.nusc_cache.pkl
+.nusc_build.pkl
+
+# Raw / private data (confidential loader bag data — never commit)
+*.bag
+extracted_data/
+数据/
+
+# Public datasets (do NOT redistribute; download from official sources)
+公开数据集/
+Chunk_*/
+can_bus/
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+env/
+
+# OS
+.DS_Store
+Thumbs.db

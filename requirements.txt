@@ -1,0 +1,12 @@
+# 核心依赖（必需）
+numpy>=1.24
+pandas>=2.0
+scipy>=1.10
+scikit-learn>=1.3
+matplotlib>=3.7
+
+# 可选：深度时序基线(GRU/LSTM)需要 PyTorch (CPU版即可)
+# 不装也能跑完 exp1-exp6；只有单独的GRU对比脚本需要它。
+# 安装(CPU版)：
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+# torch>=2.0
