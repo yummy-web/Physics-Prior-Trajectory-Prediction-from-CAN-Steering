@@ -29,6 +29,7 @@ EXPERIMENTS = [
     ("exp10_hybrid", "Exp10: improved physics-data hybrid (method contribution)"),
     ("exp11_cross_dataset", "Exp11: cross-DATASET validation (loader+comma2k19+nuScenes)"),
     ("exp12_pi_deep_comparison", "Exp12: vs physics-informed deep baselines (PERL-style/gated hybrid)"),
+    ("exp13_gate_ablation",      "Exp13: learnable vs heuristic gate ablation (gate design justification)"),
 ]
 
 

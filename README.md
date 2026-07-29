@@ -60,7 +60,7 @@ CPU-only; the full suite runs in ~5–8 min on a laptop-class CPU. No GPU requir
 cd src
 python comma_loader.py         # build comma2k19 cache (first run only)
 python nuscenes_loader.py      # build nuScenes cache  (first run only)
-python run_all_experiments.py  # run exp1..exp12, writes figures/ and results/
+python run_all_experiments.py  # run exp1..exp13, writes figures/ and results/
 ```
 Individual experiments (`exp1_*.py` … `exp12_*.py`) can also be run standalone.
 
@@ -82,6 +82,7 @@ Individual experiments (`exp1_*.py` … `exp12_*.py`) can also be run standalone
 | exp10 | Gated physics–data hybrid | fig14 |
 | exp11 | Cross-dataset validation (loader + comma2k19 + nuScenes) | fig15, fig16 |
 | exp12 | Comparison vs physics-informed deep baselines (PERL-style/gated) | fig17 |
+| exp13 | Gate ablation: learnable-scalar / learnable-MLP / heuristic / no-gate | fig_gate_ablation |
 
 All figures are 300 DPI without in-figure titles (captions are in the paper).
 
