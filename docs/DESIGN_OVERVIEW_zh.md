@@ -98,6 +98,6 @@
 ## 八、目标期刊与定位（诚实评估）
 
 - **稳妥可达：SCI Q2/Q3** —— Sensors、IEEE Access、Measurement、IEEE T-IV、Automation in Construction。
-- **冲高：IEEE T-ITS（Q1）** —— 三数据集验证 + 理论刻画 + 方法贡献 + SOTA 物理信息对比已具备体量；但需注意 T-ITS 典型轨迹论文多含**周车交互/高精地图/多智能体**，而本文是 **ego 单车 + CAN、无周车无地图**，属于范围偏移，有一定 desk-reject 风险。Cover letter 需强调"数据稀缺鲁棒预测 + 跨车型部署 + 传感器可观测性"的 ITS 实践价值。
-- 备选降级路线：T-ITS 拒 → Transportation Research Part C（Q1，无版面费）→ IEEE Access / Sensors。
+- **冲高：IEEE TVT（Q1）** —— 三数据集验证 + 理论刻画 + 方法贡献 + SOTA 物理信息对比已具备体量；当前稿件的 framing 已转向 vehicle technology / onboard sensing / data-scarce prediction。
+- 备选降级路线：若当前稿件再退稿，可转投 Transportation Research Part C（Q1，无版面费）→ IEEE Access / Sensors。
 - 顶会不适用。

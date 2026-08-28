@@ -16,7 +16,7 @@ problems). Concretely we compare:
                      complexity) -- our contribution vs PERL's fixed residual
 
 All on comma2k19, control-conditioned, endpoint FDE@3s, across training sizes.
-This is the T-ITS "comparison with SOTA physics-informed methods" section, done
+This is the paper's "comparison with SOTA physics-informed methods" section, done
 honestly in the correct task setting.
 
 Outputs: figures/fig17_pi_deep_comparison.png, results/exp12_results.json

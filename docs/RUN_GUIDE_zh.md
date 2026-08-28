@@ -98,7 +98,7 @@ python nuscenes_loader.py     # 生成 .nusc_cache.pkl（566个可用场景）
 | fig14_hybrid.png | 改进混合模型 vs 纯物理/纯数据 | 方法贡献 |
 | fig15_cross_dataset_R2.png | 三数据集转向辨识R²箱线图 | 创新点1跨车型 |
 | fig16_cross_dataset_pred.png | nuScenes控制条件预测对比 | 创新点跨数据集 |
-| fig17_pi_deep_comparison.png | vs物理信息深度基线(PERL式/门控) | T-ITS SOTA对比 |
+| fig17_pi_deep_comparison.png | vs物理信息深度基线(PERL式/门控) | TVT SOTA对比 |
 
 > 所有图均为 300 DPI、无图内标题（期刊用图注），满足 IEEE 投稿要求。
 
