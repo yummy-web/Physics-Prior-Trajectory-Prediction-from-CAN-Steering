@@ -24,11 +24,23 @@ _BASE = os.path.join(os.path.dirname(__file__), "..", "..")
 CACHE_FILE = os.path.join(os.path.dirname(__file__), ".comma_cache.pkl")
 
 
+def _cache_candidates():
+    here = os.path.dirname(__file__)
+    candidates = [CACHE_FILE]
+    env_cache = os.environ.get("COMMA_CACHE_FILE")
+    if env_cache:
+        candidates.insert(0, env_cache)
+    candidates.append(os.path.join(here, "..", "..", "..", "数据分析", "paper_experiments", ".comma_cache.pkl"))
+    return [os.path.abspath(c) for c in candidates]
+
+
 def _dataset_dir():
     # find the folder that contains Chunk_1 / Chunk_2
-    for d in glob.glob(os.path.join(_BASE, "*")):
-        if os.path.isdir(os.path.join(d, "Chunk_1")) or os.path.isdir(os.path.join(d, "Chunk_2")):
-            return d
+    roots = [_BASE, os.path.join(os.path.dirname(__file__), "..", "..", "..")]
+    for root in roots:
+        for d in glob.glob(os.path.join(root, "*")):
+            if os.path.isdir(os.path.join(d, "Chunk_1")) or os.path.isdir(os.path.join(d, "Chunk_2")):
+                return d
     return os.path.join(_BASE, "gongkai")
 
 
@@ -115,11 +127,17 @@ def load_many(max_segments=40, min_speed=5.0, require_turning=True):
 
 
 def load_all_cached(min_speed=8.0, min_steer_std=1.0, use_cache=True, verbose=True):
-    if use_cache and os.path.exists(CACHE_FILE):
-        if verbose:
-            print("  [cache] loading from .comma_cache.pkl")
-        with open(CACHE_FILE, "rb") as f:
-            return pickle.load(f)
+    if use_cache:
+        for cache in _cache_candidates():
+            if os.path.exists(cache):
+                if verbose:
+                    print("  [cache] loading from %s" % cache)
+                with open(cache, "rb") as f:
+                    cached = pickle.load(f)
+                if len(cached) > 0:
+                    return cached
+                if verbose:
+                    print("  [cache] skipped empty cache")
     out = {}
     segs = list_segments()
     for sp in segs:

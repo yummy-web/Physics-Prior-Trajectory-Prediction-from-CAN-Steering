@@ -8,7 +8,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-FIG_DIR = os.path.join(os.path.dirname(__file__), "figures")
+FIG_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "figures"))
 os.makedirs(FIG_DIR, exist_ok=True)
 
 plt.rcParams.update({

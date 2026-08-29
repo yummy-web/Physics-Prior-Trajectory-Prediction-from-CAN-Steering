@@ -17,7 +17,24 @@ import glob
 import numpy as np
 import pandas as pd
 
-EXTRACTED_DIR = os.path.join(os.path.dirname(__file__), "..", "extracted_data")
+def _resolve_extracted_dir():
+    candidates = []
+    env_dir = os.environ.get("LOADER_EXTRACTED_DIR")
+    if env_dir:
+        candidates.append(env_dir)
+    here = os.path.dirname(__file__)
+    candidates.extend([
+        os.path.join(here, "..", "extracted_data"),
+        os.path.join(here, "..", "..", "..", "数据分析", "extracted_data"),
+    ])
+    for candidate in candidates:
+        candidate = os.path.abspath(candidate)
+        if os.path.exists(candidate):
+            return candidate
+    return os.path.abspath(candidates[0] if candidates else os.path.join(os.path.dirname(__file__), "..", "extracted_data"))
+
+
+EXTRACTED_DIR = _resolve_extracted_dir()
 ENCODER_FULL = 65530.0
 
 SEGMENTS = [

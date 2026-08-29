@@ -39,6 +39,9 @@ available.
 The loaders auto-discover the dataset folder by scanning for `Chunk_*` (comma) and
 `*_vehicle_monitor.json` (nuScenes).
 
+For local reruns outside this repository layout, the loaders also accept:
+`LOADER_EXTRACTED_DIR`, `COMMA_CACHE_FILE`, and `NUSC_CACHE_FILE`.
+
 ---
 
 ## 2. Environment
@@ -62,7 +65,7 @@ python comma_loader.py         # build comma2k19 cache (first run only)
 python nuscenes_loader.py      # build nuScenes cache  (first run only)
 python run_all_experiments.py  # run exp1..exp13, writes figures/ and results/
 ```
-Individual experiments (`exp1_*.py` … `exp12_*.py`) can also be run standalone.
+Individual experiments (`exp1_*.py` … `exp16_*.py`) can also be run standalone.
 
 ---
 
@@ -83,6 +86,9 @@ Individual experiments (`exp1_*.py` … `exp12_*.py`) can also be run standalone
 | exp11 | Cross-dataset validation (loader + comma2k19 + nuScenes) | fig15, fig16 |
 | exp12 | Comparison vs physics-informed deep baselines (PERL-style/gated) | fig17 |
 | exp13 | Gate ablation: learnable-scalar / learnable-MLP / heuristic / no-gate | fig_gate_ablation |
+| exp14 | Crossover sensitivity across public vehicle platforms and random splits | fig18 |
+| exp15 | Repeated-split stability of the smallest-budget gate ablation | fig19 |
+| exp16 | Loader steering-identification diagnostics for the lower R2 case | fig20 |
 
 All figures are 300 DPI without in-figure titles (captions are in the paper).
 

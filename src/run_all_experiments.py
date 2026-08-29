@@ -30,6 +30,9 @@ EXPERIMENTS = [
     ("exp11_cross_dataset", "Exp11: cross-DATASET validation (loader+comma2k19+nuScenes)"),
     ("exp12_pi_deep_comparison", "Exp12: vs physics-informed deep baselines (PERL-style/gated hybrid)"),
     ("exp13_gate_ablation",      "Exp13: learnable vs heuristic gate ablation (gate design justification)"),
+    ("exp14_crossover_platform_sensitivity", "Exp14: crossover platform/protocol sensitivity"),
+    ("exp15_gate_scarcity_stability", "Exp15: repeated-split scarce-budget gate stability"),
+    ("exp16_loader_identification_diagnostics", "Exp16: loader steering-identification diagnostics"),
 ]
 
 

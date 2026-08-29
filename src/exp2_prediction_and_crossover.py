@@ -299,7 +299,7 @@ def main():
     axes[1].set_xscale("log"); axes[1].set_yscale("log")
     axes[1].set_xlabel("Training data (s, log)"); axes[1].set_ylabel("FDE@3s (m, log)")
     axes[1].set_title("comma2k19 Passenger Car"); axes[1].legend()
-    fig.suptitle("Innovation 3: Data-scarcity crossover is universal across vehicle classes")
+    fig.suptitle("Data-scarcity crossover is protocol-specific across vehicle classes")
     save(fig,"fig3_crossover.png")
 
     # ---- Fig4: anisotropy ----

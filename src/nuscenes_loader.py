@@ -20,12 +20,24 @@ _BASE = os.path.join(os.path.dirname(__file__), "..", "..")
 CACHE_FILE = os.path.join(os.path.dirname(__file__), ".nusc_cache.pkl")
 
 
+def _cache_candidates():
+    here = os.path.dirname(__file__)
+    candidates = [CACHE_FILE]
+    env_cache = os.environ.get("NUSC_CACHE_FILE")
+    if env_cache:
+        candidates.insert(0, env_cache)
+    candidates.append(os.path.join(here, "..", "..", "..", "数据分析", "paper_experiments", ".nusc_cache.pkl"))
+    return [os.path.abspath(c) for c in candidates]
+
+
 def _dataset_dir():
-    for d in glob.glob(os.path.join(_BASE, "*")):
-        # find folder that (recursively) contains *_vehicle_monitor.json
-        hits = glob.glob(os.path.join(d, "**", "*_vehicle_monitor.json"), recursive=True)
-        if hits:
-            return os.path.dirname(hits[0])
+    roots = [_BASE, os.path.join(os.path.dirname(__file__), "..", "..", "..")]
+    for root in roots:
+        for d in glob.glob(os.path.join(root, "*")):
+            # find folder that (recursively) contains *_vehicle_monitor.json
+            hits = glob.glob(os.path.join(d, "**", "*_vehicle_monitor.json"), recursive=True)
+            if hits:
+                return os.path.dirname(hits[0])
     return None
 
 
@@ -78,11 +90,17 @@ def load_scene(dd, scene):
 
 
 def load_all_cached(min_speed=3.0, min_steer_std=5.0, use_cache=True, verbose=True, max_scenes=None):
-    if use_cache and os.path.exists(CACHE_FILE):
-        if verbose:
-            print("  [cache] loading from .nusc_cache.pkl")
-        with open(CACHE_FILE, "rb") as f:
-            return pickle.load(f)
+    if use_cache:
+        for cache in _cache_candidates():
+            if os.path.exists(cache):
+                if verbose:
+                    print("  [cache] loading from %s" % cache)
+                with open(cache, "rb") as f:
+                    cached = pickle.load(f)
+                if len(cached) > 0:
+                    return cached
+                if verbose:
+                    print("  [cache] skipped empty cache")
     dd = _dataset_dir()
     if dd is None:
         raise FileNotFoundError("nuScenes CAN expansion not found under 公开数据集/")
