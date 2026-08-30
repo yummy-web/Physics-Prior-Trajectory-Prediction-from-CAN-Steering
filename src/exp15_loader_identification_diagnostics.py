@@ -1,5 +1,5 @@
 """
-exp16_loader_identification_diagnostics.py
+exp15_loader_identification_diagnostics.py
 
 Diagnostic analysis for the articulated loader's lower steering-to-curvature R2.
 The loader is the most industrially relevant and most challenging platform in
@@ -7,8 +7,8 @@ the paper. This script reports whether its lower median R2 still supports a
 usable calibration backbone.
 
 Outputs:
-  figures/fig20_loader_identification_diagnostics.png
-  results/exp16_results.json
+  figures/fig19_loader_identification_diagnostics.png
+  results/exp15_results.json
 """
 import json
 import os
@@ -93,7 +93,7 @@ def pooled_fit(data):
 
 def main():
     print("=" * 70)
-    print("  Exp16: articulated-loader steering identification diagnostics")
+    print("  Exp15: articulated-loader steering identification diagnostics")
     print("=" * 70)
     data = load_all()
     per_session = {name: fit_segment(df) for name, df in data.items()}
@@ -127,12 +127,12 @@ def main():
     axes[1].bar(labels, curv_std, color="tab:orange")
     axes[1].set_ylabel("Curvature std. (1/m)")
     axes[1].set_xlabel("Loader session")
-    save(fig, "fig20_loader_identification_diagnostics.png")
+    save(fig, "fig19_loader_identification_diagnostics.png")
 
-    path = os.path.join(RES, "exp16_results.json")
+    path = os.path.join(RES, "exp15_results.json")
     with open(path, "w") as f:
         json.dump({"per_session": per_session, "summary": summary}, f, indent=2)
-    print(f"\nsaved {path}\nExp16 done.")
+    print(f"\nsaved {path}\nExp15 done.")
 
 
 if __name__ == "__main__":

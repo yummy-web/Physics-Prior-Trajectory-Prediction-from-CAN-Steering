@@ -63,9 +63,9 @@ CPU-only; the full suite runs in ~5–8 min on a laptop-class CPU. No GPU requir
 cd src
 python comma_loader.py         # build comma2k19 cache (first run only)
 python nuscenes_loader.py      # build nuScenes cache  (first run only)
-python run_all_experiments.py  # run exp1..exp13, writes figures/ and results/
+python run_all_experiments.py  # run exp1..exp15, writes figures/ and results/
 ```
-Individual experiments (`exp1_*.py` … `exp16_*.py`) can also be run standalone.
+Individual experiments (`exp1_*.py` … `exp15_*.py`) can also be run standalone.
 
 ---
 
@@ -87,8 +87,7 @@ Individual experiments (`exp1_*.py` … `exp16_*.py`) can also be run standalone
 | exp12 | Comparison vs physics-informed deep baselines (PERL-style/gated) | fig17 |
 | exp13 | Gate ablation: learnable-scalar / learnable-MLP / heuristic / no-gate | fig_gate_ablation |
 | exp14 | Crossover sensitivity across public vehicle platforms and random splits | fig18 |
-| exp15 | Repeated-split stability of the smallest-budget gate ablation | fig19 |
-| exp16 | Loader steering-identification diagnostics for the lower R2 case | fig20 |
+| exp15 | Loader steering-identification diagnostics for the lower R2 case | fig19 |
 
 All figures are 300 DPI without in-figure titles (captions are in the paper).
 
