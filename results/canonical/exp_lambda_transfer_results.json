@@ -1,0 +1,202 @@
+{
+  "horizon_s": 3.0,
+  "dt": 0.02,
+  "N_list": [
+    3,
+    5,
+    10,
+    20
+  ],
+  "source_schedule": {
+    "3": 0.35,
+    "5": 0.52,
+    "10": 0.72,
+    "20": 0.89
+  },
+  "provenance": {
+    "run_date": "2026-10-08T17:00:23",
+    "folds": 3,
+    "subset_seeds": 4,
+    "dataset": "nuscenes(target) <- comma(source)",
+    "causal": true,
+    "speed_src": "can_speed",
+    "yawrate_src": "backward_diff",
+    "collect_from": "exp_lambda_nusc_causal",
+    "gain_from": "gain_causal",
+    "source_schedule_origin": "comma only (exp_lambda_analytic); target test never used for selection",
+    "stat_unit": "scene (clustered bootstrap over test scenes); draw-level CI non-independent (4 subset seeds reuse same test scenes per fold)",
+    "scope": "temporally-causal; localisation pose + CAN at anchor; NOT real-vehicle sensor-only",
+    "ci_coverage": "scene-level CIs for source-vs-tval, universal-vs-tval, AND universal-vs-source",
+    "note": "CAUSAL: apply comma analytic-shrunk lambda schedule to nuScenes; compare vs universal/target-val/target-oracle"
+  },
+  "per_N": {
+    "3": {
+      "N": 3,
+      "n_draws": 12,
+      "lambda_source": 0.35,
+      "stat_unit": "scene (clustered); draw-level CI non-independent",
+      "fde_source": 2.7771057966273673,
+      "fde_universal": 4.146380945979515,
+      "fde_target_val": 2.4829838233633987,
+      "fde_target_oracle": 2.451038767241457,
+      "source_minus_tval": 0.2941219732639688,
+      "source_minus_tval_CI95_scene": [
+        0.23430387531965774,
+        0.35611228147159724
+      ],
+      "source_minus_tval_CI95_draw_nonindep": [
+        0.038792321967016236,
+        0.6294959306431577
+      ],
+      "universal_minus_tval": 1.6633971226161162,
+      "universal_minus_tval_CI95_scene": [
+        1.461054132327674,
+        1.8765293478193739
+      ],
+      "universal_minus_tval_CI95_draw_nonindep": [
+        0.7398314648608953,
+        2.8775705523288564
+      ],
+      "source_vs_universal": 1.3692751493521473,
+      "universal_minus_source_CI95_scene": [
+        1.2245254665467094,
+        1.5215162166357725
+      ],
+      "universal_minus_source_detail": {
+        "n_scenes": 566,
+        "mean_diff": 1.3674784789747756,
+        "CI95": [
+          1.2245254665467094,
+          1.5215162166357725
+        ],
+        "frac_scenes_positive": 0.9946996466431095
+      }
+    },
+    "5": {
+      "N": 5,
+      "n_draws": 12,
+      "lambda_source": 0.52,
+      "stat_unit": "scene (clustered); draw-level CI non-independent",
+      "fde_source": 2.6985979122389776,
+      "fde_universal": 3.4048246741565964,
+      "fde_target_val": 2.445039476279224,
+      "fde_target_oracle": 2.4283994242831004,
+      "source_minus_tval": 0.2535584359597538,
+      "source_minus_tval_CI95_scene": [
+        0.21261108443281146,
+        0.30057943105161283
+      ],
+      "source_minus_tval_CI95_draw_nonindep": [
+        0.0563258870694475,
+        0.4687509285302493
+      ],
+      "universal_minus_tval": 0.9597851978773716,
+      "universal_minus_tval_CI95_scene": [
+        0.8602689272609313,
+        1.069113425057707
+      ],
+      "universal_minus_tval_CI95_draw_nonindep": [
+        0.4242249306160442,
+        1.5454361927061178
+      ],
+      "source_vs_universal": 0.7062267619176179,
+      "universal_minus_source_CI95_scene": [
+        0.6440143806226095,
+        0.7718099070738321
+      ],
+      "universal_minus_source_detail": {
+        "n_scenes": 566,
+        "mean_diff": 0.7068477894474108,
+        "CI95": [
+          0.6440143806226095,
+          0.7718099070738321
+        ],
+        "frac_scenes_positive": 0.9717314487632509
+      }
+    },
+    "10": {
+      "N": 10,
+      "n_draws": 12,
+      "lambda_source": 0.72,
+      "stat_unit": "scene (clustered); draw-level CI non-independent",
+      "fde_source": 2.6119342428936982,
+      "fde_universal": 2.8442513313203217,
+      "fde_target_val": 2.4246361795550837,
+      "fde_target_oracle": 2.422134048147415,
+      "source_minus_tval": 0.1872980633386149,
+      "source_minus_tval_CI95_scene": [
+        0.16255812404190398,
+        0.21521282106927958
+      ],
+      "source_minus_tval_CI95_draw_nonindep": [
+        0.11851457730002837,
+        0.26236307236367296
+      ],
+      "universal_minus_tval": 0.4196151517652383,
+      "universal_minus_tval_CI95_scene": [
+        0.38019379534190606,
+        0.464331297429494
+      ],
+      "universal_minus_tval_CI95_draw_nonindep": [
+        0.299405100364651,
+        0.5497893178021509
+      ],
+      "source_vs_universal": 0.23231708842662332,
+      "universal_minus_source_CI95_scene": [
+        0.21648196272383746,
+        0.250142652964346
+      ],
+      "universal_minus_source_detail": {
+        "n_scenes": 566,
+        "mean_diff": 0.23240207551928865,
+        "CI95": [
+          0.21648196272383746,
+          0.250142652964346
+        ],
+        "frac_scenes_positive": 0.9787985865724381
+      }
+    },
+    "20": {
+      "N": 20,
+      "n_draws": 12,
+      "lambda_source": 0.89,
+      "stat_unit": "scene (clustered); draw-level CI non-independent",
+      "fde_source": 2.4324105551459536,
+      "fde_universal": 2.4893246461835834,
+      "fde_target_val": 2.3518341170938233,
+      "fde_target_oracle": 2.333955048308671,
+      "source_minus_tval": 0.08057643805213022,
+      "source_minus_tval_CI95_scene": [
+        0.060694561994165,
+        0.10131837580653968
+      ],
+      "source_minus_tval_CI95_draw_nonindep": [
+        0.0306260064390287,
+        0.13286091134937264
+      ],
+      "universal_minus_tval": 0.13749052908976012,
+      "universal_minus_tval_CI95_scene": [
+        0.11372468221374551,
+        0.16251155206330448
+      ],
+      "universal_minus_tval_CI95_draw_nonindep": [
+        0.07568665201530222,
+        0.20283005669258622
+      ],
+      "source_vs_universal": 0.0569140910376299,
+      "universal_minus_source_CI95_scene": [
+        0.05273002687738259,
+        0.06135342881853494
+      ],
+      "universal_minus_source_detail": {
+        "n_scenes": 566,
+        "mean_diff": 0.05690923324402525,
+        "CI95": [
+          0.05273002687738259,
+          0.06135342881853494
+        ],
+        "frac_scenes_positive": 0.8939929328621908
+      }
+    }
+  }
+}

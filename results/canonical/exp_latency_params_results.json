@@ -1,0 +1,22 @@
+{
+  "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+  "python": "3.10.12",
+  "cpu": "x86_64",
+  "note": "single-thread, after 50-iter warm-up; NO embedded hw; energy claims dropped",
+  "horizon_s": 3.0,
+  "rollout_steps": 60,
+  "latency_ms_per_prediction": {
+    "physics_causal": 0.0832,
+    "mlp_causal": 0.0483,
+    "residual_causal": 0.1316
+  },
+  "parameters": {
+    "physics_gain_a": 1,
+    "mlp": 1658,
+    "residual": 1659
+  },
+  "mlp_hidden": [
+    48,
+    24
+  ]
+}

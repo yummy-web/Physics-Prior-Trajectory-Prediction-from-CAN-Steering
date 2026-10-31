@@ -1,103 +1,54 @@
-# Physics-Prior Trajectory Prediction from CAN Steering
+# CAN 转向条件下的数据稀缺车辆轨迹预测
 
-Reproducibility repository for the paper:
+本仓库对应论文“CAN 转向条件下的数据稀缺车辆轨迹预测：物理先验与残差信任的验证集校准”。仓库公开的是可复现实验代码、论文实际引用的结果快照和中文实验说明，不重新分发任何原始数据。
 
-> **Physics-Prior Trajectory Prediction from CAN Steering under Data Scarcity:
-> Cross-Vehicle Identification, a Bias–Variance Crossover, and a Gated Hybrid Model**
+## 研究范围
 
-This repository contains all code, figures, and numerical results to reproduce the
-experiments. It studies **control-conditioned vehicle trajectory prediction** driven by
-the CAN steering signal, and shows — across **three independent vehicle classes** — that a
-lightweight physics prior is highly data-efficient, that prediction error is anisotropic
-(governed by which control signal is observable), and that a **gated physics–data hybrid**
-outperforms both pure physics and pure data-driven models once a modest amount of data is
-available.
+研究对象是无地图、无周围车辆轨迹输入的单车短时预测。预测器由控制条件物理先验 p 和残差网络 r 组成：
 
----
+ŷ = p + λ r
 
-## 1. Datasets
+λ 是离线标量：残差网络只在拟合分区训练，λ 在独立验证分区由闭式最小二乘对齐量估计并按验证锚点数量进行经验收缩，随后在外层测试前固定。论文把它定位为受限 CAN 和数据稀缺条件下的可审计校准流程，而不是 physics-plus-residual、标量融合或收缩思想本身的首次提出。
 
-| Dataset | Role | Access |
-|---------|------|--------|
-| **Articulated wheel loader (private)** | Real engineering case study (222 s, CAN + RTK-GPS) | **Not redistributed** (confidential, provided by an industrial partner). Extracted, anonymized feature CSVs may be shared on request. |
-| **comma2k19** | Sedan cross-vehicle validation | Public. Download from the official release: https://github.com/commaai/comma2k19 |
-| **nuScenes CAN bus expansion** | Renault Zoe cross-vehicle validation | Public. Download `can_bus.zip` from https://www.nuscenes.org/nuscenes (Downloads → CAN bus expansion) |
+当前证据支持的范围是：nuScenes 中收缩收益随平台特定预算增加而下降；comma2k19 的路线级结果主要是低预算描述性观察；跨平台迁移支持“收缩方向可复用、具体数值仍需目标平台校准”；CRISAL 只提供同一车辆七次采集的时间外部验证。旧的 heuristic gate、严格 1/N 定律、普适 λ 定律和嵌入式实时结论均不属于当前主张。
 
-> The raw loader bag files are **intentionally excluded** from this repository for
-> confidentiality. The public datasets are **not** re-hosted here (they have their own
-> licenses); use the official links above and the loader scripts in `src/`.
+## 仓库结构
 
-### Expected local layout
-```
-<project_root>/
-├── extracted_data/                 # loader feature CSVs (private)
-├── 公开数据集/  (or any name)
-│   ├── Chunk_1/ Chunk_2/           # comma2k19
-│   └── can_bus/can_bus/            # nuScenes CAN expansion (scene-*.json)
-└── src/                            # this repo's code
-```
-The loaders auto-discover the dataset folder by scanning for `Chunk_*` (comma) and
-`*_vehicle_monitor.json` (nuScenes).
+src/                         核心模块与当前因果实验脚本
+deprecated/                  历史、泄漏或未纳入当前证据链的文件，仅作审计留档
+results/canonical/           论文实际使用或明确引用的 JSON/CSV 快照
+results/reports_zh/          中文实验报告、收敛诊断和 provenance
+figures/canonical/           论文配套高清 PNG/PDF 图表
+experiments/                 外部数据实验的运行说明
+docs/                        数据、复现和发布政策
 
-For local reruns outside this repository layout, the loaders also accept:
-`LOADER_EXTRACTED_DIR`, `COMMA_CACHE_FILE`, and `NUSC_CACHE_FILE`.
+## 数据来源与许可
 
----
+| 数据 | 用途 | 获取方式 |
+|---|---|---|
+| comma2k19 | 公开路线级主实验 | https://github.com/commaai/comma2k19 |
+| nuScenes CAN bus expansion | 公开场景级主实验 | https://www.nuscenes.org/nuscenes |
+| CRISAL 2025 | 同车多采集外部验证 | https://doi.org/10.57745/YCXRWF |
+| 装载机数据 | 私有辅助案例 | 不随仓库发布 |
 
-## 2. Environment
+数据由各自提供方的许可和使用条款约束。用户应从官方来源获取数据，并自行确认使用许可。仓库不上传 comma2k19、nuScenes、CRISAL 原始文件、缓存、ROS bag 或私有装载机数据。
 
-```bash
-conda create -n loader_paper python=3.10 -y
-conda activate loader_paper
+## 环境
+
+python -m venv .venv
 pip install -r requirements.txt
-# optional, for the deep GRU baselines (exp7, exp12):
-pip install torch --index-url https://download.pytorch.org/whl/cpu
-```
-CPU-only; the full suite runs in ~5–8 min on a laptop-class CPU. No GPU required.
+pip install -r requirements-crisal.txt
 
----
+## 复现
 
-## 3. Run
+详细路径和命令见 docs/REPRODUCE_zh.md、docs/DATA_POLICY_zh.md、docs/PROVENANCE.md 和 experiments/crisal_external_validation/README.md。
 
-```bash
-cd src
-python comma_loader.py         # build comma2k19 cache (first run only)
-python nuscenes_loader.py      # build nuScenes cache  (first run only)
-python run_all_experiments.py  # run exp1..exp15, writes figures/ and results/
-```
-Individual experiments (`exp1_*.py` … `exp15_*.py`) can also be run standalone.
+先在本地准备数据，再按数据集运行对应脚本。结果快照已经放在 results/canonical/；没有私有装载机数据时，不能复现该辅助案例的数值。
 
----
+## 结果与边界
 
-## 4. Experiments and figures
+所有可引用数字、统计单位、split、seed 和限制见 results/reports_zh/PROVENANCE.md。canonical 目录中的 oracle 量仅作描述性上界，不能作为部署结果；CRISAL 的 INSPVA 是融合导航输出，不是独立定位真值；时间信息约束实验不等同于真实 IMU-only 或嵌入式硬件验证。
 
-| Exp | Content | Figures |
-|-----|---------|---------|
-| exp1 | CAN steering → curvature identification (loader + comma) | fig1, fig1b |
-| exp2 | Prediction + data-scarcity crossover + error anisotropy | fig2–4 |
-| exp3 | Full baselines (CV/CA/CTRV/CTRA/EKF) + bootstrap CI + significance | fig5, fig6 |
-| exp4 | Bias–variance theory of the crossover | fig7 |
-| exp5 | Physics-model ablation | fig8 |
-| exp6 | CAN degradation robustness (noise/dropout/latency) | fig9 |
-| exp7 | Deep GRU baseline vs physics | fig10 |
-| exp8 | Grouped (control-conditioned vs extrapolation) + ADE + lat/lon | fig11, fig12 |
-| exp9 | Stratified validation (speed × turn) | fig13 |
-| exp10 | Gated physics–data hybrid | fig14 |
-| exp11 | Cross-dataset validation (loader + comma2k19 + nuScenes) | fig15, fig16 |
-| exp12 | Comparison vs physics-informed deep baselines (PERL-style/gated) | fig17 |
-| exp13 | Gate ablation: learnable-scalar / learnable-MLP / heuristic / no-gate | fig_gate_ablation |
-| exp14 | Crossover sensitivity across public vehicle platforms and random splits | fig18 |
-| exp15 | Loader steering-identification diagnostics for the lower R2 case | fig19 |
+## 代码引用
 
-All figures are 300 DPI without in-figure titles (captions are in the paper).
-
----
-
-## 5. Citation
-
-If you use this code, please cite the paper (see `CITATION` once the DOI is assigned).
-
-## 6. License
-
-Code released under the MIT License (see `LICENSE`). Dataset licenses are governed by
-their respective providers (comma2k19, nuScenes).
+https://github.com/yummy-web/Physics-Prior-Trajectory-Prediction-from-CAN-Steering

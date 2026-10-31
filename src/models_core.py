@@ -60,6 +60,23 @@ def comma_gain(segs):
     return g
 
 
+def comma_gain_curv(segs, min_v=8.0):
+    """UNIFIED Model-C (revision): fit a in curvature = a * steer, where
+    curvature = radians(yaw_rate)/v. Consistent with the paper's kappa=a*delta
+    identification AND bicycle-kinematic rollout (omega = a*delta*v).
+    See exp_unify_physics.py: equivalent to yaw-rate model on near-constant-speed
+    comma, but markedly better on variable-speed nuScenes (FDE 0.352 vs 0.549 m)."""
+    xs, ys = [], []
+    for df in segs:
+        m = df["obs_v"].values > min_v
+        x = df["steer"].values[m]
+        y = (np.radians(df["yaw_rate"].values) / (df["obs_v"].values + 1e-3))[m]
+        ok = np.isfinite(x) & np.isfinite(y) & (np.abs(y) < np.nanpercentile(np.abs(y[np.isfinite(y)]), 97))
+        xs.append(x[ok]); ys.append(y[ok])
+    a, b, r, p, se = stats.linregress(np.concatenate(xs), np.concatenate(ys))
+    return a
+
+
 # ---------------- physics rollout (per-anchor FDE list) ----------------
 
 def loader_phys_fde(df, hs, dt, g, c, coef, use_obs_speed=False, no_steer=False, no_warmup_c=None):
@@ -114,6 +131,51 @@ def loader_direct_dataset(data, segs, hs, dt):
     return np.array(X), np.array(Y)
 
 
+def comma_mlp_dataset(data, keys, hs, dt, causal=True, hist_win=10):
+    """Build (X, Y, groups) for the comma residual/direct MLP.
+    causal=True  -> features use ONLY the history window [i0-hist_win, i0] and t0 state
+    causal=False -> features use the future window [i0, i0+hs]  (ORACLE, = old leaky code)
+    Y is the displacement in the t0 body frame. groups = per-anchor route id (for grouped bootstrap)."""
+    import re
+    X, Y, grp = [], [], []
+    for s in keys:
+        df = data[s]; n = len(df)
+        seg = df["seg"].iloc[0] if "seg" in df else s
+        m = re.search(r"(\d{4}-\d{2}-\d{2}--\d{2}-\d{2}-\d{2})", str(seg))
+        route = m.group(1) if m else str(s)
+        st = df["steer"].values; v = df["obs_v"].values; cv = df["can_speed"].values if "can_speed" in df else v
+        yr = np.radians(df["yaw_rate"].values)
+        for i0 in range(hist_win, n - hs, 5):
+            if causal:
+                h = slice(max(i0 - hist_win, 0), i0 + 1)
+                feat = [v[i0], cv[i0], yr[i0], st[i0],
+                        np.mean(st[h]), np.std(st[h]), np.mean(v[h]),
+                        (st[i0] - st[h.start]) / (max(i0 - h.start, 1) * dt)]
+            else:
+                fut = slice(i0, i0 + hs)
+                feat = [v[i0], yr[i0], np.mean(st[fut]), np.std(st[fut]),
+                        np.mean(v[fut]), np.std(v[fut])]
+            yaw = np.radians(df["yaw_unwrap"].values[i0])
+            dx = df["x"].values[i0 + hs] - df["x"].values[i0]
+            dy = df["y"].values[i0 + hs] - df["y"].values[i0]
+            cc, ss = np.cos(-yaw), np.sin(-yaw)
+            X.append(feat); Y.append([cc * dx - ss * dy, ss * dx + cc * dy]); grp.append(route)
+    return np.array(X), np.array(Y), np.array(grp)
+
+
+def grouped_bootstrap_ci(vals, groups, n_boot=2000, alpha=0.05, seed=0):
+    """Bootstrap over GROUPS (routes/sessions), not individual anchors (R2-8).
+    Resamples groups with replacement, averages per-group means."""
+    vals = np.asarray(vals); groups = np.asarray(groups)
+    uniq = np.unique(groups)
+    gmean = {g: float(np.mean(vals[groups == g])) for g in uniq}
+    gm = np.array([gmean[g] for g in uniq])
+    rng = np.random.default_rng(seed)
+    means = [np.mean(rng.choice(gm, size=len(gm), replace=True)) for _ in range(n_boot)]
+    lo, hi = np.percentile(means, [100 * alpha / 2, 100 * (1 - alpha / 2)])
+    return float(np.mean(gm)), float(lo), float(hi)
+
+
 def train_mlp(X, Y, hidden=(48, 24), seed=0):
     sc = StandardScaler().fit(X)
     mdl = MLPRegressor(hidden_layer_sizes=hidden, max_iter=1000, alpha=1e-3,
@@ -162,6 +224,67 @@ def comma_phys_metrics(df, hs, dt, g, use_obs_speed=True):
             gx = x[i0 + k + 1]; gy = y[i0 + k + 1]
             ds.append(np.hypot(px - gx, py - gy))
             ex, ey = px - gx, py - gy
+        ade.append(np.mean(ds)); fde.append(ds[-1])
+        c, s = np.cos(yaw0), np.sin(yaw0)
+        lon.append(abs(c * ex + s * ey)); lat.append(abs(-s * ex + c * ey))
+    return {"ade": np.array(ade), "fde": np.array(fde),
+            "lat": np.array(lat), "lon": np.array(lon)}
+
+
+def comma_phys_metrics_curv(df, hs, dt, a, speed_mode="obs", steer_mode="future", hist_win=10):
+    """UNIFIED Model-C physics prior with explicit speed term in heading update:
+        th += a * steer * v * dt   (bicycle-consistent, omega = a*delta*v)
+
+    speed_mode controls the velocity source:
+        'obs'      -> future pose-derived obs_v[j]        (ORACLE, leaks future state)
+        'can'      -> future CAN can_speed[j]             (future control preview)
+        'hold'     -> freeze obs_v at anchor obs_v[i0]    (causal)
+        'can_hold' -> freeze CAN speed at anchor          (causal, deployable)
+        'hist'     -> linear extrapolation from history   (causal)
+    steer_mode controls the steering source:
+        'future'   -> future steer[j]                     (ORACLE / planner-preview)
+        'hold'     -> freeze steer at anchor steer[i0]    (causal)
+        'hist'     -> linear extrapolation from history   (causal)
+    Returns per-anchor dict: ade, fde, lat, lon."""
+    x = df["x"].values; y = df["y"].values; yaw = np.radians(df["yaw_unwrap"].values)
+    st = df["steer"].values
+    obs_v = df["obs_v"].values
+    can_v = df["can_speed"].values if "can_speed" in df else obs_v
+    n = len(df)
+    ade, fde, lat, lon = [], [], [], []
+    for i0 in range(0, n - hs, 5):
+        px, py, th = x[i0], y[i0], yaw[i0]
+        yaw0 = yaw[i0]
+        j0 = max(i0 - hist_win, 0)
+        vslope = (obs_v[i0] - obs_v[j0]) / ((i0 - j0) * dt) if i0 > j0 else 0.0
+        sslope = (st[i0] - st[j0]) / ((i0 - j0) * dt) if i0 > j0 else 0.0
+        ds = []; ex = ey = 0.0
+        for k in range(hs):
+            j = min(i0 + k, n - 1)
+            if speed_mode == "obs":
+                v = obs_v[j]
+            elif speed_mode == "can":
+                v = can_v[j]
+            elif speed_mode == "hold":
+                v = obs_v[i0]
+            elif speed_mode == "can_hold":
+                v = can_v[i0]
+            elif speed_mode == "hist":
+                v = max(obs_v[i0] + vslope * k * dt, 0.0)
+            else:
+                v = obs_v[j]
+            if steer_mode == "future":
+                sd = st[j]
+            elif steer_mode == "hold":
+                sd = st[i0]
+            elif steer_mode == "hist":
+                sd = st[i0] + sslope * k * dt
+            else:
+                sd = st[j]
+            th += a * sd * v * dt
+            px += v * np.cos(th) * dt; py += v * np.sin(th) * dt
+            gx = x[i0 + k + 1]; gy = y[i0 + k + 1]
+            ds.append(np.hypot(px - gx, py - gy)); ex, ey = px - gx, py - gy
         ade.append(np.mean(ds)); fde.append(ds[-1])
         c, s = np.cos(yaw0), np.sin(yaw0)
         lon.append(abs(c * ex + s * ey)); lat.append(abs(-s * ex + c * ey))

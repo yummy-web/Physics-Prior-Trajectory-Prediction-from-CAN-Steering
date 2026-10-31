@@ -1,0 +1,128 @@
+{
+  "experiment": "calibration_regret_audit",
+  "description": "Descriptive regret to the test-set grid oracle; not used for model selection.",
+  "sources": [
+    "exp_lambda_analytic_results.json",
+    "exp_lambda_analytic_nusc_results.json",
+    "exp_lambda_usability_results.json"
+  ],
+  "comma2k19": {
+    "dataset": "comma2k19",
+    "rows": [
+      {
+        "N": 3,
+        "full_fde": 2.1025160360947104,
+        "analytic_shrunk_fde": 1.823932413412618,
+        "oracle_fde": 1.8086463091700502,
+        "full_regret_vs_oracle": 0.2938697269246602,
+        "shrunk_regret_vs_oracle": 0.015286104242567822,
+        "shrunk_gain_vs_full": 0.27858362268209236,
+        "fraction_of_full_to_oracle_gap_closed": 0.9479833993023489,
+        "validation_selected_fde": null,
+        "validation_selected_regret_vs_oracle": null,
+        "statistical_scope": "scene-level CI exists for nuScenes shrink-vs-full; all regret quantities are descriptive point estimates"
+      },
+      {
+        "N": 5,
+        "full_fde": 1.8330040860401338,
+        "analytic_shrunk_fde": 1.7494962759248611,
+        "oracle_fde": 1.7271002621477078,
+        "full_regret_vs_oracle": 0.10590382389242592,
+        "shrunk_regret_vs_oracle": 0.02239601377715328,
+        "shrunk_gain_vs_full": 0.08350781011527264,
+        "fraction_of_full_to_oracle_gap_closed": 0.7885249752652699,
+        "validation_selected_fde": null,
+        "validation_selected_regret_vs_oracle": null,
+        "statistical_scope": "scene-level CI exists for nuScenes shrink-vs-full; all regret quantities are descriptive point estimates"
+      },
+      {
+        "N": 10,
+        "full_fde": 1.6885313091733272,
+        "analytic_shrunk_fde": 1.6860851999939468,
+        "oracle_fde": 1.6649857412894356,
+        "full_regret_vs_oracle": 0.023545567883891616,
+        "shrunk_regret_vs_oracle": 0.021099458704511243,
+        "shrunk_gain_vs_full": 0.0024461091793803735,
+        "fraction_of_full_to_oracle_gap_closed": 0.10388830676935366,
+        "validation_selected_fde": null,
+        "validation_selected_regret_vs_oracle": null,
+        "statistical_scope": "scene-level CI exists for nuScenes shrink-vs-full; all regret quantities are descriptive point estimates"
+      },
+      {
+        "N": 20,
+        "full_fde": 1.5871305760021766,
+        "analytic_shrunk_fde": 1.5878924848609213,
+        "oracle_fde": 1.581948411470538,
+        "full_regret_vs_oracle": 0.005182164531638556,
+        "shrunk_regret_vs_oracle": 0.005944073390383275,
+        "shrunk_gain_vs_full": -0.0007619088587447198,
+        "fraction_of_full_to_oracle_gap_closed": -0.1470252158326997,
+        "validation_selected_fde": null,
+        "validation_selected_regret_vs_oracle": null,
+        "statistical_scope": "scene-level CI exists for nuScenes shrink-vs-full; all regret quantities are descriptive point estimates"
+      }
+    ]
+  },
+  "nuScenes": {
+    "dataset": "nuScenes",
+    "rows": [
+      {
+        "N": 3,
+        "full_fde": 4.146380945979515,
+        "analytic_shrunk_fde": 2.4829838233633987,
+        "oracle_fde": 2.451038767241457,
+        "full_regret_vs_oracle": 1.6953421787380578,
+        "shrunk_regret_vs_oracle": 0.03194505612194165,
+        "shrunk_gain_vs_full": 1.6633971226161162,
+        "fraction_of_full_to_oracle_gap_closed": 0.9811571631246029,
+        "validation_selected_fde": 1.8553862660946923,
+        "validation_selected_regret_vs_oracle": -0.5956525011467648,
+        "statistical_scope": "scene-level CI exists for nuScenes shrink-vs-full; all regret quantities are descriptive point estimates"
+      },
+      {
+        "N": 5,
+        "full_fde": 3.4048246741565964,
+        "analytic_shrunk_fde": 2.445039476279224,
+        "oracle_fde": 2.4283994242831004,
+        "full_regret_vs_oracle": 0.976425249873496,
+        "shrunk_regret_vs_oracle": 0.016640051996123617,
+        "shrunk_gain_vs_full": 0.9597851978773724,
+        "fraction_of_full_to_oracle_gap_closed": 0.9829581916298462,
+        "validation_selected_fde": 1.8115699946061186,
+        "validation_selected_regret_vs_oracle": -0.6168294296769818,
+        "statistical_scope": "scene-level CI exists for nuScenes shrink-vs-full; all regret quantities are descriptive point estimates"
+      },
+      {
+        "N": 10,
+        "full_fde": 2.8442513313203217,
+        "analytic_shrunk_fde": 2.4246361795550837,
+        "oracle_fde": 2.422134048147415,
+        "full_regret_vs_oracle": 0.42211728317290653,
+        "shrunk_regret_vs_oracle": 0.0025021314076685286,
+        "shrunk_gain_vs_full": 0.419615151765238,
+        "fraction_of_full_to_oracle_gap_closed": 0.9940724260592675,
+        "validation_selected_fde": 1.6813043307564028,
+        "validation_selected_regret_vs_oracle": -0.7408297173910123,
+        "statistical_scope": "scene-level CI exists for nuScenes shrink-vs-full; all regret quantities are descriptive point estimates"
+      },
+      {
+        "N": 20,
+        "full_fde": 2.4893246461835834,
+        "analytic_shrunk_fde": 2.3518341170938233,
+        "oracle_fde": 2.333955048308671,
+        "full_regret_vs_oracle": 0.15536959787491256,
+        "shrunk_regret_vs_oracle": 0.01787906878515244,
+        "shrunk_gain_vs_full": 0.13749052908976012,
+        "fraction_of_full_to_oracle_gap_closed": 0.8849255643980826,
+        "validation_selected_fde": 1.5852519115224462,
+        "validation_selected_regret_vs_oracle": -0.7487031367862247,
+        "statistical_scope": "scene-level CI exists for nuScenes shrink-vs-full; all regret quantities are descriptive point estimates"
+      }
+    ]
+  },
+  "interpretation": [
+    "The grid oracle is a descriptive upper bound and is never available at deployment.",
+    "The regret and fraction-closed quantities are point estimates; only the nuScenes shrink-vs-full comparison has scene-clustered CIs in the source JSON.",
+    "Do not interpret a high fraction closed as a theorem or as a guarantee for unseen platforms."
+  ]
+}

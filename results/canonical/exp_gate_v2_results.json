@@ -1,0 +1,23 @@
+{
+  "horizon_s": 3.0,
+  "gain_a": 0.00022698010817025048,
+  "diag_corr_histStd_vs_true_physErr": 0.26537545711739585,
+  "note": "all gates causal (history std / causal features); threshold on validation",
+  "val_threshold": 0.2,
+  "learn_scalar_ab": [
+    4.0,
+    3.0
+  ],
+  "gate_mean_opening": {
+    "heuristic": 0.5314726360802093,
+    "scalar": 0.9777880390182662,
+    "mlp": 0.752167799911516
+  },
+  "fde_by_gate": {
+    "PurePhysics": 1.7620348390835683,
+    "NoGate": 1.0730927470966514,
+    "Heuristic": 1.261206988139453,
+    "Learn-Scalar": 1.0733579785936682,
+    "Learn-MLP": 1.1236669821703293
+  }
+}

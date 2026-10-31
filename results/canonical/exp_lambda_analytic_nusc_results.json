@@ -1,0 +1,385 @@
+{
+  "horizon_s": 3.0,
+  "dt": 0.02,
+  "N_list": [
+    3,
+    5,
+    10,
+    20
+  ],
+  "kappa": 300,
+  "kappa_sweep": [
+    100,
+    200,
+    300,
+    500,
+    800
+  ],
+  "lambdas": [
+    0.0,
+    0.25,
+    0.5,
+    0.75,
+    1.0,
+    1.25,
+    1.5
+  ],
+  "provenance": {
+    "run_date": "2026-10-08T16:50:47",
+    "folds": 3,
+    "subset_seeds": 4,
+    "dataset": "nuscenes",
+    "causal": true,
+    "speed_src": "can_speed",
+    "yawrate_src": "backward_diff",
+    "collect_from": "exp_lambda_nusc_causal",
+    "gain_from": "gain_causal",
+    "kappa_unit": "raw_validation_anchor_count (overlapping stride-5 windows; NOT an effective independent sample size)",
+    "kappa_tuned_on_test": false,
+    "kappa_selection": "FIXED prior, declared before test eval; defensibility via kappa_sweep with scene-level CIs (not post-hoc picked)",
+    "stat_unit": "scene (clustered bootstrap over test scenes); draw-level CI is non-independent (4 subset seeds reuse same test scenes per fold)",
+    "scope": "temporally-causal: uses localisation pose + CAN signals available at anchor; NOT a real-vehicle sensor-only causal validation",
+    "note": "CAUSAL closed-form lambda=<r,y-p>/<r,r> + shrinkage; nested grouped CV; replaces leaky exp_lambda_shrinkage_nusc.collect (central-diff obs_v/yaw_rate)"
+  },
+  "per_N": {
+    "3": {
+      "N": 3,
+      "n_draws": 12,
+      "fde_prior": 2.4714334429980194,
+      "fde_full": 4.146380945979515,
+      "fde_grid": 2.7518274964688274,
+      "fde_analytic": 2.6838308709499863,
+      "fde_analytic_shrunk": 2.4829838233633987,
+      "fde_oracle": 2.451038767241457,
+      "shrunk_gain_vs_full": 1.6633971226161162,
+      "shrunk_gain_CI95_draw_nonindep": [
+        0.7398314648608953,
+        2.8775705523288564
+      ],
+      "shrunk_gain_CI95_scene": [
+        1.461054132327674,
+        1.8765293478193739
+      ],
+      "shrunk_gain_scene_detail": {
+        "n_scenes": 566,
+        "mean_diff": 1.6608434413841102,
+        "CI95": [
+          1.461054132327674,
+          1.8765293478193739
+        ],
+        "frac_scenes_positive": 0.9876325088339223
+      },
+      "stat_unit": "scene (clustered); draw-level CI retained but non-independent",
+      "lhat_grid_mean": 0.5,
+      "lhat_analytic_mean": 0.4754544525991144,
+      "lhat_shrunk_mean": 0.16726594989305332,
+      "kappa_sweep": {
+        "100": {
+          "fde_shrunk": 2.542136418883274,
+          "lhat_shrunk_mean": 0.29454797974869645,
+          "gain_vs_full": 1.6042445270962407,
+          "gain_vs_full_CI95_scene": [
+            1.4051004855569282,
+            1.8132414160104886
+          ]
+        },
+        "200": {
+          "fde_shrunk": 2.49993037828792,
+          "lhat_shrunk_mean": 0.21336634294377047,
+          "gain_vs_full": 1.6464505676915948,
+          "gain_vs_full_CI95_scene": [
+            1.4455600323597964,
+            1.8580010957650603
+          ]
+        },
+        "300": {
+          "fde_shrunk": 2.4829838233633987,
+          "lhat_shrunk_mean": 0.16726594989305332,
+          "gain_vs_full": 1.6633971226161162,
+          "gain_vs_full_CI95_scene": [
+            1.461054132327674,
+            1.8765293478193739
+          ]
+        },
+        "500": {
+          "fde_shrunk": 2.4707567953565053,
+          "lhat_shrunk_mean": 0.11679591618738998,
+          "gain_vs_full": 1.6756241506230098,
+          "gain_vs_full_CI95_scene": [
+            1.4709751749579767,
+            1.8900893078807115
+          ]
+        },
+        "800": {
+          "fde_shrunk": 2.466345512965592,
+          "lhat_shrunk_mean": 0.08040467471749654,
+          "gain_vs_full": 1.6800354330139224,
+          "gain_vs_full_CI95_scene": [
+            1.4731028998360804,
+            1.8951513120132453
+          ]
+        }
+      }
+    },
+    "5": {
+      "N": 5,
+      "n_draws": 12,
+      "fde_prior": 2.4661546214249515,
+      "fde_full": 3.4048246741565964,
+      "fde_grid": 2.467524209637549,
+      "fde_analytic": 2.4655039312535965,
+      "fde_analytic_shrunk": 2.445039476279224,
+      "fde_oracle": 2.4283994242831004,
+      "shrunk_gain_vs_full": 0.9597851978773716,
+      "shrunk_gain_CI95_draw_nonindep": [
+        0.4242249306160442,
+        1.5454361927061178
+      ],
+      "shrunk_gain_CI95_scene": [
+        0.8602689272609313,
+        1.069113425057707
+      ],
+      "shrunk_gain_scene_detail": {
+        "n_scenes": 566,
+        "mean_diff": 0.960684946603622,
+        "CI95": [
+          0.8602689272609313,
+          1.069113425057707
+        ],
+        "frac_scenes_positive": 0.9240282685512368
+      },
+      "stat_unit": "scene (clustered); draw-level CI retained but non-independent",
+      "lhat_grid_mean": 0.20833333333333334,
+      "lhat_analytic_mean": 0.22082699781267814,
+      "lhat_shrunk_mean": 0.11476328070928205,
+      "kappa_sweep": {
+        "100": {
+          "fde_shrunk": 2.451001638103948,
+          "lhat_shrunk_mean": 0.16881811385561377,
+          "gain_vs_full": 0.9538230360526478,
+          "gain_vs_full_CI95_scene": [
+            0.8555088719686489,
+            1.061392622448997
+          ]
+        },
+        "200": {
+          "fde_shrunk": 2.446300356630782,
+          "lhat_shrunk_mean": 0.13663857616935624,
+          "gain_vs_full": 0.9585243175258135,
+          "gain_vs_full_CI95_scene": [
+            0.8594109988816985,
+            1.0670225285983148
+          ]
+        },
+        "300": {
+          "fde_shrunk": 2.445039476279224,
+          "lhat_shrunk_mean": 0.11476328070928205,
+          "gain_vs_full": 0.9597851978773716,
+          "gain_vs_full_CI95_scene": [
+            0.8602689272609313,
+            1.069113425057707
+          ]
+        },
+        "500": {
+          "fde_shrunk": 2.4458121824126224,
+          "lhat_shrunk_mean": 0.08692959516731595,
+          "gain_vs_full": 0.9590124917439734,
+          "gain_vs_full_CI95_scene": [
+            0.8592764308100419,
+            1.0688730116372411
+          ]
+        },
+        "800": {
+          "fde_shrunk": 2.4485335788829246,
+          "lhat_shrunk_mean": 0.06374109357536327,
+          "gain_vs_full": 0.956291095273671,
+          "gain_vs_full_CI95_scene": [
+            0.8560909475045909,
+            1.0669637548140507
+          ]
+        }
+      }
+    },
+    "10": {
+      "N": 10,
+      "n_draws": 12,
+      "fde_prior": 2.4745588533892264,
+      "fde_full": 2.8442513313203217,
+      "fde_grid": 2.4406576504521516,
+      "fde_analytic": 2.435514664677998,
+      "fde_analytic_shrunk": 2.4246361795550837,
+      "fde_oracle": 2.422134048147415,
+      "shrunk_gain_vs_full": 0.4196151517652383,
+      "shrunk_gain_CI95_draw_nonindep": [
+        0.299405100364651,
+        0.5497893178021509
+      ],
+      "shrunk_gain_CI95_scene": [
+        0.38019379534190606,
+        0.464331297429494
+      ],
+      "shrunk_gain_scene_detail": {
+        "n_scenes": 566,
+        "mean_diff": 0.41984173077208436,
+        "CI95": [
+          0.38019379534190606,
+          0.464331297429494
+        ],
+        "frac_scenes_positive": 0.8798586572438163
+      },
+      "stat_unit": "scene (clustered); draw-level CI retained but non-independent",
+      "lhat_grid_mean": 0.2916666666666667,
+      "lhat_analytic_mean": 0.32083155541859953,
+      "lhat_shrunk_mean": 0.21936173190085284,
+      "kappa_sweep": {
+        "100": {
+          "fde_shrunk": 2.4284651447031407,
+          "lhat_shrunk_mean": 0.2779706442969054,
+          "gain_vs_full": 0.41578618661718075,
+          "gain_vs_full_CI95_scene": [
+            0.37773783209740663,
+            0.4588732659774004
+          ]
+        },
+        "200": {
+          "fde_shrunk": 2.42548030797065,
+          "lhat_shrunk_mean": 0.24521256329323962,
+          "gain_vs_full": 0.41877102334967137,
+          "gain_vs_full_CI95_scene": [
+            0.3797457290177649,
+            0.4629298440931309
+          ]
+        },
+        "300": {
+          "fde_shrunk": 2.4246361795550837,
+          "lhat_shrunk_mean": 0.21936173190085284,
+          "gain_vs_full": 0.4196151517652383,
+          "gain_vs_full_CI95_scene": [
+            0.38019379534190606,
+            0.464331297429494
+          ]
+        },
+        "500": {
+          "fde_shrunk": 2.425897484228567,
+          "lhat_shrunk_mean": 0.1811646987135717,
+          "gain_vs_full": 0.4183538470917549,
+          "gain_vs_full_CI95_scene": [
+            0.3782029106980709,
+            0.46390241591282644
+          ]
+        },
+        "800": {
+          "fde_shrunk": 2.4301197677442326,
+          "lhat_shrunk_mean": 0.14364598671578435,
+          "gain_vs_full": 0.41413156357608916,
+          "gain_vs_full_CI95_scene": [
+            0.3731270143677226,
+            0.46024146047825987
+          ]
+        }
+      }
+    },
+    "20": {
+      "N": 20,
+      "n_draws": 12,
+      "fde_prior": 2.474495616630898,
+      "fde_full": 2.4893246461835834,
+      "fde_grid": 2.356365023820309,
+      "fde_analytic": 2.344650419591652,
+      "fde_analytic_shrunk": 2.3518341170938233,
+      "fde_oracle": 2.333955048308671,
+      "shrunk_gain_vs_full": 0.13749052908976012,
+      "shrunk_gain_CI95_draw_nonindep": [
+        0.07568665201530222,
+        0.20283005669258622
+      ],
+      "shrunk_gain_CI95_scene": [
+        0.11372468221374551,
+        0.16251155206330448
+      ],
+      "shrunk_gain_scene_detail": {
+        "n_scenes": 566,
+        "mean_diff": 0.1374606852508105,
+        "CI95": [
+          0.11372468221374551,
+          0.16251155206330448
+        ],
+        "frac_scenes_positive": 0.6890459363957597
+      },
+      "stat_unit": "scene (clustered); draw-level CI retained but non-independent",
+      "lhat_grid_mean": 0.4375,
+      "lhat_analytic_mean": 0.43682549492737643,
+      "lhat_shrunk_mean": 0.3455887794135996,
+      "kappa_sweep": {
+        "100": {
+          "fde_shrunk": 2.3461288183705196,
+          "lhat_shrunk_mean": 0.40149348971411136,
+          "gain_vs_full": 0.14319582781306364,
+          "gain_vs_full_CI95_scene": [
+            0.12117798957998495,
+            0.16630444149882234
+          ]
+        },
+        "200": {
+          "fde_shrunk": 2.3486845689559237,
+          "lhat_shrunk_mean": 0.37144941160204364,
+          "gain_vs_full": 0.14064007722765956,
+          "gain_vs_full_CI95_scene": [
+            0.1177442297143496,
+            0.16474839200128388
+          ]
+        },
+        "300": {
+          "fde_shrunk": 2.3518341170938233,
+          "lhat_shrunk_mean": 0.3455887794135996,
+          "gain_vs_full": 0.13749052908976012,
+          "gain_vs_full_CI95_scene": [
+            0.11372468221374551,
+            0.16251155206330448
+          ]
+        },
+        "500": {
+          "fde_shrunk": 2.3588640722543603,
+          "lhat_shrunk_mean": 0.3033499051819922,
+          "gain_vs_full": 0.13046057392922303,
+          "gain_vs_full_CI95_scene": [
+            0.10542812506529721,
+            0.1567795010200679
+          ]
+        },
+        "800": {
+          "fde_shrunk": 2.369372973847369,
+          "lhat_shrunk_mean": 0.2563519054540259,
+          "gain_vs_full": 0.11995167233621488,
+          "gain_vs_full_CI95_scene": [
+            0.09330988220901744,
+            0.14744677778308132
+          ]
+        }
+      }
+    }
+  },
+  "lambda_monotonicity_note": {
+    "N_list": [
+      3,
+      5,
+      10,
+      20
+    ],
+    "lhat_grid_mean": [
+      0.5,
+      0.20833333333333334,
+      0.2916666666666667,
+      0.4375
+    ],
+    "grid_strictly_monotonic": false,
+    "lhat_shrunk_mean": [
+      0.16726594989305332,
+      0.11476328070928205,
+      0.21936173190085284,
+      0.3455887794135996
+    ],
+    "shrunk_strictly_monotonic": false,
+    "interpretation": "Neither grid-optimal nor analytic-shrunk lambda is strictly monotonic in N. Grid-optimal lambda is non-monotonic and NOT even a clean low-to-high trend here (N=3=0.50 is the max, N=5=0.21 the min). Analytic-shrunk lambda rises overall from N=3=0.167 to N=20=0.346 but dips at N=5=0.115, so it is a trend between endpoints, NOT a strict step-by-step monotone law. The ROBUST claim is the FDE GAIN of shrinkage vs full-residual, which decreases monotonically with N (1.663>0.960>0.420>0.137, all scene-CIs exclude 0) i.e. the VALUE of shrinkage shrinks as budget grows. Do NOT claim a monotone lambda law; frame as empirical, platform-dependent calibration."
+  }
+}

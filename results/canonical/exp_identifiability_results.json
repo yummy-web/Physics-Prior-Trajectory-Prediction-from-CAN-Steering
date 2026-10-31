@@ -1,0 +1,59 @@
+{
+  "note": "causal state (one-sided backward diff); gain a in curvature=a*steer",
+  "comma2k19": {
+    "n_groups": 42,
+    "gain_global": 0.00021162292970294458,
+    "gain_mean": 0.00021483010438115932,
+    "gain_std": 2.2329295819957586e-05,
+    "gain_cv": 0.10393932349630489,
+    "gain_p2.5": 0.0001910120930869773,
+    "gain_p97.5": 0.000282981050227483,
+    "gain_se_median": 1.0004289913457102e-06,
+    "R2_median": 0.8086771208364278,
+    "R2_frac_gt07": 0.8333333333333334,
+    "residual_diag": {
+      "corr_resid_abssteer": -0.0003826302288782024,
+      "corr_resid_speed": 0.002832972452932178,
+      "corr_resid_abscurv": -0.05698896205207213,
+      "resid_std": 0.08851572056435124
+    },
+    "grouping": "per-route (42 routes from 328 segments)"
+  },
+  "nuscenes": {
+    "n_groups": 566,
+    "gain_global": 0.00035884903649670904,
+    "gain_mean": 0.00035170334971444716,
+    "gain_std": 6.456624202277628e-05,
+    "gain_cv": 0.1835815379399058,
+    "gain_p2.5": 0.0002201866843577582,
+    "gain_p97.5": 0.0004788854270608168,
+    "gain_se_median": 2.7543997098437478e-05,
+    "R2_median": 0.15043977671443048,
+    "R2_frac_gt07": 0.0,
+    "residual_diag": {
+      "corr_resid_abssteer": 0.00025407120145795885,
+      "corr_resid_speed": -0.0004650670194708642,
+      "corr_resid_abscurv": 0.02487471442593271,
+      "resid_std": 0.7667735747806043
+    }
+  },
+  "loader": {
+    "n_groups": 4,
+    "gain_global": 5.492872840344816e-06,
+    "gain_mean": 2.2067668918673825e-07,
+    "gain_std": 9.7409457146843e-06,
+    "gain_cv": 44.14105363610852,
+    "gain_p2.5": -1.4970279815783798e-05,
+    "gain_p97.5": 6.8665432219444115e-06,
+    "gain_se_median": 1.3598495591383692e-06,
+    "R2_median": 0.03166502421956523,
+    "R2_frac_gt07": 0.0,
+    "residual_diag": {
+      "corr_resid_abssteer": 0.012774712330017432,
+      "corr_resid_speed": 0.004278417209337217,
+      "corr_resid_abscurv": -0.04166929594439654,
+      "resid_std": 0.5922120367785406
+    },
+    "note": "steer=motor_angle-center; no CAN speed, pose speed used (documented limitation)"
+  }
+}

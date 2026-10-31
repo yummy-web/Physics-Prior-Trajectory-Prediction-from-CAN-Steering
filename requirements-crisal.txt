@@ -1,0 +1,2 @@
+# Optional parser for CRISAL ROS1 bag experiments; tested in the current workspace.
+rosbags==0.11.0

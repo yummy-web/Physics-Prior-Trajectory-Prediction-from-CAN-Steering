@@ -1,0 +1,90 @@
+{
+  "horizon_s": 3.0,
+  "N_list": [
+    3,
+    5,
+    10,
+    20
+  ],
+  "kappa": 300,
+  "provenance": {
+    "run_date": "2026-10-08T13:48:37",
+    "folds": 3,
+    "subset_seeds": 4,
+    "note": "closed-form lambda = <r,y-p>/<r,r> + small-sample shrinkage; nested grouped CV"
+  },
+  "per_N": {
+    "3": {
+      "N": 3,
+      "n_draws": 12,
+      "fde_prior": 1.9126519192308635,
+      "fde_full": 2.1025160360947104,
+      "fde_grid": 1.8553862660946923,
+      "fde_analytic": 1.8448001560331149,
+      "fde_analytic_shrunk": 1.823932413412618,
+      "fde_oracle": 1.8086463091700502,
+      "shrunk_gain_vs_full": 0.27858362268209197,
+      "shrunk_gain_CI95": [
+        0.1146815238366548,
+        0.4752768158224831
+      ],
+      "lhat_grid_mean": 0.625,
+      "lhat_analytic_mean": 0.515810029935644,
+      "lhat_shrunk_mean": 0.3504520806993569
+    },
+    "5": {
+      "N": 5,
+      "n_draws": 12,
+      "fde_prior": 1.8869920161828653,
+      "fde_full": 1.8330040860401338,
+      "fde_grid": 1.8115699946061186,
+      "fde_analytic": 1.7506194539802786,
+      "fde_analytic_shrunk": 1.7494962759248611,
+      "fde_oracle": 1.7271002621477078,
+      "shrunk_gain_vs_full": 0.08350781011527242,
+      "shrunk_gain_CI95": [
+        -0.003927921732431525,
+        0.21044175020422803
+      ],
+      "lhat_grid_mean": 0.8125,
+      "lhat_analytic_mean": 0.6427589450228084,
+      "lhat_shrunk_mean": 0.521755969202646
+    },
+    "10": {
+      "N": 10,
+      "n_draws": 12,
+      "fde_prior": 1.9273646253146677,
+      "fde_full": 1.6885313091733272,
+      "fde_grid": 1.6813043307564028,
+      "fde_analytic": 1.6841930212579148,
+      "fde_analytic_shrunk": 1.6860851999939468,
+      "fde_oracle": 1.6649857412894356,
+      "shrunk_gain_vs_full": 0.002446109179380207,
+      "shrunk_gain_CI95": [
+        -0.017289963904324593,
+        0.022628967966370556
+      ],
+      "lhat_grid_mean": 0.875,
+      "lhat_analytic_mean": 0.8049247051516207,
+      "lhat_shrunk_mean": 0.7188783331009261
+    },
+    "20": {
+      "N": 20,
+      "n_draws": 12,
+      "fde_prior": 1.9169717388775165,
+      "fde_full": 1.5871305760021766,
+      "fde_grid": 1.5852519115224462,
+      "fde_analytic": 1.58911919642994,
+      "fde_analytic_shrunk": 1.5878924848609213,
+      "fde_oracle": 1.581948411470538,
+      "shrunk_gain_vs_full": -0.0007619088587446273,
+      "shrunk_gain_CI95": [
+        -0.009475261293817731,
+        0.00782846453223339
+      ],
+      "lhat_grid_mean": 0.9166666666666666,
+      "lhat_analytic_mean": 0.9517569102175928,
+      "lhat_shrunk_mean": 0.8894302892539138
+    }
+  }
+}

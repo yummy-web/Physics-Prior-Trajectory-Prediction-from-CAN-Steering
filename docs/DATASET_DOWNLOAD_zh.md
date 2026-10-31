@@ -22,7 +22,7 @@
 1. 注册并登录 nuScenes 官网：https://www.nuscenes.org/nuscenes （免费，学术用途）
 2. 到 Downloads 页面，找到 **"CAN bus expansion"**（在 Full dataset 区域下方的 expansion 列表里）。
 3. 下载 `can_bus.zip`（约几十 MB）。
-4. 解压到：`D:\论文与项目\路径规划\公开数据集\nuscenes_can\`
+4. 解压到：`<data_root>/nuscenes_can/`
    解压后应有形如 `scene-0001_meta.json`、`scene-0001_ms_imu.json`、`scene-0001_vehicle_monitor.json`、`scene-0001_pose.json` 等一批 JSON 文件。
 5. （可选）装官方 devkit 方便校验：`pip install nuscenes-devkit`，但我会写独立解析器，不强制依赖。
 
@@ -32,7 +32,7 @@
 - `utime`：时间戳(微秒)
 `pose.json` 里有 `pos`(位置)、`orientation`(四元数)、`vel`(速度)、`utime`。
 
-> 下好后把 `nuscenes_can` 文件夹告诉我，我写 `nuscenes_loader.py`，跑同一套 exp1(转向辨识) + exp8(控制条件预测) 流程，产出第三车型的对照结果。
+> 当前仓库已包含 nuScenes 解析与因果实验脚本。准备好数据后，按 `docs/REPRODUCE_zh.md` 运行当前脚本，不需要再创建额外解析器。
 
 ---
 
@@ -47,5 +47,6 @@
 
 ## 我的建议
 
-优先 **nuScenes CAN bus expansion**（小、信号对口、最能加分）。KITTI 作为退路。
-下好任一个，告诉我文件夹路径，我立即写解析器并补跑跨数据集实验，把结果并入论文。
+当前公开复现实验使用 comma2k19、nuScenes CAN bus expansion 和 CRISAL 2025。请从各数据集官方页面获取原始数据；仓库不重新分发数据，也不要求将数据复制到仓库目录。
+
+主结果的固定配置、统计单位和可写结论见 docs/PROVENANCE.md。CRISAL 仅在具备七次合格采集时运行 grouped 外部验证；只有单个 bag 时，应将输出视为 QC 或探索性 pilot。

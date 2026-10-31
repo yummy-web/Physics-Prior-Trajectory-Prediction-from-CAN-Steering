@@ -1,0 +1,291 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-10-24T23:31:29.985447+00:00",
+  "dataset": "CRISAL 2025; seven acquisitions, same vehicle and collection day",
+  "raw_data_root": "<CRISAL_ROOT>",
+  "expected_acquisition_count": 7,
+  "discovered_acquisition_count": 7,
+  "eligible_acquisition_count": 7,
+  "eligible_acquisition_ids": [
+    "08_04_2024_anneau_cite_scientifique_1_2024-04-08-12-03-32",
+    "08_04_2024_anneau_cite_scientifique_2_2024-04-08-12-14-51",
+    "08_04_2024_bleu_2024-04-08-12-47-23",
+    "08_04_2024_jaune_2024-04-08-13-16-18",
+    "08_04_2024_rouge_2024-04-08-12-57-04",
+    "08_04_2024_vert_2024-04-08-12-35-18",
+    "08_04_2024_violet_2024-04-08-12-20-41"
+  ],
+  "excluded_acquisitions": [],
+  "minimum_valid_anchors_per_acquisition": 80,
+  "acquisitions": [
+    {
+      "acquisition_id": "08_04_2024_anneau_cite_scientifique_1_2024-04-08-12-03-32",
+      "bag_path": "<CRISAL_ROOT>\\extracted\\08_04_2024_anneau_cite_scientifique_1_2024-04-08-12-03-32\\locsp_08_04_2024_anneau_cite_scientifique_1_2024-04-08-12-03-32.bag",
+      "bag_bytes": 20840635906,
+      "usable_ins_solution_good": 2026,
+      "ins_good_duration_sec": 265.4998939037323,
+      "raw_topic_message_counts": {
+        "/can/speed": 34598,
+        "/novatel/oem7/inspva": 3501,
+        "/can/steering": 34598
+      },
+      "ins_status_counts": {
+        "12": 685,
+        "7": 160,
+        "3": 2026,
+        "6": 170,
+        "2": 460
+      },
+      "header_time_fallback_counts": {
+        "/can/speed": 0,
+        "/novatel/oem7/inspva": 0,
+        "/can/steering": 0
+      },
+      "invalid_value_counts": {
+        "inspva_good_nonfinite_position_heading_velocity_or_height": 0,
+        "speed": 0,
+        "steering_angle_plus_offset": 0
+      },
+      "duplicate_timestamp_counts": {
+        "inspva_after_good_filter": 0,
+        "speed": 0,
+        "steering": 0
+      },
+      "valid_anchor_count": 392,
+      "speed_zoh_age_p95_sec": 0.009685242176055908,
+      "steering_zoh_age_p95_sec": 0.009801554679870605,
+      "label_bracket_p95_sec": 0.10098528861999512,
+      "all_features_finite": true,
+      "all_labels_finite": true,
+      "pilot_split_mode": "whole_acquisition; no within-acquisition random or chronological train/test split"
+    },
+    {
+      "acquisition_id": "08_04_2024_anneau_cite_scientifique_2_2024-04-08-12-14-51",
+      "bag_path": "<CRISAL_ROOT>\\extracted\\08_04_2024_anneau_cite_scientifique_2_2024-04-08-12-14-51\\locsp_08_04_2024_anneau_cite_scientifique_2024-04-08-12-14-51.bag",
+      "bag_bytes": 18224361390,
+      "usable_ins_solution_good": 3054,
+      "ins_good_duration_sec": 307.29970598220825,
+      "raw_topic_message_counts": {
+        "/can/speed": 30397,
+        "/novatel/oem7/inspva": 3074,
+        "/can/steering": 30396
+      },
+      "ins_status_counts": {
+        "3": 3054,
+        "6": 20
+      },
+      "header_time_fallback_counts": {
+        "/can/speed": 0,
+        "/novatel/oem7/inspva": 0,
+        "/can/steering": 0
+      },
+      "invalid_value_counts": {
+        "inspva_good_nonfinite_position_heading_velocity_or_height": 0,
+        "speed": 0,
+        "steering_angle_plus_offset": 0
+      },
+      "duplicate_timestamp_counts": {
+        "inspva_after_good_filter": 0,
+        "speed": 0,
+        "steering": 0
+      },
+      "valid_anchor_count": 596,
+      "speed_zoh_age_p95_sec": 0.009728968143463135,
+      "steering_zoh_age_p95_sec": 0.00977259874343872,
+      "label_bracket_p95_sec": 0.10191351175308228,
+      "all_features_finite": true,
+      "all_labels_finite": true,
+      "pilot_split_mode": "whole_acquisition; no within-acquisition random or chronological train/test split"
+    },
+    {
+      "acquisition_id": "08_04_2024_bleu_2024-04-08-12-47-23",
+      "bag_path": "<CRISAL_ROOT>\\extracted\\08_04_2024_bleu_2024-04-08-12-47-23\\locsp_08_04_2024_bleu_2024-04-08-12-47-23.bag",
+      "bag_bytes": 29209017464,
+      "usable_ins_solution_good": 4793,
+      "ins_good_duration_sec": 490.20006370544434,
+      "raw_topic_message_counts": {
+        "/can/speed": 48509,
+        "/can/steering": 48508,
+        "/novatel/oem7/inspva": 4903
+      },
+      "ins_status_counts": {
+        "3": 4793,
+        "6": 110
+      },
+      "header_time_fallback_counts": {
+        "/can/speed": 0,
+        "/can/steering": 0,
+        "/novatel/oem7/inspva": 0
+      },
+      "invalid_value_counts": {
+        "inspva_good_nonfinite_position_heading_velocity_or_height": 0,
+        "speed": 0,
+        "steering_angle_plus_offset": 0
+      },
+      "duplicate_timestamp_counts": {
+        "inspva_after_good_filter": 0,
+        "speed": 0,
+        "steering": 0
+      },
+      "valid_anchor_count": 927,
+      "speed_zoh_age_p95_sec": 0.009672975540161131,
+      "steering_zoh_age_p95_sec": 0.009620189666748047,
+      "label_bracket_p95_sec": 0.1009669303894043,
+      "all_features_finite": true,
+      "all_labels_finite": true,
+      "pilot_split_mode": "whole_acquisition; no within-acquisition random or chronological train/test split"
+    },
+    {
+      "acquisition_id": "08_04_2024_jaune_2024-04-08-13-16-18",
+      "bag_path": "<CRISAL_ROOT>\\extracted\\08_04_2024_jaune_2024-04-08-13-16-18\\locsp_08_04_2024_jaune_2024-04-08-13-16-18.bag",
+      "bag_bytes": 66438307855,
+      "usable_ins_solution_good": 11568,
+      "ins_good_duration_sec": 1158.6991200447083,
+      "raw_topic_message_counts": {
+        "/can/speed": 114513,
+        "/novatel/oem7/inspva": 11588,
+        "/can/steering": 114513
+      },
+      "ins_status_counts": {
+        "3": 11568,
+        "6": 20
+      },
+      "header_time_fallback_counts": {
+        "/can/speed": 0,
+        "/novatel/oem7/inspva": 0,
+        "/can/steering": 0
+      },
+      "invalid_value_counts": {
+        "inspva_good_nonfinite_position_heading_velocity_or_height": 0,
+        "speed": 0,
+        "steering_angle_plus_offset": 0
+      },
+      "duplicate_timestamp_counts": {
+        "inspva_after_good_filter": 0,
+        "speed": 0,
+        "steering": 0
+      },
+      "valid_anchor_count": 2300,
+      "speed_zoh_age_p95_sec": 0.009601819515228269,
+      "steering_zoh_age_p95_sec": 0.009640753269195557,
+      "label_bracket_p95_sec": 0.1021878719329834,
+      "all_features_finite": true,
+      "all_labels_finite": true,
+      "pilot_split_mode": "whole_acquisition; no within-acquisition random or chronological train/test split"
+    },
+    {
+      "acquisition_id": "08_04_2024_rouge_2024-04-08-12-57-04",
+      "bag_path": "<CRISAL_ROOT>\\extracted\\08_04_2024_rouge_2024-04-08-12-57-04\\locsp_08_04_2024_rouge_2024-04-08-12-57-04.bag",
+      "bag_bytes": 59511498333,
+      "usable_ins_solution_good": 9779,
+      "ins_good_duration_sec": 977.8008644580841,
+      "raw_topic_message_counts": {
+        "/can/speed": 96732,
+        "/novatel/oem7/inspva": 9779,
+        "/can/steering": 96732
+      },
+      "ins_status_counts": {
+        "3": 9779
+      },
+      "header_time_fallback_counts": {
+        "/can/speed": 0,
+        "/novatel/oem7/inspva": 0,
+        "/can/steering": 0
+      },
+      "invalid_value_counts": {
+        "inspva_good_nonfinite_position_heading_velocity_or_height": 0,
+        "speed": 0,
+        "steering_angle_plus_offset": 0
+      },
+      "duplicate_timestamp_counts": {
+        "inspva_after_good_filter": 0,
+        "speed": 0,
+        "steering": 0
+      },
+      "valid_anchor_count": 1948,
+      "speed_zoh_age_p95_sec": 0.009581351280212402,
+      "steering_zoh_age_p95_sec": 0.009615457057952881,
+      "label_bracket_p95_sec": 0.10329277515411377,
+      "all_features_finite": true,
+      "all_labels_finite": true,
+      "pilot_split_mode": "whole_acquisition; no within-acquisition random or chronological train/test split"
+    },
+    {
+      "acquisition_id": "08_04_2024_vert_2024-04-08-12-35-18",
+      "bag_path": "<CRISAL_ROOT>\\extracted\\08_04_2024_vert_2024-04-08-12-35-18\\locsp_08_04_2024_vert_2024-04-08-12-35-18.bag",
+      "bag_bytes": 34800047151,
+      "usable_ins_solution_good": 5943,
+      "ins_good_duration_sec": 601.1999390125275,
+      "raw_topic_message_counts": {
+        "/can/speed": 59443,
+        "/novatel/oem7/inspva": 6013,
+        "/can/steering": 59443
+      },
+      "ins_status_counts": {
+        "3": 5943,
+        "6": 70
+      },
+      "header_time_fallback_counts": {
+        "/can/speed": 0,
+        "/novatel/oem7/inspva": 0,
+        "/can/steering": 0
+      },
+      "invalid_value_counts": {
+        "inspva_good_nonfinite_position_heading_velocity_or_height": 0,
+        "speed": 0,
+        "steering_angle_plus_offset": 0
+      },
+      "duplicate_timestamp_counts": {
+        "inspva_after_good_filter": 0,
+        "speed": 0,
+        "steering": 0
+      },
+      "valid_anchor_count": 1155,
+      "speed_zoh_age_p95_sec": 0.009611105918884276,
+      "steering_zoh_age_p95_sec": 0.009565591812133789,
+      "label_bracket_p95_sec": 0.10283875465393066,
+      "all_features_finite": true,
+      "all_labels_finite": true,
+      "pilot_split_mode": "whole_acquisition; no within-acquisition random or chronological train/test split"
+    },
+    {
+      "acquisition_id": "08_04_2024_violet_2024-04-08-12-20-41",
+      "bag_path": "<CRISAL_ROOT>\\extracted\\08_04_2024_violet_2024-04-08-12-20-41\\locsp_08_04_2024_violet_2024-04-08-12-20-41.bag",
+      "bag_bytes": 44080866202,
+      "usable_ins_solution_good": 7252,
+      "ins_good_duration_sec": 732.0996975898743,
+      "raw_topic_message_counts": {
+        "/can/speed": 72406,
+        "/novatel/oem7/inspva": 7322,
+        "/can/steering": 72406
+      },
+      "ins_status_counts": {
+        "3": 7252,
+        "6": 70
+      },
+      "header_time_fallback_counts": {
+        "/can/speed": 0,
+        "/novatel/oem7/inspva": 0,
+        "/can/steering": 0
+      },
+      "invalid_value_counts": {
+        "inspva_good_nonfinite_position_heading_velocity_or_height": 0,
+        "speed": 0,
+        "steering_angle_plus_offset": 0
+      },
+      "duplicate_timestamp_counts": {
+        "inspva_after_good_filter": 0,
+        "speed": 0,
+        "steering": 0
+      },
+      "valid_anchor_count": 1429,
+      "speed_zoh_age_p95_sec": 0.009638786315917969,
+      "steering_zoh_age_p95_sec": 0.009618949890136718,
+      "label_bracket_p95_sec": 0.10063719749450684,
+      "all_features_finite": true,
+      "all_labels_finite": true,
+      "pilot_split_mode": "whole_acquisition; no within-acquisition random or chronological train/test split"
+    }
+  ],
+  "scope_limit": "Acquisition QC and sampleability only; INSPVA is fused navigation and this dataset does not establish independent ground-truth accuracy or cross-vehicle generalization."
+}
