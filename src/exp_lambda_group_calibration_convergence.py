@@ -32,9 +32,9 @@ from sklearn.preprocessing import StandardScaler
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 RESULTS = ROOT / "results"
-CANONICAL = RESULTS / "exp_lambda_group_calibration_results.json"
-DEFAULT_OUT = RESULTS / "exp_lambda_group_calibration_convergence_results.json"
-DEFAULT_REPORT = RESULTS / "EXP_LAMBDA_GROUP_CALIBRATION_CONVERGENCE_zh.md"
+CANONICAL = RESULTS / "canonical" / "exp_lambda_group_calibration_results.json"
+DEFAULT_OUT = RESULTS / "supplementary" / "exp_lambda_group_calibration_convergence_results.json"
+DEFAULT_REPORT = RESULTS / "reports_zh" / "EXP_LAMBDA_GROUP_CALIBRATION_CONVERGENCE_zh.md"
 
 sys.path.insert(0, str(HERE))
 import causal_eval as E

@@ -16,7 +16,7 @@
 
 ## 不支持的结论
 
-不支持严格 lambda 单调、严格 1/N、普适 schedule、跨车辆参数直接迁移、heuristic gate 最优、oracle 可部署、嵌入式实时已验证或 CRISAL 跨车型泛化。
+不支持严格 lambda 单调、严格 1/N、普适 schedule、跨车辆参数直接迁移、heuristic gate 最优、oracle 可部署、嵌入式实时已验证或 CRIStAL/LOCSP 跨车型泛化。
 
 ## 文件对应关系
 

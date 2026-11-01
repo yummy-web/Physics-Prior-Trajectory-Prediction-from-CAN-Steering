@@ -1,6 +1,6 @@
-# CAN 转向条件下的数据稀缺车辆轨迹预测
+# 面向数据稀缺 CAN 车辆轨迹预测的验证集残差信任校准
 
-本仓库对应论文“CAN 转向条件下的数据稀缺车辆轨迹预测：物理先验与残差信任的验证集校准”。仓库公开的是可复现实验代码、论文实际引用的结果快照和中文实验说明，不重新分发任何原始数据。
+本仓库对应论文“面向数据稀缺 CAN 车辆轨迹预测的验证集残差信任校准”。仓库公开的是可复现实验代码、论文实际引用的结果快照和中文实验说明，不重新分发任何原始数据。
 
 ## 研究范围
 
@@ -10,7 +10,7 @@
 
 λ 是离线标量：残差网络只在拟合分区训练，λ 在独立验证分区由闭式最小二乘对齐量估计并按验证锚点数量进行经验收缩，随后在外层测试前固定。论文把它定位为受限 CAN 和数据稀缺条件下的可审计校准流程，而不是 physics-plus-residual、标量融合或收缩思想本身的首次提出。
 
-当前证据支持的范围是：nuScenes 中收缩收益随平台特定预算增加而下降；comma2k19 的路线级结果主要是低预算描述性观察；跨平台迁移支持“收缩方向可复用、具体数值仍需目标平台校准”；CRISAL 只提供同一车辆七次采集的时间外部验证。旧的 heuristic gate、严格 1/N 定律、普适 λ 定律和嵌入式实时结论均不属于当前主张。
+当前证据支持的范围是：nuScenes 中收缩收益随平台特定预算增加而下降；comma2k19 的路线级结果主要是低预算描述性观察；跨平台迁移支持“收缩方向可复用、具体数值仍需目标平台校准”；CRIStAL/LOCSP 只提供同一车辆七次采集的时间外部验证。旧的 heuristic gate、严格 1/N 定律、普适 λ 定律和嵌入式实时结论均不属于当前主张。
 
 ## 仓库结构
 
@@ -20,6 +20,7 @@ results/canonical/           论文实际使用或明确引用的 JSON/CSV 快�
 results/reports_zh/          中文实验报告、收敛诊断和 provenance
 figures/canonical/           论文配套高清 PNG/PDF 图表
 experiments/                 外部数据实验的运行说明
+results/supplementary/      新增补充审计结果（不替换 canonical 主结果）
 docs/                        数据、复现和发布政策
 
 ## 数据来源与许可
@@ -28,16 +29,18 @@ docs/                        数据、复现和发布政策
 |---|---|---|
 | comma2k19 | 公开路线级主实验 | https://github.com/commaai/comma2k19 |
 | nuScenes CAN bus expansion | 公开场景级主实验 | https://www.nuscenes.org/nuscenes |
-| CRISAL 2025 | 同车多采集外部验证 | https://doi.org/10.57745/YCXRWF |
+| CRIStAL/LOCSP 2025 | 同车多采集外部验证 | https://doi.org/10.57745/YCXRWF |
 | 装载机数据 | 私有辅助案例 | 不随仓库发布 |
 
-数据由各自提供方的许可和使用条款约束。用户应从官方来源获取数据，并自行确认使用许可。仓库不上传 comma2k19、nuScenes、CRISAL 原始文件、缓存、ROS bag 或私有装载机数据。
+数据由各自提供方的许可和使用条款约束。用户应从官方来源获取数据，并自行确认使用许可。仓库不上传 comma2k19、nuScenes、CRIStAL/LOCSP 原始文件、缓存、ROS bag 或私有装载机数据。
 
 ## 环境
 
 python -m venv .venv
 pip install -r requirements.txt
 pip install -r requirements-crisal.txt
+# Optional causal GRU supplement:
+# pip install -r requirements-gru.txt
 
 ## 复现
 
@@ -47,7 +50,7 @@ pip install -r requirements-crisal.txt
 
 ## 结果与边界
 
-所有可引用数字、统计单位、split、seed 和限制见 results/reports_zh/PROVENANCE.md。canonical 目录中的 oracle 量仅作描述性上界，不能作为部署结果；CRISAL 的 INSPVA 是融合导航输出，不是独立定位真值；时间信息约束实验不等同于真实 IMU-only 或嵌入式硬件验证。
+所有可引用数字、统计单位、split、seed 和限制见 results/reports_zh/PROVENANCE.md。canonical 目录中的 oracle 量仅作描述性上界，不能作为部署结果；CRIStAL/LOCSP 的 INSPVA 是融合导航输出，不是独立定位真值；时间信息约束实验不等同于真实 IMU-only 或嵌入式硬件验证。
 
 ## 代码引用
 

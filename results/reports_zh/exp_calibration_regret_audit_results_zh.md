@@ -1,12 +1,8 @@
-# 校准收益与 oracle 差距审计
+# Lambda calibration regret audit
 
-## 协议和解释
+This is a descriptive audit of frozen results; it does not retrain or select models.
 
-本审计使用已有预测结果，比较满残差、验证集收缩和测试集 oracle。oracle 使用测试集信息，只能作为描述性上界；“关闭差距比例”是点估计，不是可部署保证，也未作为独立显著性检验。
-
-## 结果
-
-| 数据集 | N | 满残差 FDE (m) | 收缩后 FDE (m) | oracle FDE (m) | 收缩收益 (m) | 关闭满残差至 oracle 差距比例 |
+| Dataset | N | Full FDE | Shrunk FDE | Oracle FDE | Shrunk gain vs full | Full-to-oracle gap closed |
 |---|---:|---:|---:|---:|---:|---:|
 | comma2k19 | 3 | 2.103 | 1.824 | 1.809 | 0.279 | 0.948 |
 | comma2k19 | 5 | 1.833 | 1.749 | 1.727 | 0.084 | 0.789 |
@@ -17,6 +13,7 @@
 | nuScenes | 10 | 2.844 | 2.425 | 2.422 | 0.420 | 0.994 |
 | nuScenes | 20 | 2.489 | 2.352 | 2.334 | 0.137 | 0.885 |
 
-## 解释边界
-
-该审计支持“验证集收缩可接近测试集最优标量的描述性现象”，尤其在 nuScenes 的低预算点；它不证明 oracle 可部署，也不替代 scene-level 不确定性分析。
+Interpretation:
+- The oracle uses test-set information and is only a descriptive upper bound.
+- Regret and fraction-closed values are point estimates; they are not significance claims.
+- The source nuScenes JSON contains scene-clustered CIs for shrink-vs-full, but not for every regret quantity.

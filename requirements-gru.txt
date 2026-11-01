@@ -1,0 +1,2 @@
+# Optional dependency for src/exp_gru_baseline_causal.py
+torch>=2.0

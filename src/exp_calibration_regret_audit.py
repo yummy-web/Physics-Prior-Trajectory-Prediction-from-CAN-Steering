@@ -8,13 +8,19 @@ from pathlib import Path
 import json
 
 ROOT = Path(__file__).resolve().parents[1]
-RES = ROOT / "results"
-OUT_JSON = RES / "exp_calibration_regret_audit_results.json"
-OUT_MD = RES / "exp_calibration_regret_audit_results.md"
+RES = ROOT / "results" / "canonical"
+OUT_JSON = ROOT / "results" / "supplementary" / "exp_calibration_regret_audit_results.json"
+OUT_MD = ROOT / "results" / "reports_zh" / "exp_calibration_regret_audit_results_zh.md"
 
 
 def load(name):
-    return json.loads((RES / name).read_text(encoding="utf-8"))
+    candidates = [RES / name, ROOT / "results" / "canonical" / name,
+                  ROOT / "results" / "supplementary" / name,
+                  ROOT / "deprecated" / "local_unpublished_results" / name]
+    for p in candidates:
+        if p.exists():
+            return json.loads(p.read_text(encoding="utf-8"))
+    raise FileNotFoundError(f"Result not found: {name}; checked {candidates}")
 
 
 def summarize(label, obj):

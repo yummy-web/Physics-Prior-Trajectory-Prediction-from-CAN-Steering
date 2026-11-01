@@ -1,0 +1,2018 @@
+{
+  "title": "Causal GRU baseline",
+  "status": "FULL_RUN",
+  "configuration": {
+    "epochs": 80,
+    "patience": 12,
+    "hidden": 32,
+    "input_features": [
+      "causal_speed",
+      "causal_pose_speed",
+      "backward_yaw_rate",
+      "steer"
+    ],
+    "split_source": "results\\canonical\\exp_lambda_group_calibration_results.json"
+  },
+  "per_dataset": {
+    "comma": {
+      "grouping_unit": "route",
+      "per_N": {
+        "3": {
+          "N": 3,
+          "n_draws": 12,
+          "n_groups": 42,
+          "mean_fde_m": {
+            "direct_gru": 13.049698378358569,
+            "residual_gru": 1.734541886619159,
+            "physics": 1.9126519220215934
+          },
+          "comparisons": {
+            "residual_gru_vs_direct_gru": {
+              "n_groups": 42,
+              "mean_gain_m": 11.31515649173941,
+              "CI95_m": [
+                8.776912724847595,
+                13.9470718270079
+              ],
+              "fraction_cand_better": 1.0
+            },
+            "residual_gru_vs_physics": {
+              "n_groups": 42,
+              "mean_gain_m": 0.17811003540243422,
+              "CI95_m": [
+                0.10711240610551266,
+                0.24326674641952623
+              ],
+              "fraction_cand_better": 0.7857142857142857
+            }
+          },
+          "diagnostics": [
+            {
+              "draw": 0,
+              "gain": 0.0002709442261121844,
+              "fit_anchors": 608,
+              "test_anchors": 8814,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 1026.98095703125,
+                "n_train": 487,
+                "n_val": 121
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 3.866407871246338,
+                "n_train": 487,
+                "n_val": 121
+              }
+            },
+            {
+              "draw": 1,
+              "gain": 0.00022302254632456352,
+              "fit_anchors": 760,
+              "test_anchors": 8814,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 145.65415954589844,
+                "n_train": 608,
+                "n_val": 152
+              },
+              "residual": {
+                "epochs_run": 50,
+                "best_val_mse": 2.4296951293945312,
+                "n_train": 608,
+                "n_val": 152
+              }
+            },
+            {
+              "draw": 2,
+              "gain": 0.00020464013571684644,
+              "fit_anchors": 1519,
+              "test_anchors": 8814,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 12.653016090393066,
+                "n_train": 1216,
+                "n_val": 303
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.7745600938796997,
+                "n_train": 1216,
+                "n_val": 303
+              }
+            },
+            {
+              "draw": 3,
+              "gain": 0.00023709978144569822,
+              "fit_anchors": 684,
+              "test_anchors": 8814,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 332.5279541015625,
+                "n_train": 548,
+                "n_val": 136
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.7704232931137085,
+                "n_train": 548,
+                "n_val": 136
+              }
+            },
+            {
+              "draw": 4,
+              "gain": 0.00020237612495003734,
+              "fit_anchors": 1520,
+              "test_anchors": 8132,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 22.356985092163086,
+                "n_train": 1216,
+                "n_val": 304
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 2.107778787612915,
+                "n_train": 1216,
+                "n_val": 304
+              }
+            },
+            {
+              "draw": 5,
+              "gain": 0.00020003736730962873,
+              "fit_anchors": 1596,
+              "test_anchors": 8132,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 15.56975269317627,
+                "n_train": 1277,
+                "n_val": 319
+              },
+              "residual": {
+                "epochs_run": 24,
+                "best_val_mse": 1.9718002080917358,
+                "n_train": 1277,
+                "n_val": 319
+              }
+            },
+            {
+              "draw": 6,
+              "gain": 0.00022304177781510507,
+              "fit_anchors": 1292,
+              "test_anchors": 8132,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 54.883968353271484,
+                "n_train": 1034,
+                "n_val": 258
+              },
+              "residual": {
+                "epochs_run": 70,
+                "best_val_mse": 1.954963207244873,
+                "n_train": 1034,
+                "n_val": 258
+              }
+            },
+            {
+              "draw": 7,
+              "gain": 0.00021303168396338327,
+              "fit_anchors": 1366,
+              "test_anchors": 8132,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 16.279064178466797,
+                "n_train": 1093,
+                "n_val": 273
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 2.502000093460083,
+                "n_train": 1093,
+                "n_val": 273
+              }
+            },
+            {
+              "draw": 8,
+              "gain": 0.0002202478679486163,
+              "fit_anchors": 1216,
+              "test_anchors": 7979,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 25.598901748657227,
+                "n_train": 973,
+                "n_val": 243
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.2355509996414185,
+                "n_train": 973,
+                "n_val": 243
+              }
+            },
+            {
+              "draw": 9,
+              "gain": 0.0002343611171969663,
+              "fit_anchors": 1216,
+              "test_anchors": 7979,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 23.517393112182617,
+                "n_train": 973,
+                "n_val": 243
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.4460092782974243,
+                "n_train": 973,
+                "n_val": 243
+              }
+            },
+            {
+              "draw": 10,
+              "gain": 0.00020080282876506187,
+              "fit_anchors": 1140,
+              "test_anchors": 7979,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 40.790401458740234,
+                "n_train": 912,
+                "n_val": 228
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.4303903579711914,
+                "n_train": 912,
+                "n_val": 228
+              }
+            },
+            {
+              "draw": 11,
+              "gain": 0.00023994528833306847,
+              "fit_anchors": 1216,
+              "test_anchors": 7979,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 37.60133743286133,
+                "n_train": 973,
+                "n_val": 243
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.1382601261138916,
+                "n_train": 973,
+                "n_val": 243
+              }
+            }
+          ]
+        },
+        "5": {
+          "N": 5,
+          "n_draws": 12,
+          "n_groups": 42,
+          "mean_fde_m": {
+            "direct_gru": 4.34120694228581,
+            "residual_gru": 1.716484975247156,
+            "physics": 1.8869920344579787
+          },
+          "comparisons": {
+            "residual_gru_vs_direct_gru": {
+              "n_groups": 42,
+              "mean_gain_m": 2.624721967038654,
+              "CI95_m": [
+                2.1822518962124984,
+                3.111594739840144
+              ],
+              "fraction_cand_better": 1.0
+            },
+            "residual_gru_vs_physics": {
+              "n_groups": 42,
+              "mean_gain_m": 0.1705070592108227,
+              "CI95_m": [
+                0.10077489142616589,
+                0.232971146649548
+              ],
+              "fraction_cand_better": 0.8333333333333334
+            }
+          },
+          "diagnostics": [
+            {
+              "draw": 0,
+              "gain": 0.00021238758616591138,
+              "fit_anchors": 1520,
+              "test_anchors": 8814,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 17.786273956298828,
+                "n_train": 1216,
+                "n_val": 304
+              },
+              "residual": {
+                "epochs_run": 22,
+                "best_val_mse": 2.024367094039917,
+                "n_train": 1216,
+                "n_val": 304
+              }
+            },
+            {
+              "draw": 1,
+              "gain": 0.00020798314281303122,
+              "fit_anchors": 1900,
+              "test_anchors": 8814,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 9.98913288116455,
+                "n_train": 1520,
+                "n_val": 380
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 2.4530858993530273,
+                "n_train": 1520,
+                "n_val": 380
+              }
+            },
+            {
+              "draw": 2,
+              "gain": 0.0002251249967378919,
+              "fit_anchors": 2052,
+              "test_anchors": 8814,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 7.682150363922119,
+                "n_train": 1642,
+                "n_val": 410
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.7752560377120972,
+                "n_train": 1642,
+                "n_val": 410
+              }
+            },
+            {
+              "draw": 3,
+              "gain": 0.00022986832858910876,
+              "fit_anchors": 1292,
+              "test_anchors": 8814,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 26.09016990661621,
+                "n_train": 1034,
+                "n_val": 258
+              },
+              "residual": {
+                "epochs_run": 68,
+                "best_val_mse": 1.9623043537139893,
+                "n_train": 1034,
+                "n_val": 258
+              }
+            },
+            {
+              "draw": 4,
+              "gain": 0.00020811851629787693,
+              "fit_anchors": 2583,
+              "test_anchors": 8132,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 5.902450084686279,
+                "n_train": 2067,
+                "n_val": 516
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.3585559129714966,
+                "n_train": 2067,
+                "n_val": 516
+              }
+            },
+            {
+              "draw": 5,
+              "gain": 0.00020084850492903313,
+              "fit_anchors": 2279,
+              "test_anchors": 8132,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 7.068731784820557,
+                "n_train": 1824,
+                "n_val": 455
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.9499008655548096,
+                "n_train": 1824,
+                "n_val": 455
+              }
+            },
+            {
+              "draw": 6,
+              "gain": 0.00021594601814900192,
+              "fit_anchors": 2202,
+              "test_anchors": 8132,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 8.785940170288086,
+                "n_train": 1762,
+                "n_val": 440
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.7360621690750122,
+                "n_train": 1762,
+                "n_val": 440
+              }
+            },
+            {
+              "draw": 7,
+              "gain": 0.00019960376832566326,
+              "fit_anchors": 1748,
+              "test_anchors": 8132,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 10.149864196777344,
+                "n_train": 1399,
+                "n_val": 349
+              },
+              "residual": {
+                "epochs_run": 56,
+                "best_val_mse": 1.805686593055725,
+                "n_train": 1399,
+                "n_val": 349
+              }
+            },
+            {
+              "draw": 8,
+              "gain": 0.00021111020225710533,
+              "fit_anchors": 2356,
+              "test_anchors": 7979,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 6.966390132904053,
+                "n_train": 1885,
+                "n_val": 471
+              },
+              "residual": {
+                "epochs_run": 44,
+                "best_val_mse": 1.5373479127883911,
+                "n_train": 1885,
+                "n_val": 471
+              }
+            },
+            {
+              "draw": 9,
+              "gain": 0.00022169277512146965,
+              "fit_anchors": 2126,
+              "test_anchors": 7979,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 8.015836715698242,
+                "n_train": 1701,
+                "n_val": 425
+              },
+              "residual": {
+                "epochs_run": 77,
+                "best_val_mse": 1.7687689065933228,
+                "n_train": 1701,
+                "n_val": 425
+              }
+            },
+            {
+              "draw": 10,
+              "gain": 0.00020103515123508743,
+              "fit_anchors": 1900,
+              "test_anchors": 7979,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 10.40038013458252,
+                "n_train": 1520,
+                "n_val": 380
+              },
+              "residual": {
+                "epochs_run": 55,
+                "best_val_mse": 1.7511824369430542,
+                "n_train": 1520,
+                "n_val": 380
+              }
+            },
+            {
+              "draw": 11,
+              "gain": 0.00023878838325428676,
+              "fit_anchors": 1900,
+              "test_anchors": 7979,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 7.77636194229126,
+                "n_train": 1520,
+                "n_val": 380
+              },
+              "residual": {
+                "epochs_run": 35,
+                "best_val_mse": 2.1003096103668213,
+                "n_train": 1520,
+                "n_val": 380
+              }
+            }
+          ]
+        },
+        "10": {
+          "N": 10,
+          "n_draws": 12,
+          "n_groups": 42,
+          "mean_fde_m": {
+            "direct_gru": 2.7908290390457426,
+            "residual_gru": 1.6408648639917374,
+            "physics": 1.927364624681927
+          },
+          "comparisons": {
+            "residual_gru_vs_direct_gru": {
+              "n_groups": 42,
+              "mean_gain_m": 1.1499641750540053,
+              "CI95_m": [
+                1.0334850393235684,
+                1.2700930275022984
+              ],
+              "fraction_cand_better": 1.0
+            },
+            "residual_gru_vs_physics": {
+              "n_groups": 42,
+              "mean_gain_m": 0.28649976069018956,
+              "CI95_m": [
+                0.22429381706530138,
+                0.3479359312426475
+              ],
+              "fraction_cand_better": 0.9047619047619048
+            }
+          },
+          "diagnostics": [
+            {
+              "draw": 0,
+              "gain": 0.00024155829781503954,
+              "fit_anchors": 3116,
+              "test_anchors": 8814,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 5.4643874168396,
+                "n_train": 2493,
+                "n_val": 623
+              },
+              "residual": {
+                "epochs_run": 64,
+                "best_val_mse": 1.976839542388916,
+                "n_train": 2493,
+                "n_val": 623
+              }
+            },
+            {
+              "draw": 1,
+              "gain": 0.00021102710368749682,
+              "fit_anchors": 5016,
+              "test_anchors": 8814,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 5.934217929840088,
+                "n_train": 4013,
+                "n_val": 1003
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.611282467842102,
+                "n_train": 4013,
+                "n_val": 1003
+              }
+            },
+            {
+              "draw": 2,
+              "gain": 0.00022400034498246314,
+              "fit_anchors": 3572,
+              "test_anchors": 8814,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 5.766749382019043,
+                "n_train": 2858,
+                "n_val": 714
+              },
+              "residual": {
+                "epochs_run": 26,
+                "best_val_mse": 2.0406196117401123,
+                "n_train": 2858,
+                "n_val": 714
+              }
+            },
+            {
+              "draw": 3,
+              "gain": 0.00024697390259256253,
+              "fit_anchors": 3648,
+              "test_anchors": 8814,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 5.97210168838501,
+                "n_train": 2919,
+                "n_val": 729
+              },
+              "residual": {
+                "epochs_run": 54,
+                "best_val_mse": 1.9123327732086182,
+                "n_train": 2919,
+                "n_val": 729
+              }
+            },
+            {
+              "draw": 4,
+              "gain": 0.00022397420896263687,
+              "fit_anchors": 3798,
+              "test_anchors": 8132,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 2.850996494293213,
+                "n_train": 3039,
+                "n_val": 759
+              },
+              "residual": {
+                "epochs_run": 57,
+                "best_val_mse": 1.6988341808319092,
+                "n_train": 3039,
+                "n_val": 759
+              }
+            },
+            {
+              "draw": 5,
+              "gain": 0.0002090311756407478,
+              "fit_anchors": 3722,
+              "test_anchors": 8132,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 2.297990083694458,
+                "n_train": 2978,
+                "n_val": 744
+              },
+              "residual": {
+                "epochs_run": 76,
+                "best_val_mse": 1.7847516536712646,
+                "n_train": 2978,
+                "n_val": 744
+              }
+            },
+            {
+              "draw": 6,
+              "gain": 0.00022199269844701806,
+              "fit_anchors": 2964,
+              "test_anchors": 8132,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 7.369770050048828,
+                "n_train": 2372,
+                "n_val": 592
+              },
+              "residual": {
+                "epochs_run": 43,
+                "best_val_mse": 1.9026110172271729,
+                "n_train": 2372,
+                "n_val": 592
+              }
+            },
+            {
+              "draw": 7,
+              "gain": 0.00022915077014593489,
+              "fit_anchors": 3114,
+              "test_anchors": 8132,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 6.880819320678711,
+                "n_train": 2492,
+                "n_val": 622
+              },
+              "residual": {
+                "epochs_run": 63,
+                "best_val_mse": 2.440762758255005,
+                "n_train": 2492,
+                "n_val": 622
+              }
+            },
+            {
+              "draw": 8,
+              "gain": 0.00023453555974855005,
+              "fit_anchors": 2354,
+              "test_anchors": 7979,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 7.16636323928833,
+                "n_train": 1884,
+                "n_val": 470
+              },
+              "residual": {
+                "epochs_run": 78,
+                "best_val_mse": 2.2527458667755127,
+                "n_train": 1884,
+                "n_val": 470
+              }
+            },
+            {
+              "draw": 9,
+              "gain": 0.0002508993315102421,
+              "fit_anchors": 3268,
+              "test_anchors": 7979,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 3.7967748641967773,
+                "n_train": 2615,
+                "n_val": 653
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.9548474550247192,
+                "n_train": 2615,
+                "n_val": 653
+              }
+            },
+            {
+              "draw": 10,
+              "gain": 0.00025500423078483116,
+              "fit_anchors": 3724,
+              "test_anchors": 7979,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 2.8231961727142334,
+                "n_train": 2980,
+                "n_val": 744
+              },
+              "residual": {
+                "epochs_run": 35,
+                "best_val_mse": 1.983388066291809,
+                "n_train": 2980,
+                "n_val": 744
+              }
+            },
+            {
+              "draw": 11,
+              "gain": 0.0002099889965721187,
+              "fit_anchors": 4788,
+              "test_anchors": 7979,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 3.9220290184020996,
+                "n_train": 3831,
+                "n_val": 957
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.4422661066055298,
+                "n_train": 3831,
+                "n_val": 957
+              }
+            }
+          ]
+        },
+        "20": {
+          "N": 20,
+          "n_draws": 12,
+          "n_groups": 42,
+          "mean_fde_m": {
+            "direct_gru": 1.922348285005206,
+            "residual_gru": 1.6146985217928886,
+            "physics": 1.9169717537505286
+          },
+          "comparisons": {
+            "residual_gru_vs_direct_gru": {
+              "n_groups": 42,
+              "mean_gain_m": 0.3076497632123175,
+              "CI95_m": [
+                0.26857541471364954,
+                0.35362760176261265
+              ],
+              "fraction_cand_better": 1.0
+            },
+            "residual_gru_vs_physics": {
+              "n_groups": 42,
+              "mean_gain_m": 0.30227323195763994,
+              "CI95_m": [
+                0.23375213906346332,
+                0.36605142532359985
+              ],
+              "fraction_cand_better": 0.8809523809523809
+            }
+          },
+          "diagnostics": [
+            {
+              "draw": 0,
+              "gain": 0.00024641410542022054,
+              "fit_anchors": 6384,
+              "test_anchors": 8814,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 3.317441463470459,
+                "n_train": 5108,
+                "n_val": 1276
+              },
+              "residual": {
+                "epochs_run": 79,
+                "best_val_mse": 1.6510478258132935,
+                "n_train": 5108,
+                "n_val": 1276
+              }
+            },
+            {
+              "draw": 1,
+              "gain": 0.00023605069584106545,
+              "fit_anchors": 6840,
+              "test_anchors": 8814,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 2.5985846519470215,
+                "n_train": 5472,
+                "n_val": 1368
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.8463051319122314,
+                "n_train": 5472,
+                "n_val": 1368
+              }
+            },
+            {
+              "draw": 2,
+              "gain": 0.0002449705316150178,
+              "fit_anchors": 6840,
+              "test_anchors": 8814,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 2.8885324001312256,
+                "n_train": 5472,
+                "n_val": 1368
+              },
+              "residual": {
+                "epochs_run": 47,
+                "best_val_mse": 2.2837066650390625,
+                "n_train": 5472,
+                "n_val": 1368
+              }
+            },
+            {
+              "draw": 3,
+              "gain": 0.00022194183566717475,
+              "fit_anchors": 7524,
+              "test_anchors": 8814,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 2.534782648086548,
+                "n_train": 6020,
+                "n_val": 1504
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.7620697021484375,
+                "n_train": 6020,
+                "n_val": 1504
+              }
+            },
+            {
+              "draw": 4,
+              "gain": 0.00021507976959651894,
+              "fit_anchors": 8130,
+              "test_anchors": 8132,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 2.109858274459839,
+                "n_train": 6504,
+                "n_val": 1626
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 2.0008838176727295,
+                "n_train": 6504,
+                "n_val": 1626
+              }
+            },
+            {
+              "draw": 5,
+              "gain": 0.00022140532518848843,
+              "fit_anchors": 7675,
+              "test_anchors": 8132,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 2.70805287361145,
+                "n_train": 6140,
+                "n_val": 1535
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 2.087984085083008,
+                "n_train": 6140,
+                "n_val": 1535
+              }
+            },
+            {
+              "draw": 6,
+              "gain": 0.00021291531709422183,
+              "fit_anchors": 7371,
+              "test_anchors": 8132,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 2.5064923763275146,
+                "n_train": 5897,
+                "n_val": 1474
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 2.0002410411834717,
+                "n_train": 5897,
+                "n_val": 1474
+              }
+            },
+            {
+              "draw": 7,
+              "gain": 0.00021773442521570596,
+              "fit_anchors": 7296,
+              "test_anchors": 8132,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 1.9385148286819458,
+                "n_train": 5837,
+                "n_val": 1459
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.695038914680481,
+                "n_train": 5837,
+                "n_val": 1459
+              }
+            },
+            {
+              "draw": 8,
+              "gain": 0.00022914085932886896,
+              "fit_anchors": 9120,
+              "test_anchors": 7979,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 2.2413647174835205,
+                "n_train": 7296,
+                "n_val": 1824
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.60813570022583,
+                "n_train": 7296,
+                "n_val": 1824
+              }
+            },
+            {
+              "draw": 9,
+              "gain": 0.00022340940574617897,
+              "fit_anchors": 8738,
+              "test_anchors": 7979,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 2.90482759475708,
+                "n_train": 6991,
+                "n_val": 1747
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.8759725093841553,
+                "n_train": 6991,
+                "n_val": 1747
+              }
+            },
+            {
+              "draw": 10,
+              "gain": 0.00023333328765218745,
+              "fit_anchors": 8206,
+              "test_anchors": 7979,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 2.246915817260742,
+                "n_train": 6565,
+                "n_val": 1641
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.7235122919082642,
+                "n_train": 6565,
+                "n_val": 1641
+              }
+            },
+            {
+              "draw": 11,
+              "gain": 0.00023455055562867898,
+              "fit_anchors": 8208,
+              "test_anchors": 7979,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 1.9836342334747314,
+                "n_train": 6567,
+                "n_val": 1641
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.4986165761947632,
+                "n_train": 6567,
+                "n_val": 1641
+              }
+            }
+          ]
+        }
+      }
+    },
+    "nuscenes": {
+      "grouping_unit": "scene",
+      "per_N": {
+        "3": {
+          "N": 3,
+          "n_draws": 12,
+          "n_groups": 566,
+          "mean_fde_m": {
+            "direct_gru": 6.758319868584404,
+            "residual_gru": 2.7812076384208226,
+            "physics": 2.471490348817603
+          },
+          "comparisons": {
+            "residual_gru_vs_direct_gru": {
+              "n_groups": 566,
+              "mean_gain_m": 3.977112230163581,
+              "CI95_m": [
+                3.7575074998773768,
+                4.2139768571583
+              ],
+              "fraction_cand_better": 1.0
+            },
+            "residual_gru_vs_physics": {
+              "n_groups": 566,
+              "mean_gain_m": -0.30971728960321987,
+              "CI95_m": [
+                -0.3372102105312128,
+                -0.28214199611844737
+              ],
+              "fraction_cand_better": 0.1607773851590106
+            }
+          },
+          "diagnostics": [
+            {
+              "draw": 0,
+              "gain": 0.0004378828081513121,
+              "fit_anchors": 326,
+              "test_anchors": 30742,
+              "direct": {
+                "epochs_run": 69,
+                "best_val_mse": 5.50822114944458,
+                "n_train": 261,
+                "n_val": 65
+              },
+              "residual": {
+                "epochs_run": 57,
+                "best_val_mse": 2.4066314697265625,
+                "n_train": 261,
+                "n_val": 65
+              }
+            },
+            {
+              "draw": 1,
+              "gain": 0.00044852164046689773,
+              "fit_anchors": 334,
+              "test_anchors": 30742,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 10.74207878112793,
+                "n_train": 268,
+                "n_val": 66
+              },
+              "residual": {
+                "epochs_run": 75,
+                "best_val_mse": 4.136413097381592,
+                "n_train": 268,
+                "n_val": 66
+              }
+            },
+            {
+              "draw": 2,
+              "gain": 0.00043629464614120255,
+              "fit_anchors": 327,
+              "test_anchors": 30742,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 8.284564971923828,
+                "n_train": 262,
+                "n_val": 65
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.8051103353500366,
+                "n_train": 262,
+                "n_val": 65
+              }
+            },
+            {
+              "draw": 3,
+              "gain": 0.00039993032418590604,
+              "fit_anchors": 323,
+              "test_anchors": 30742,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 14.369954109191895,
+                "n_train": 259,
+                "n_val": 64
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.9309487342834473,
+                "n_train": 259,
+                "n_val": 64
+              }
+            },
+            {
+              "draw": 4,
+              "gain": 0.00043094688868128354,
+              "fit_anchors": 333,
+              "test_anchors": 30728,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 16.97461700439453,
+                "n_train": 267,
+                "n_val": 66
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 2.4957518577575684,
+                "n_train": 267,
+                "n_val": 66
+              }
+            },
+            {
+              "draw": 5,
+              "gain": 0.00043814365547689894,
+              "fit_anchors": 323,
+              "test_anchors": 30728,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 37.060203552246094,
+                "n_train": 259,
+                "n_val": 64
+              },
+              "residual": {
+                "epochs_run": 75,
+                "best_val_mse": 3.293480634689331,
+                "n_train": 259,
+                "n_val": 64
+              }
+            },
+            {
+              "draw": 6,
+              "gain": 0.0004232351681912234,
+              "fit_anchors": 324,
+              "test_anchors": 30728,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 7.576263904571533,
+                "n_train": 260,
+                "n_val": 64
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.8778587579727173,
+                "n_train": 260,
+                "n_val": 64
+              }
+            },
+            {
+              "draw": 7,
+              "gain": 0.0004402810556508841,
+              "fit_anchors": 327,
+              "test_anchors": 30728,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 7.442712783813477,
+                "n_train": 262,
+                "n_val": 65
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.048061728477478,
+                "n_train": 262,
+                "n_val": 65
+              }
+            },
+            {
+              "draw": 8,
+              "gain": 0.0004391436668341329,
+              "fit_anchors": 325,
+              "test_anchors": 30642,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 10.530767440795898,
+                "n_train": 260,
+                "n_val": 65
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 6.2618184089660645,
+                "n_train": 260,
+                "n_val": 65
+              }
+            },
+            {
+              "draw": 9,
+              "gain": 0.00038817238488475725,
+              "fit_anchors": 333,
+              "test_anchors": 30642,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 12.224800109863281,
+                "n_train": 267,
+                "n_val": 66
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.4417706727981567,
+                "n_train": 267,
+                "n_val": 66
+              }
+            },
+            {
+              "draw": 10,
+              "gain": 0.00042831843537649903,
+              "fit_anchors": 329,
+              "test_anchors": 30642,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 8.082717895507812,
+                "n_train": 264,
+                "n_val": 65
+              },
+              "residual": {
+                "epochs_run": 54,
+                "best_val_mse": 3.399456739425659,
+                "n_train": 264,
+                "n_val": 65
+              }
+            },
+            {
+              "draw": 11,
+              "gain": 0.0004413585769005204,
+              "fit_anchors": 328,
+              "test_anchors": 30642,
+              "direct": {
+                "epochs_run": 76,
+                "best_val_mse": 51.05448913574219,
+                "n_train": 263,
+                "n_val": 65
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 6.6657867431640625,
+                "n_train": 263,
+                "n_val": 65
+              }
+            }
+          ]
+        },
+        "5": {
+          "N": 5,
+          "n_draws": 12,
+          "n_groups": 566,
+          "mean_fde_m": {
+            "direct_gru": 6.505451515474926,
+            "residual_gru": 2.8843117698816445,
+            "physics": 2.466213311249713
+          },
+          "comparisons": {
+            "residual_gru_vs_direct_gru": {
+              "n_groups": 566,
+              "mean_gain_m": 3.6211397455932817,
+              "CI95_m": [
+                3.4339305592134806,
+                3.820725534080985
+              ],
+              "fraction_cand_better": 1.0
+            },
+            "residual_gru_vs_physics": {
+              "n_groups": 566,
+              "mean_gain_m": -0.4180984586319317,
+              "CI95_m": [
+                -0.4584514398654337,
+                -0.3790954042463021
+              ],
+              "fraction_cand_better": 0.17491166077738515
+            }
+          },
+          "diagnostics": [
+            {
+              "draw": 0,
+              "gain": 0.00039446180616068587,
+              "fit_anchors": 492,
+              "test_anchors": 30742,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 12.932519912719727,
+                "n_train": 394,
+                "n_val": 98
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 0.6740745902061462,
+                "n_train": 394,
+                "n_val": 98
+              }
+            },
+            {
+              "draw": 1,
+              "gain": 0.0004091257625196864,
+              "fit_anchors": 492,
+              "test_anchors": 30742,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 16.9376163482666,
+                "n_train": 394,
+                "n_val": 98
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.8581846952438354,
+                "n_train": 394,
+                "n_val": 98
+              }
+            },
+            {
+              "draw": 2,
+              "gain": 0.0004417687676594632,
+              "fit_anchors": 492,
+              "test_anchors": 30742,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 6.067227840423584,
+                "n_train": 394,
+                "n_val": 98
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.867807149887085,
+                "n_train": 394,
+                "n_val": 98
+              }
+            },
+            {
+              "draw": 3,
+              "gain": 0.00042155093820845654,
+              "fit_anchors": 486,
+              "test_anchors": 30742,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 12.80984115600586,
+                "n_train": 389,
+                "n_val": 97
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.4955593347549438,
+                "n_train": 389,
+                "n_val": 97
+              }
+            },
+            {
+              "draw": 4,
+              "gain": 0.0004431456406458749,
+              "fit_anchors": 491,
+              "test_anchors": 30728,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 9.402531623840332,
+                "n_train": 393,
+                "n_val": 98
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.2104474306106567,
+                "n_train": 393,
+                "n_val": 98
+              }
+            },
+            {
+              "draw": 5,
+              "gain": 0.00042607206165218574,
+              "fit_anchors": 491,
+              "test_anchors": 30728,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 25.574853897094727,
+                "n_train": 393,
+                "n_val": 98
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 2.63411021232605,
+                "n_train": 393,
+                "n_val": 98
+              }
+            },
+            {
+              "draw": 6,
+              "gain": 0.00044721094394573204,
+              "fit_anchors": 493,
+              "test_anchors": 30728,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 14.6504487991333,
+                "n_train": 395,
+                "n_val": 98
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.966238021850586,
+                "n_train": 395,
+                "n_val": 98
+              }
+            },
+            {
+              "draw": 7,
+              "gain": 0.00042918968836495083,
+              "fit_anchors": 484,
+              "test_anchors": 30728,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 21.26217269897461,
+                "n_train": 388,
+                "n_val": 96
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 3.5149412155151367,
+                "n_train": 388,
+                "n_val": 96
+              }
+            },
+            {
+              "draw": 8,
+              "gain": 0.00039083529722737815,
+              "fit_anchors": 493,
+              "test_anchors": 30642,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 26.186580657958984,
+                "n_train": 395,
+                "n_val": 98
+              },
+              "residual": {
+                "epochs_run": 34,
+                "best_val_mse": 3.0558595657348633,
+                "n_train": 395,
+                "n_val": 98
+              }
+            },
+            {
+              "draw": 9,
+              "gain": 0.0004182707254676923,
+              "fit_anchors": 497,
+              "test_anchors": 30642,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 15.894430160522461,
+                "n_train": 398,
+                "n_val": 99
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 3.573122024536133,
+                "n_train": 398,
+                "n_val": 99
+              }
+            },
+            {
+              "draw": 10,
+              "gain": 0.00042200634110783615,
+              "fit_anchors": 485,
+              "test_anchors": 30642,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 13.064763069152832,
+                "n_train": 388,
+                "n_val": 97
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 3.350341796875,
+                "n_train": 388,
+                "n_val": 97
+              }
+            },
+            {
+              "draw": 11,
+              "gain": 0.00043904627127068003,
+              "fit_anchors": 494,
+              "test_anchors": 30642,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 13.699682235717773,
+                "n_train": 396,
+                "n_val": 98
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.3643499612808228,
+                "n_train": 396,
+                "n_val": 98
+              }
+            }
+          ]
+        },
+        "10": {
+          "N": 10,
+          "n_draws": 12,
+          "n_groups": 566,
+          "mean_fde_m": {
+            "direct_gru": 3.3413001907851165,
+            "residual_gru": 2.5650676931962106,
+            "physics": 2.4746091538520245
+          },
+          "comparisons": {
+            "residual_gru_vs_direct_gru": {
+              "n_groups": 566,
+              "mean_gain_m": 0.7762324975889058,
+              "CI95_m": [
+                0.6835009715286192,
+                0.8894230311933916
+              ],
+              "fraction_cand_better": 0.941696113074205
+            },
+            "residual_gru_vs_physics": {
+              "n_groups": 566,
+              "mean_gain_m": -0.09045853934418607,
+              "CI95_m": [
+                -0.11597619144173582,
+                -0.0656381935565716
+              ],
+              "fraction_cand_better": 0.39045936395759717
+            }
+          },
+          "diagnostics": [
+            {
+              "draw": 0,
+              "gain": 0.00043694567338417974,
+              "fit_anchors": 981,
+              "test_anchors": 30742,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 5.5821943283081055,
+                "n_train": 785,
+                "n_val": 196
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.4061075448989868,
+                "n_train": 785,
+                "n_val": 196
+              }
+            },
+            {
+              "draw": 1,
+              "gain": 0.00043303930171538106,
+              "fit_anchors": 976,
+              "test_anchors": 30742,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 8.259965896606445,
+                "n_train": 781,
+                "n_val": 195
+              },
+              "residual": {
+                "epochs_run": 31,
+                "best_val_mse": 5.987701416015625,
+                "n_train": 781,
+                "n_val": 195
+              }
+            },
+            {
+              "draw": 2,
+              "gain": 0.00043765426838073424,
+              "fit_anchors": 980,
+              "test_anchors": 30742,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 5.469735145568848,
+                "n_train": 784,
+                "n_val": 196
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 2.8151936531066895,
+                "n_train": 784,
+                "n_val": 196
+              }
+            },
+            {
+              "draw": 3,
+              "gain": 0.00042824751403493423,
+              "fit_anchors": 968,
+              "test_anchors": 30742,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 7.135183811187744,
+                "n_train": 775,
+                "n_val": 193
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 4.518937587738037,
+                "n_train": 775,
+                "n_val": 193
+              }
+            },
+            {
+              "draw": 4,
+              "gain": 0.00043920316248301477,
+              "fit_anchors": 983,
+              "test_anchors": 30728,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 5.048341751098633,
+                "n_train": 787,
+                "n_val": 196
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 3.4818968772888184,
+                "n_train": 787,
+                "n_val": 196
+              }
+            },
+            {
+              "draw": 5,
+              "gain": 0.0004266812182309068,
+              "fit_anchors": 980,
+              "test_anchors": 30728,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 12.194160461425781,
+                "n_train": 784,
+                "n_val": 196
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 3.2689645290374756,
+                "n_train": 784,
+                "n_val": 196
+              }
+            },
+            {
+              "draw": 6,
+              "gain": 0.00043607451894178624,
+              "fit_anchors": 973,
+              "test_anchors": 30728,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 6.438872337341309,
+                "n_train": 779,
+                "n_val": 194
+              },
+              "residual": {
+                "epochs_run": 52,
+                "best_val_mse": 4.282233238220215,
+                "n_train": 779,
+                "n_val": 194
+              }
+            },
+            {
+              "draw": 7,
+              "gain": 0.0004351419420637013,
+              "fit_anchors": 970,
+              "test_anchors": 30728,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 4.000187397003174,
+                "n_train": 776,
+                "n_val": 194
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 2.681360960006714,
+                "n_train": 776,
+                "n_val": 194
+              }
+            },
+            {
+              "draw": 8,
+              "gain": 0.00043025719047723264,
+              "fit_anchors": 987,
+              "test_anchors": 30642,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 7.846584796905518,
+                "n_train": 790,
+                "n_val": 197
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 3.636838674545288,
+                "n_train": 790,
+                "n_val": 197
+              }
+            },
+            {
+              "draw": 9,
+              "gain": 0.0004429680262803229,
+              "fit_anchors": 980,
+              "test_anchors": 30642,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 3.47007417678833,
+                "n_train": 784,
+                "n_val": 196
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 2.0303378105163574,
+                "n_train": 784,
+                "n_val": 196
+              }
+            },
+            {
+              "draw": 10,
+              "gain": 0.00042729528343387143,
+              "fit_anchors": 975,
+              "test_anchors": 30642,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 6.288000583648682,
+                "n_train": 780,
+                "n_val": 195
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 3.8975353240966797,
+                "n_train": 780,
+                "n_val": 195
+              }
+            },
+            {
+              "draw": 11,
+              "gain": 0.00043583514316164257,
+              "fit_anchors": 985,
+              "test_anchors": 30642,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 3.424879312515259,
+                "n_train": 788,
+                "n_val": 197
+              },
+              "residual": {
+                "epochs_run": 52,
+                "best_val_mse": 3.0274429321289062,
+                "n_train": 788,
+                "n_val": 197
+              }
+            }
+          ]
+        },
+        "20": {
+          "N": 20,
+          "n_draws": 12,
+          "n_groups": 566,
+          "mean_fde_m": {
+            "direct_gru": 2.740794209045993,
+            "residual_gru": 2.498969282783805,
+            "physics": 2.474549515798109
+          },
+          "comparisons": {
+            "residual_gru_vs_direct_gru": {
+              "n_groups": 566,
+              "mean_gain_m": 0.2418249262621883,
+              "CI95_m": [
+                0.18453026605710757,
+                0.31095392633782365
+              ],
+              "fraction_cand_better": 0.7597173144876325
+            },
+            "residual_gru_vs_physics": {
+              "n_groups": 566,
+              "mean_gain_m": -0.02441976698569611,
+              "CI95_m": [
+                -0.05511065780945359,
+                0.00656437197101198
+              ],
+              "fraction_cand_better": 0.48586572438162545
+            }
+          },
+          "diagnostics": [
+            {
+              "draw": 0,
+              "gain": 0.00043710267611265987,
+              "fit_anchors": 2105,
+              "test_anchors": 30742,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 4.37697172164917,
+                "n_train": 1684,
+                "n_val": 421
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 4.132040977478027,
+                "n_train": 1684,
+                "n_val": 421
+              }
+            },
+            {
+              "draw": 1,
+              "gain": 0.0004218452391919681,
+              "fit_anchors": 2120,
+              "test_anchors": 30742,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 4.191931247711182,
+                "n_train": 1696,
+                "n_val": 424
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 2.9479379653930664,
+                "n_train": 1696,
+                "n_val": 424
+              }
+            },
+            {
+              "draw": 2,
+              "gain": 0.00044102836957351496,
+              "fit_anchors": 2120,
+              "test_anchors": 30742,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 4.2772321701049805,
+                "n_train": 1696,
+                "n_val": 424
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 2.9286983013153076,
+                "n_train": 1696,
+                "n_val": 424
+              }
+            },
+            {
+              "draw": 3,
+              "gain": 0.00043438571690999596,
+              "fit_anchors": 2125,
+              "test_anchors": 30742,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 4.010467529296875,
+                "n_train": 1700,
+                "n_val": 425
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 2.609915256500244,
+                "n_train": 1700,
+                "n_val": 425
+              }
+            },
+            {
+              "draw": 4,
+              "gain": 0.0004378540851103038,
+              "fit_anchors": 2129,
+              "test_anchors": 30728,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 3.7188100814819336,
+                "n_train": 1704,
+                "n_val": 425
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 3.3480052947998047,
+                "n_train": 1704,
+                "n_val": 425
+              }
+            },
+            {
+              "draw": 5,
+              "gain": 0.0004274678961204611,
+              "fit_anchors": 2109,
+              "test_anchors": 30728,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 3.9484992027282715,
+                "n_train": 1688,
+                "n_val": 421
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 2.9185361862182617,
+                "n_train": 1688,
+                "n_val": 421
+              }
+            },
+            {
+              "draw": 6,
+              "gain": 0.00044090168506651176,
+              "fit_anchors": 2101,
+              "test_anchors": 30728,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 4.600476264953613,
+                "n_train": 1681,
+                "n_val": 420
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 2.9920151233673096,
+                "n_train": 1681,
+                "n_val": 420
+              }
+            },
+            {
+              "draw": 7,
+              "gain": 0.0004404797101299316,
+              "fit_anchors": 2137,
+              "test_anchors": 30728,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 3.3666532039642334,
+                "n_train": 1710,
+                "n_val": 427
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 3.0497684478759766,
+                "n_train": 1710,
+                "n_val": 427
+              }
+            },
+            {
+              "draw": 8,
+              "gain": 0.0004375364137701094,
+              "fit_anchors": 2124,
+              "test_anchors": 30642,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 6.41905403137207,
+                "n_train": 1700,
+                "n_val": 424
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 4.931257247924805,
+                "n_train": 1700,
+                "n_val": 424
+              }
+            },
+            {
+              "draw": 9,
+              "gain": 0.0004272685295791904,
+              "fit_anchors": 2121,
+              "test_anchors": 30642,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 3.719806671142578,
+                "n_train": 1697,
+                "n_val": 424
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 3.33732271194458,
+                "n_train": 1697,
+                "n_val": 424
+              }
+            },
+            {
+              "draw": 10,
+              "gain": 0.0004332587478973349,
+              "fit_anchors": 2128,
+              "test_anchors": 30642,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 2.6012279987335205,
+                "n_train": 1703,
+                "n_val": 425
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 1.6768040657043457,
+                "n_train": 1703,
+                "n_val": 425
+              }
+            },
+            {
+              "draw": 11,
+              "gain": 0.00042975118616768844,
+              "fit_anchors": 2113,
+              "test_anchors": 30642,
+              "direct": {
+                "epochs_run": 80,
+                "best_val_mse": 3.807711601257324,
+                "n_train": 1691,
+                "n_val": 422
+              },
+              "residual": {
+                "epochs_run": 80,
+                "best_val_mse": 3.125967502593994,
+                "n_train": 1691,
+                "n_val": 422
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "provenance": {
+    "script": "src\\exp_gru_baseline_causal.py",
+    "script_sha256": "5a04daf47442fa49b92fa24cd526e9d56e5230b57be2b5dfc7e895c3621e3825",
+    "stat_unit": "route for comma; scene for nuScenes",
+    "test_not_used_for_training": true
+  }
+}

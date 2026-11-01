@@ -10,3 +10,4 @@ matplotlib>=3.7
 # 安装(CPU版)：
 #   pip install torch --index-url https://download.pytorch.org/whl/cpu
 # torch>=2.0
+# GRU supplement only: pip install -r requirements-gru.txt

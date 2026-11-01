@@ -1,0 +1,62 @@
+{
+  "title": "Unified transfer/demand experiment independent audit",
+  "status": "PASS",
+  "result_file_sha256": "716b743b02fed690e1e0624697e03f251b5cc50cfa6d0babe46432e555ef9431",
+  "script_sha256": "897f4c7e510bac029ddc65f383a342017edafd2e6cd7ba3b0091c16e1fe4696f",
+  "canonical_file_sha256": "25a3d27760d440460738c6eb2844857882ec3a693f9a5f70f378000f281c854c",
+  "original_result_status": "FULL_RUN",
+  "checks": {
+    "N_list": true,
+    "per_N_keys": true,
+    "canonical_source_schedule": true,
+    "per_N": [
+      {
+        "N": 3,
+        "n_draws_12": true,
+        "n_scenes_566": true,
+        "policy_set": true,
+        "CI_for_nonuniversal": true,
+        "manifest_hash_count": true,
+        "pass": true
+      },
+      {
+        "N": 5,
+        "n_draws_12": true,
+        "n_scenes_566": true,
+        "policy_set": true,
+        "CI_for_nonuniversal": true,
+        "manifest_hash_count": true,
+        "pass": true
+      },
+      {
+        "N": 10,
+        "n_draws_12": true,
+        "n_scenes_566": true,
+        "policy_set": true,
+        "CI_for_nonuniversal": true,
+        "manifest_hash_count": true,
+        "pass": true
+      },
+      {
+        "N": 20,
+        "n_draws_12": true,
+        "n_scenes_566": true,
+        "policy_set": true,
+        "CI_for_nonuniversal": true,
+        "manifest_hash_count": true,
+        "pass": true
+      }
+    ]
+  },
+  "canonical_replay": {
+    "test_group_count": 189,
+    "n_common_scenes": 189,
+    "scene_0002_replay_m": 3.5886129873193284,
+    "scene_0002_canonical_m": 3.5886129873193284,
+    "replay_test_mean_m": 3.231992715688312,
+    "canonical_test_mean_m": 3.231992715688312,
+    "max_absolute_scene_difference_m": 0.0,
+    "pass": true
+  },
+  "note": "This audit checks stored structure and one deterministic canonical replay; it does not replace the full experiment."
+}

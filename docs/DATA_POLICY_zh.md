@@ -6,11 +6,11 @@
 
 ## 数据获取
 
-comma2k19、nuScenes CAN bus expansion 和 CRISAL 2025 必须从各自官方来源获取，使用者应遵守提供方许可。CRISAL 数据页面为 DOI 10.57745/YCXRWF。仓库只记录解析协议和结果 provenance，不重新托管数据。
+comma2k19、nuScenes CAN bus expansion 和 CRIStAL/LOCSP 2025 必须从各自官方来源获取，使用者应遵守提供方许可。CRIStAL/LOCSP 数据页面为 DOI 10.57745/YCXRWF。仓库只记录解析协议和结果 provenance，不重新托管数据。
 
 ## 可复现边界
 
-公开数据和依赖齐备时，核心实验可按 docs/REPRODUCE_zh.md 运行。私有装载机案例不能由公开仓库独立复现。CRISAL 的结果依赖本地下载并解压的七个 acquisition；其参考轨迹为 INSPVA 融合导航输出，不应解释为独立真值。
+公开数据和依赖齐备时，核心实验可按 docs/REPRODUCE_zh.md 运行。私有装载机案例不能由公开仓库独立复现。CRIStAL/LOCSP 的结果依赖本地下载并解压的七个 acquisition；其参考轨迹为 INSPVA 融合导航输出，不应解释为独立真值。
 
 ## 不发布的历史内容
 

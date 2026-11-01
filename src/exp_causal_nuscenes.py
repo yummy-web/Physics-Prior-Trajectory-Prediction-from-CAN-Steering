@@ -30,7 +30,14 @@ SEED = 0
 
 def load():
     import pickle
-    return pickle.load(open(os.path.join(os.path.dirname(__file__), ".nusc_cache.pkl"), "rb"))
+    candidates = [
+        os.path.join(os.path.dirname(__file__), ".nusc_cache.pkl"),
+        os.path.join(os.path.dirname(__file__), "..", "..", "..", "数据分析", "paper_experiments", ".nusc_cache.pkl"),
+    ]
+    for path in candidates:
+        if os.path.exists(path):
+            return pickle.load(open(path, "rb"))
+    raise FileNotFoundError("nuScenes cache not found; checked: " + "; ".join(candidates))
 
 
 def key_of(df, k):

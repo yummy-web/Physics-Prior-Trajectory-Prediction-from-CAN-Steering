@@ -11,10 +11,10 @@
 ## 3. 证据分层
 
 - 主要证据：nuScenes 场景级收缩收益、comma2k19 路线级点估计、跨平台迁移和逐时域 FDE。
-- 外部支持：CRISAL 七次同车多采集留一验证；它不是跨车辆泛化。
+- 外部支持：CRIStAL/LOCSP 七次同车多采集留一验证；它不是跨车辆泛化。
 - 辅助审计：RLS/EKF 信息集匹配、MLP 收敛敏感性、各向异性、辨识稳定性和负向 gate 消融。
 - 不作主张：旧 gate headline、严格 1/N、普适 λ schedule、跨车辆参数直接迁移、嵌入式实时性能。
 
 ## 4. 统计纪律
 
-comma2k19 以路线为主要分组单位；nuScenes λ 实验以 scene 为聚类单位；CRISAL 以 acquisition 为独立单位。滑动窗口、复用测试片段、验证组合和模型 seed 不被包装成额外独立样本。
+comma2k19 以路线为主要分组单位；nuScenes λ 实验以 scene 为聚类单位；CRIStAL/LOCSP 以 acquisition 为独立单位。滑动窗口、复用测试片段、验证组合和模型 seed 不被包装成额外独立样本。

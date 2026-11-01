@@ -47,6 +47,6 @@
 
 ## 我的建议
 
-当前公开复现实验使用 comma2k19、nuScenes CAN bus expansion 和 CRISAL 2025。请从各数据集官方页面获取原始数据；仓库不重新分发数据，也不要求将数据复制到仓库目录。
+当前公开复现实验使用 comma2k19、nuScenes CAN bus expansion 和 CRIStAL/LOCSP 2025。请从各数据集官方页面获取原始数据；仓库不重新分发数据，也不要求将数据复制到仓库目录。
 
-主结果的固定配置、统计单位和可写结论见 docs/PROVENANCE.md。CRISAL 仅在具备七次合格采集时运行 grouped 外部验证；只有单个 bag 时，应将输出视为 QC 或探索性 pilot。
+主结果的固定配置、统计单位和可写结论见 docs/PROVENANCE.md。CRIStAL/LOCSP 仅在具备七次合格采集时运行 grouped 外部验证；只有单个 bag 时，应将输出视为 QC 或探索性 pilot。
