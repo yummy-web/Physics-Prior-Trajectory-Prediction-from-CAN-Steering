@@ -28,11 +28,14 @@ python src/exp_gate_v2.py
 python src/exp_latency_params.py
 python src/exp_scalinglaw_v2.py
 python src/exp_lambda_group_calibration_convergence.py
+python src/export_directional_error_table.py
 
 gate 与 scaling-law 脚本用于协议敏感性诊断。固定配置、统计单位和边界见 results/reports_zh/PROVENANCE.md。
 
 ## CRIStAL/LOCSP
 python src/exp_crisal_grouped_external.py --data-root <CRIStAL根目录>
+python src/export_cristal_representative_rollout.py --data-root <CRIStAL根目录>
+python src/plot_manuscript_figures.py
 
 窗口数量不替代路线、scene 或 acquisition 数量；测试集 oracle 是描述性上界；CRIStAL/LOCSP 结果属于同车多采集验证。
 ## 历史与非冻结诊断

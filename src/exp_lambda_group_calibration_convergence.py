@@ -1,14 +1,16 @@
-"""MLP convergence sensitivity audit for the canonical grouped lambda experiment.
+"""Controlled MLP convergence sensitivity audit for grouped lambda calibration.
 
-This script deliberately does not overwrite the canonical result. It replays the
-exact split manifests from exp_lambda_group_calibration_results.json, fits the
-same causal physics+MLP pipeline under the canonical and higher max_iter
-conditions, and compares the resulting group-level FDE and shrinkage gain.
+This script deliberately does not overwrite the frozen main result. It replays
+the exact split manifests from exp_lambda_group_calibration_results.json and,
+within one current-code run, fits the same causal physics+MLP pipeline under a
+baseline and a higher max_iter condition.  This within-run pair is the valid
+sensitivity comparison.
 
 The only intended optimization change is max_iter. Model architecture, alpha,
 random seed, early stopping, tol, n_iter_no_change, data, splits, and scoring
-remain fixed. Results are diagnostic/sensitivity evidence, not a replacement
-for the canonical result unless stability is established separately.
+remain fixed.  A separate historical-snapshot audit compares the current-code
+baseline with the frozen JSON.  Failure of that audit is reported explicitly
+and is not confused with the validity of the controlled within-run pair.
 """
 from __future__ import annotations
 
@@ -263,14 +265,14 @@ def run_dataset(dataset: str, canonical: dict, high_max_iter: int) -> dict:
                 "validation_anchor_count": int(len(arrays[1][0])),
                 "test_anchor_count": int(len(arrays[2][0])),
                 "physics_gain_fit_only": float(gain),
-                "conditions": {"canonical_max_iter": low, "higher_max_iter": high},
+                "conditions": {"current_code_baseline": low, "higher_max_iter": high},
             })
             print(f"[{dataset} N={n} draw={idx+1}/{len(manifests)}] "
                   f"low_iter={low['fit_diagnostics']['n_iter']} high_iter={high['fit_diagnostics']['n_iter']} "
                   f"warn={low['fit_diagnostics']['warning_count']}/{high['fit_diagnostics']['warning_count']}", flush=True)
 
         condition_summary = {}
-        for condition in ("canonical_max_iter", "higher_max_iter"):
+        for condition in ("current_code_baseline", "higher_max_iter"):
             by_method = {method: aggregate_groups(records, condition, method) for method in METHODS}
             mean_by_method = {method: float(np.mean(list(v.values()))) for method, v in by_method.items()}
             condition_summary[condition] = {
@@ -283,13 +285,13 @@ def run_dataset(dataset: str, canonical: dict, high_max_iter: int) -> dict:
             }
 
         method_sensitivity = {}
-        low_by = condition_summary["canonical_max_iter"]["test_group_fde_by_method"]
+        low_by = condition_summary["current_code_baseline"]["test_group_fde_by_method"]
         high_by = condition_summary["higher_max_iter"]["test_group_fde_by_method"]
         for method in METHODS:
             method_sensitivity[method] = paired_group_inference(
                 low_by[method], high_by[method], seed=71000 + n + METHODS.index(method)
             )
-        low_gain = condition_summary["canonical_max_iter"]["paired_group_comparisons_shrunk_vs_full"]
+        low_gain = condition_summary["current_code_baseline"]["paired_group_comparisons_shrunk_vs_full"]
         high_gain = condition_summary["higher_max_iter"]["paired_group_comparisons_shrunk_vs_full"]
         gain_delta = float(high_gain["mean_gain_ref_minus_candidate_m"] - low_gain["mean_gain_ref_minus_candidate_m"])
         gain_direction_preserved = bool(
@@ -307,17 +309,17 @@ def run_dataset(dataset: str, canonical: dict, high_max_iter: int) -> dict:
                 "early_stopping": True,
                 "tol": 1e-4,
                 "n_iter_no_change": 10,
-                "canonical_max_iter": 300 if dataset == "nuscenes" else 250,
+                "baseline_max_iter": 300 if dataset == "nuscenes" else 250,
                 "higher_max_iter": int(high_max_iter),
             },
             "condition_summary": condition_summary,
-            "method_sensitivity_high_minus_canonical": method_sensitivity,
+            "method_sensitivity_high_minus_baseline": method_sensitivity,
             "shrinkage_gain_sensitivity": {
-                "canonical_gain_full_minus_shrunk_m": float(low_gain["mean_gain_ref_minus_candidate_m"]),
+                "baseline_gain_full_minus_shrunk_m": float(low_gain["mean_gain_ref_minus_candidate_m"]),
                 "higher_gain_full_minus_shrunk_m": float(high_gain["mean_gain_ref_minus_candidate_m"]),
-                "higher_minus_canonical_gain_m": gain_delta,
+                "higher_minus_baseline_gain_m": gain_delta,
                 "gain_direction_preserved": gain_direction_preserved,
-                "canonical_gain_CI95_m": low_gain["paired_group_bootstrap_CI95_m"],
+                "baseline_gain_CI95_m": low_gain["paired_group_bootstrap_CI95_m"],
                 "higher_gain_CI95_m": high_gain["paired_group_bootstrap_CI95_m"],
             },
             "draw_records": records,
@@ -331,16 +333,27 @@ def run_dataset(dataset: str, canonical: dict, high_max_iter: int) -> dict:
     }
 
 
-def canonical_reproduction_check(out: dict, canonical: dict, atol: float = 1e-8) -> dict:
+def historical_snapshot_reproduction(out: dict, canonical: dict, atol: float = 1e-8) -> dict:
     checks = []
     for dataset, ds in out["per_dataset"].items():
         for n, item in ds["per_N"].items():
-            got = item["condition_summary"]["canonical_max_iter"]["mean_test_fde_by_method_group_weighted_m"]
+            got = item["condition_summary"]["current_code_baseline"]["mean_test_fde_by_method_group_weighted_m"]
             expected = canonical["per_dataset"][dataset]["per_N"][n]["mean_test_fde_by_method_group_weighted_m"]
             for method in METHODS:
                 diff = abs(float(got[method]) - float(expected[method]))
                 checks.append({"dataset": dataset, "N": int(n), "method": method, "abs_diff_m": diff, "pass": diff <= atol})
-    return {"all_pass": bool(all(c["pass"] for c in checks)), "tolerance_m": atol, "checks": checks}
+    return {
+        "all_pass": bool(all(c["pass"] for c in checks)),
+        "tolerance_m": atol,
+        "role": "audit_only_not_the_controlled_sensitivity_pair",
+        "explanation": (
+            "The frozen historical JSON records a script SHA that is not the SHA of the "
+            "released current script. Exact equality is therefore not asserted. The valid "
+            "convergence comparison is baseline versus higher max_iter produced together "
+            "by this script, with all other inputs held fixed."
+        ),
+        "checks": checks,
+    }
 
 
 def create_report(result_path: Path, report_path: Path) -> None:
@@ -350,39 +363,41 @@ def create_report(result_path: Path, report_path: Path) -> None:
         "",
         "## 目的与原则",
         "",
-        "本检查只改变 MLP 的 `max_iter`，不改变数据、因果特征、物理先验、模型结构、随机种子、早停参数、分组切分或统计单位。脚本重放 canonical 结果中的 3 个 outer fold × 4 个 subset seed 清单，并将每个 test route/scene 内的重复评估先平均，再做组级比较。",
+        "本检查重放冻结结果中的 3 个 outer fold × 4 个 subset seed 清单，并在同一次当前代码运行内只改变 MLP 的 `max_iter`。数据、因果特征、物理先验、模型结构、随机种子、早停参数、分组切分和统计单位均保持不变；每个 test route/scene 内的重复评估先平均，再做组级比较。",
         "",
-        "- canonical 条件：comma `max_iter=250`，nuScenes `max_iter=300`；",
+        "- 当前代码基线：comma `max_iter=250`，nuScenes `max_iter=300`；",
         f"- higher 条件：两个平台均为 `max_iter={obj['configuration']['higher_max_iter']}`；",
         "- 早停：`early_stopping=True`、`tol=1e-4`、`n_iter_no_change=10`；",
-        "- 高迭代结果是敏感性证据，不自动替换 canonical 结果。",
+        "- 严格受控比较是当前代码基线与高迭代条件；历史冻结 JSON 仅作快照审计。",
+        "- 由于历史结果记录的脚本 SHA 与当前开源脚本不一致，本文不声称当前代码逐数值复现历史快照。",
         "",
         "## 结果摘要",
         "",
     ]
     for dataset, ds in obj["per_dataset"].items():
         unit = ds["grouping_unit"]
-        lines += [f"### {dataset}（统计单位：{unit}）", "", "| N | canonical 收缩增益 full−shrunk (m) | higher 收缩增益 full−shrunk (m) | higher−canonical (m) | canonical 95% CI | higher 95% CI | 方向保持 | |", "|---:|---:|---:|---:|---|---|:---:|",]
+        lines += [f"### {dataset}（统计单位：{unit}）", "", "| N | 当前代码基线收缩增益 full−shrunk (m) | higher 收缩增益 full−shrunk (m) | higher−baseline (m) | baseline 95% CI | higher 95% CI | 方向保持 |", "|---:|---:|---:|---:|---|---|:---:|",]
         for n, item in ds["per_N"].items():
             s = item["shrinkage_gain_sensitivity"]
             lines.append(
-                f"| {n} | {s['canonical_gain_full_minus_shrunk_m']:.4f} | {s['higher_gain_full_minus_shrunk_m']:.4f} | {s['higher_minus_canonical_gain_m']:.4f} | "
-                f"[{s['canonical_gain_CI95_m'][0]:.4f}, {s['canonical_gain_CI95_m'][1]:.4f}] | "
+                f"| {n} | {s['baseline_gain_full_minus_shrunk_m']:.4f} | {s['higher_gain_full_minus_shrunk_m']:.4f} | {s['higher_minus_baseline_gain_m']:.4f} | "
+                f"[{s['baseline_gain_CI95_m'][0]:.4f}, {s['baseline_gain_CI95_m'][1]:.4f}] | "
                 f"[{s['higher_gain_CI95_m'][0]:.4f}, {s['higher_gain_CI95_m'][1]:.4f}] | {'是' if s['gain_direction_preserved'] else '否'} |"
             )
         lines += ["", "### 拟合收敛诊断", "", "| N | 条件 | 拟合次数 | warning拟合数/比例 | 达到max_iter数/比例 | n_iter均值 | n_iter中位数 | n_iter最大 |", "|---:|---|---:|---:|---:|---:|---:|---:|"]
         for n, item in ds["per_N"].items():
-            for condition, label in (("canonical_max_iter", "canonical"), ("higher_max_iter", "higher")):
+            for condition, label in (("current_code_baseline", "baseline"), ("higher_max_iter", "higher")):
                 d = item["condition_summary"][condition]["fit_diagnostics"]
                 lines.append(f"| {n} | {label} | {d['n_fits']} | {d['warning_fit_count']}/{d['warning_fit_rate']:.1%} | {d['hit_max_iter_count']}/{d['hit_max_iter_rate']:.1%} | {d['n_iter_mean']:.1f} | {d['n_iter_median']:.1f} | {d['n_iter_max']} |")
-        lines += ["", "### FDE 变化（higher − canonical，单位 m；正值表示高迭代条件误差更大）", "", "| 数据集 | N | full λ=1 | shrunk λ | analytic clipped | validation grid |", "|---|---:|---:|---:|---:|---:|"]
-        for dataset, ds in obj["per_dataset"].items():
-            for n, item in ds["per_N"].items():
-                row = []
-                for method in (FULL, SHRUNK, "squared_analytic_clipped", "validation_group_fde_grid"):
-                    row.append(item["method_sensitivity_high_minus_canonical"][method]["mean_gain_ref_minus_candidate_m"] * -1.0)
-                lines.append(f"| {dataset} | {n} | {row[0]:.5f} | {row[1]:.5f} | {row[2]:.5f} | {row[3]:.5f} |")
-        lines += ["", "## 解释边界", "", "1. 如果 higher 条件下收缩增益的方向、量级和组级区间与 canonical 基本一致，可将结论描述为对 MLP 停止条件具有敏感性稳定性；这不等于证明神经网络优化已达到全局最优。", "2. 如果某个 N 的差异明显或方向翻转，应以 higher 结果重新评估该预算的主张，不选择性保留较有利条件。", "3. `warning` 与 `hit_max_iter` 只反映 sklearn 训练停止诊断；早停会在达到 patience 时停止，因此 `n_iter < max_iter` 不必然表示损失已完全收敛。", "4. comma 与 nuScenes 仍按各自平台的 route/scene 统计单位解释，不将窗口数当作独立样本。", ""]
+    lines += ["", "## FDE 变化（higher − baseline，单位 m；正值表示高迭代条件误差更大）", "", "| 数据集 | N | full λ=1 | shrunk λ | analytic clipped | validation grid |", "|---|---:|---:|---:|---:|---:|"]
+    for dataset, ds in obj["per_dataset"].items():
+        for n, item in ds["per_N"].items():
+            row = []
+            for method in (FULL, SHRUNK, "squared_analytic_clipped", "validation_group_fde_grid"):
+                row.append(item["method_sensitivity_high_minus_baseline"][method]["mean_gain_ref_minus_candidate_m"] * -1.0)
+            lines.append(f"| {dataset} | {n} | {row[0]:.5f} | {row[1]:.5f} | {row[2]:.5f} | {row[3]:.5f} |")
+    audit = obj["historical_snapshot_reproduction"]
+    lines += ["", "## 历史快照审计", "", f"逐数值核对通过：`{audit['all_pass']}`。该核对只用于披露历史脚本快照与当前开源代码之间的版本差异，不参与受控敏感性结论。", "", "## 解释边界", "", "1. 当前代码基线与 higher 条件的比较只说明结果对所检查 `max_iter` 范围的敏感性，不证明神经网络优化达到全局最优。", "2. 历史冻结主结果与当前代码基线不是严格受控的一对，二者不得用于归因 `max_iter` 的效果。", "3. `warning` 与 `hit_max_iter` 只反映 sklearn 训练停止诊断；早停会在达到 patience 时停止，因此 `n_iter < max_iter` 不必然表示损失已完全收敛。", "4. comma 与 nuScenes 仍按各自平台的 route/scene 统计单位解释，不将窗口数当作独立样本。", ""]
     report_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
@@ -406,7 +421,12 @@ def main() -> int:
         "status": "FULL_RUN",
         "higher_max_iter": int(args.higher_max_iter),
         "configuration": {"higher_max_iter": int(args.higher_max_iter)},
-        "canonical_reproduction_check": None,
+        "controlled_pair_valid": True,
+        "interpretation_scope": (
+            "Same current-code execution, same frozen split manifests and seeds; "
+            "only MLPRegressor.max_iter differs between baseline and higher conditions."
+        ),
+        "historical_snapshot_reproduction": None,
         "provenance": {
             "script": str(Path(__file__).relative_to(ROOT)).replace("\\", "/"),
             "script_sha256": sha256(Path(__file__).resolve()),
@@ -415,7 +435,7 @@ def main() -> int:
             "python_version": sys.version.split()[0],
             "numpy": np.__version__, "scipy": scipy.__version__, "scikit_learn": sklearn.__version__,
             "only_changed_parameter": "MLPRegressor.max_iter",
-            "canonical_max_iter": {"comma": 250, "nuscenes": 300},
+            "baseline_max_iter": {"comma": 250, "nuscenes": 300},
             "higher_max_iter": int(args.higher_max_iter),
             "model": {"hidden_layer_sizes": [48, 24], "alpha": 1e-3, "random_state": 0, "early_stopping": True, "tol": 1e-4, "n_iter_no_change": 10},
             "split_replay": "exact split_manifests from canonical result; no new split or seed",
@@ -424,13 +444,14 @@ def main() -> int:
         },
         "per_dataset": per_dataset,
     }
-    output["canonical_reproduction_check"] = canonical_reproduction_check(output, canonical)
+    output["historical_snapshot_reproduction"] = historical_snapshot_reproduction(output, canonical)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(output, ensure_ascii=False, indent=2), encoding="utf-8")
     create_report(args.output, args.report)
     print(f"Wrote {args.output}")
     print(f"Wrote {args.report}")
-    print(f"canonical reproduction all_pass={output['canonical_reproduction_check']['all_pass']}")
+    print(f"controlled pair valid={output['controlled_pair_valid']}")
+    print(f"historical snapshot reproduction all_pass={output['historical_snapshot_reproduction']['all_pass']}")
     return 0
 
 

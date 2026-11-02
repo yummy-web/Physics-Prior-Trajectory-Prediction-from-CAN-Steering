@@ -1,0 +1,139 @@
+{
+  "title": "Directional absolute endpoint-error decomposition",
+  "source_result": "results/canonical/exp_anisotropy_v2_results.json",
+  "coordinate_definition": "local x is longitudinal; local y is lateral",
+  "metric": "absolute endpoint component error in metres",
+  "statistical_unit": "route for comma2k19; scene for nuScenes",
+  "nuscenes_scope": "200-scene causal subset used by exp_anisotropy_v2, not the full 566-scene corpus",
+  "interpretation": "Descriptive directional error evidence. It quantifies error allocation between local longitudinal and lateral axes; it does not establish sensor causality, observability, or a universal physical mechanism.",
+  "rows": [
+    {
+      "platform": "comma2k19",
+      "prediction_branch": "causal_physics_prior",
+      "horizon_s": 1,
+      "longitudinal_abs_endpoint_error_mean_m": 0.28965791723227874,
+      "longitudinal_group_bootstrap_CI95_m": [
+        0.27837056190555803,
+        0.3008733364722007
+      ],
+      "lateral_abs_endpoint_error_mean_m": 0.06859726492881466,
+      "lateral_group_bootstrap_CI95_m": [
+        0.063386759419529,
+        0.0742292320396732
+      ],
+      "lateral_over_longitudinal_ratio": 0.22990442287638535
+    },
+    {
+      "platform": "comma2k19",
+      "prediction_branch": "causal_physics_prior",
+      "horizon_s": 2,
+      "longitudinal_abs_endpoint_error_mean_m": 0.7725932870868261,
+      "longitudinal_group_bootstrap_CI95_m": [
+        0.7217087283907314,
+        0.825952695913848
+      ],
+      "lateral_abs_endpoint_error_mean_m": 0.3229302616661076,
+      "lateral_group_bootstrap_CI95_m": [
+        0.3005236046189276,
+        0.34706499426888116
+      ],
+      "lateral_over_longitudinal_ratio": 0.43152123959032757
+    },
+    {
+      "platform": "comma2k19",
+      "prediction_branch": "causal_physics_prior",
+      "horizon_s": 3,
+      "longitudinal_abs_endpoint_error_mean_m": 1.481877282048887,
+      "longitudinal_group_bootstrap_CI95_m": [
+        1.3422984929737891,
+        1.6285608107183516
+      ],
+      "lateral_abs_endpoint_error_mean_m": 0.8411523941494914,
+      "lateral_group_bootstrap_CI95_m": [
+        0.7873833730609476,
+        0.9038763427075798
+      ],
+      "lateral_over_longitudinal_ratio": 0.6090353354654264
+    },
+    {
+      "platform": "comma2k19",
+      "prediction_branch": "causal_full_residual",
+      "horizon_s": 3,
+      "longitudinal_abs_endpoint_error_mean_m": 0.9100677362791982,
+      "longitudinal_group_bootstrap_CI95_m": [
+        0.759842427432292,
+        1.0596104989241442
+      ],
+      "lateral_abs_endpoint_error_mean_m": 0.7238864311743198,
+      "lateral_group_bootstrap_CI95_m": [
+        0.685407457943143,
+        0.7660017834724173
+      ],
+      "lateral_over_longitudinal_ratio": 0.8781638171945374
+    },
+    {
+      "platform": "nuscenes",
+      "prediction_branch": "causal_physics_prior",
+      "horizon_s": 1,
+      "longitudinal_abs_endpoint_error_mean_m": 0.3067509832012749,
+      "longitudinal_group_bootstrap_CI95_m": [
+        0.2941038386691401,
+        0.320827912368039
+      ],
+      "lateral_abs_endpoint_error_mean_m": 0.053624536979097276,
+      "lateral_group_bootstrap_CI95_m": [
+        0.050471362316810514,
+        0.05719672177952514
+      ],
+      "lateral_over_longitudinal_ratio": 0.174959536010693
+    },
+    {
+      "platform": "nuscenes",
+      "prediction_branch": "causal_physics_prior",
+      "horizon_s": 2,
+      "longitudinal_abs_endpoint_error_mean_m": 1.003559083675097,
+      "longitudinal_group_bootstrap_CI95_m": [
+        0.9593737951417267,
+        1.0541316594257277
+      ],
+      "lateral_abs_endpoint_error_mean_m": 0.25576104256363047,
+      "lateral_group_bootstrap_CI95_m": [
+        0.23890021530812364,
+        0.2750060314918135
+      ],
+      "lateral_over_longitudinal_ratio": 0.2550324092289771
+    },
+    {
+      "platform": "nuscenes",
+      "prediction_branch": "causal_physics_prior",
+      "horizon_s": 3,
+      "longitudinal_abs_endpoint_error_mean_m": 2.0625501166698843,
+      "longitudinal_group_bootstrap_CI95_m": [
+        1.9683626640070644,
+        2.1733641286026524
+      ],
+      "lateral_abs_endpoint_error_mean_m": 0.6948251554374971,
+      "lateral_group_bootstrap_CI95_m": [
+        0.6454025595281235,
+        0.7486614758700646
+      ],
+      "lateral_over_longitudinal_ratio": 0.3370767258840885
+    },
+    {
+      "platform": "nuscenes",
+      "prediction_branch": "causal_full_residual",
+      "horizon_s": 3,
+      "longitudinal_abs_endpoint_error_mean_m": 1.7655909494348179,
+      "longitudinal_group_bootstrap_CI95_m": [
+        1.6919462127049991,
+        1.8531682663562852
+      ],
+      "lateral_abs_endpoint_error_mean_m": 0.6508843345370202,
+      "lateral_group_bootstrap_CI95_m": [
+        0.6080506513342265,
+        0.6960605355536529
+      ],
+      "lateral_over_longitudinal_ratio": 0.36873637588661473
+    }
+  ]
+}
