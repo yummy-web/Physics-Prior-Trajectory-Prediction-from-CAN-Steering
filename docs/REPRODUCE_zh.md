@@ -13,7 +13,7 @@ python src/exp_horizonwise_v2.py
 python src/exp_lambda_group_calibration.py
 python src/exp_lambda_analytic.py
 python src/exp_lambda_analytic_nusc.py
-python src/exp_lambda_analytic_route_ci.py
+python src/exp_lambda_group_calibration.py --datasets comma
 python src/exp_lambda_transfer.py
 python src/exp_identifiability.py
 python src/exp_recursive_baselines_causal.py

@@ -346,6 +346,12 @@ def run_dataset(dataset: str, Ns: list[int], fold_indices: list[int], seeds: lis
                         "fit_group_count", "validation_group_count", "test_group_count",
                         "fit_anchor_count", "validation_anchor_count", "test_anchor_count",
                     )
+                } | {
+                    # Preserve RNG-produced order for exact MLP replay.  The
+                    # sorted lists above remain convenient membership records.
+                    "fit_groups_ordered": list(map(str, fit_groups)),
+                    "validation_groups_ordered": list(map(str, val_groups)),
+                    "test_groups_ordered": list(map(str, test_groups)),
                 })
                 print(f"[{dataset} N={n} fold={fold_i} seed={subset_seed}] "
                       f"lam_sq={lambda_sq:.3f} shr={lambda_sq_shrunk:.3f} "

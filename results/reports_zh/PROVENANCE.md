@@ -11,7 +11,7 @@
 ## 统计单位与主结果
 
 - nuScenes lambda 实验：566 个 scene 聚类；3 s 收缩相对满残差的改善量为 N=3/5/10/20 时 1.663/0.960/0.420/0.137 m，scene-level 95% CI 分别为 [1.461,1.877]、[0.860,1.069]、[0.380,0.464]、[0.114,0.163]。
-- comma2k19：42 条 route；解析式 lambda 结果仅报告点估计，路线级审计收益为 0.1616/0.0569/0.0040/−0.0012 m，区间均包含 0。
+- comma2k19：42 条 route；统一分组校准实验的路线级收益为 N=3/5/10/20 时 0.2786/0.0835/0.0024/−0.0008 m，95% CI 分别为 [0.1003,0.4712]、[0.0120,0.1652]、[−0.0245,0.0328]、[−0.0119,0.0128]。点估计与区间来自同一批预测。
 - 跨平台迁移：支持收缩方向可复用，但具体 lambda 数值仍需目标平台验证校准。
 - CRIStAL/LOCSP：7 次同一辆 Renault Zoe、同日采集；统计单位为 acquisition，3 s FDE 的 INS velocity ZOH、拟合 CTRV、满残差和 kappa=0.5 分别为 2.655、2.438、2.425 和 2.421 m。该结果是同车多采集外部检查，不是跨车型泛化。
 
@@ -22,7 +22,7 @@
 - supplementary/exp_gru_baseline_causal_results.json：同一因果信号族下的紧凑 GRU 补充基线。它不是 canonical MLP 的替代，也不构成对所有时序网络的比较。
 - supplementary/exp_sample_funnel_audit_results.json：缓存级筛选审计。原始下载候选总数不在缓存中，未从缓存反推候选数。
 - supplementary/exp_calibration_regret_audit_results.json：校准后悔闭合率描述性审计。nuScenes 为 98.1%/98.3%/99.4%/88.5%，comma 为 94.8%/78.9%/10.4%/-14.7%；均为点估计，oracle 只作描述性上界。
-- supplementary/exp_lambda_group_calibration_convergence_results.json：仅改变 MLP max_iter 的收敛敏感性检查。canonical reproduction check 标记为不通过，原因是该脚本按当前实现重训时与历史 canonical MLP 的若干 FDE 数值不完全复现；因此只能使用其“收缩增益方向保持”的诊断，不能声称逐数值复现。
+- supplementary/exp_lambda_group_calibration_convergence_results.json：仅改变 MLP max_iter 的收敛敏感性检查。脚本按主实验的 RNG 规则恢复有序 fit/validation/test 分组；基线逐 test group 复现主结果（最大绝对差为 0），再与高迭代条件配对比较。
 
 ## 辅助审计
 

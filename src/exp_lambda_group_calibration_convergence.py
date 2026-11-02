@@ -1,16 +1,10 @@
-"""Controlled MLP convergence sensitivity audit for grouped lambda calibration.
+"""Controlled MLP convergence sensitivity for grouped lambda calibration.
 
-This script deliberately does not overwrite the frozen main result. It replays
-the exact split manifests from exp_lambda_group_calibration_results.json and,
-within one current-code run, fits the same causal physics+MLP pipeline under a
-baseline and a higher max_iter condition.  This within-run pair is the valid
-sensitivity comparison.
-
-The only intended optimization change is max_iter. Model architecture, alpha,
-random seed, early stopping, tol, n_iter_no_change, data, splits, and scoring
-remain fixed.  A separate historical-snapshot audit compares the current-code
-baseline with the frozen JSON.  Failure of that audit is reported explicitly
-and is not confused with the validity of the controlled within-run pair.
+The script reconstructs the ordered group splits used by the main grouped
+calibration experiment, verifies that the baseline condition reproduces every
+saved test-group prediction, and then changes only ``MLPRegressor.max_iter``.
+Keeping ordered fit/validation/test lists is essential because stochastic
+gradient training is sensitive to sample order even when membership is fixed.
 """
 from __future__ import annotations
 
@@ -156,6 +150,42 @@ def keys_for_groups(group_map: dict[str, list[str]], groups: list[str]) -> list[
     return [key for g in groups for key in group_map[str(g)]]
 
 
+def reconstruct_ordered_split(group_map: dict[str, list[str]], manifest: dict) -> tuple[list[str], list[str], list[str]]:
+    """Recreate and validate the exact ordered split used by the main run."""
+    ordered_keys = ("fit_groups_ordered", "validation_groups_ordered", "test_groups_ordered")
+    if all(k in manifest for k in ordered_keys):
+        ordered = tuple([str(x) for x in manifest[k]] for k in ordered_keys)
+        membership = (set(map(str, manifest["fit_groups"])),
+                      set(map(str, manifest["validation_groups"])),
+                      set(map(str, manifest["test_groups"])))
+        if tuple(map(set, ordered)) != membership:
+            raise RuntimeError("Ordered split fields do not match manifest membership")
+        return ordered
+    gids = list(group_map.keys())
+    rng = np.random.default_rng(0)
+    rng.shuffle(gids)
+    folds = [gids[i::G.FOLDS_DEFAULT] for i in range(G.FOLDS_DEFAULT)]
+    fold_i = int(manifest["outer_fold"])
+    n = int(manifest["training_group_budget_N"])
+    subset_seed = int(manifest["subset_seed"])
+    test_groups = list(folds[fold_i])
+    pool = [g for g in gids if g not in set(test_groups)]
+    local_rng = np.random.default_rng(100 * fold_i + subset_seed)
+    subset = list(local_rng.choice(pool, size=n, replace=False))
+    n_val = max(1, int(np.ceil(n / 3.0)))
+    val_groups = list(local_rng.choice(subset, size=n_val, replace=False))
+    fit_groups = [g for g in subset if g not in set(val_groups)]
+    got = (set(map(str, fit_groups)), set(map(str, val_groups)), set(map(str, test_groups)))
+    expected = (set(map(str, manifest["fit_groups"])),
+                set(map(str, manifest["validation_groups"])),
+                set(map(str, manifest["test_groups"])))
+    if got != expected:
+        raise RuntimeError(
+            f"Unable to reconstruct ordered split: fold={fold_i}, seed={subset_seed}, N={n}"
+        )
+    return list(map(str, fit_groups)), list(map(str, val_groups)), list(map(str, test_groups))
+
+
 def build_arrays(dataset: str, data: dict, keys: list[str], gain: float):
     if dataset == "comma":
         return G.build_comma(data, keys, gain)
@@ -235,11 +265,14 @@ def run_dataset(dataset: str, canonical: dict, high_max_iter: int) -> dict:
     for n_str, canonical_n in sorted(canonical_ds["per_N"].items(), key=lambda kv: int(kv[0])):
         n = int(n_str)
         manifests = canonical_n["split_manifests"]
+        canonical_draws = {
+            (int(r["outer_fold"]), int(r["subset_seed"])): r
+            for r in canonical_n["draw_records"]
+        }
         records = []
+        reproduction_max_abs_diff = 0.0
         for idx, manifest in enumerate(manifests):
-            fit_groups = [str(x) for x in manifest["fit_groups"]]
-            val_groups = [str(x) for x in manifest["validation_groups"]]
-            test_groups = [str(x) for x in manifest["test_groups"]]
+            fit_groups, val_groups, test_groups = reconstruct_ordered_split(group_map, manifest)
             fit_keys = keys_for_groups(group_map, fit_groups)
             val_keys = keys_for_groups(group_map, val_groups)
             test_keys = keys_for_groups(group_map, test_groups)
@@ -253,6 +286,24 @@ def run_dataset(dataset: str, canonical: dict, high_max_iter: int) -> dict:
                 raise RuntimeError(f"Canonical manifest became invalid: {dataset} N={n} draw={idx}")
             low_iter = 300 if dataset == "nuscenes" else 250
             low = fit_and_score(dataset, arrays, low_iter)
+            canonical_draw = canonical_draws[(int(manifest["outer_fold"]), int(manifest["subset_seed"]))]
+            for method in METHODS:
+                expected_group = canonical_draw["test_group_fde_by_method"][method]
+                got_group = low["test_group_fde_by_method"][method]
+                if set(expected_group) != set(got_group):
+                    raise RuntimeError(
+                        f"Baseline group mismatch: {dataset} N={n} draw={idx} method={method}"
+                    )
+                for group, expected_value in expected_group.items():
+                    reproduction_max_abs_diff = max(
+                        reproduction_max_abs_diff,
+                        abs(float(got_group[group]) - float(expected_value)),
+                    )
+            if reproduction_max_abs_diff > 1e-10:
+                raise RuntimeError(
+                    f"Baseline failed to reproduce main result: {dataset} N={n} "
+                    f"max_abs_diff={reproduction_max_abs_diff:.3g} m"
+                )
             high = fit_and_score(dataset, arrays, high_max_iter)
             records.append({
                 "outer_fold": int(manifest["outer_fold"]),
@@ -312,6 +363,11 @@ def run_dataset(dataset: str, canonical: dict, high_max_iter: int) -> dict:
                 "baseline_max_iter": 300 if dataset == "nuscenes" else 250,
                 "higher_max_iter": int(high_max_iter),
             },
+            "baseline_reproduction": {
+                "passed": True,
+                "tolerance_m": 1e-10,
+                "max_abs_test_group_fde_difference_m": float(reproduction_max_abs_diff),
+            },
             "condition_summary": condition_summary,
             "method_sensitivity_high_minus_baseline": method_sensitivity,
             "shrinkage_gain_sensitivity": {
@@ -333,29 +389,6 @@ def run_dataset(dataset: str, canonical: dict, high_max_iter: int) -> dict:
     }
 
 
-def historical_snapshot_reproduction(out: dict, canonical: dict, atol: float = 1e-8) -> dict:
-    checks = []
-    for dataset, ds in out["per_dataset"].items():
-        for n, item in ds["per_N"].items():
-            got = item["condition_summary"]["current_code_baseline"]["mean_test_fde_by_method_group_weighted_m"]
-            expected = canonical["per_dataset"][dataset]["per_N"][n]["mean_test_fde_by_method_group_weighted_m"]
-            for method in METHODS:
-                diff = abs(float(got[method]) - float(expected[method]))
-                checks.append({"dataset": dataset, "N": int(n), "method": method, "abs_diff_m": diff, "pass": diff <= atol})
-    return {
-        "all_pass": bool(all(c["pass"] for c in checks)),
-        "tolerance_m": atol,
-        "role": "audit_only_not_the_controlled_sensitivity_pair",
-        "explanation": (
-            "The frozen historical JSON records a script SHA that is not the SHA of the "
-            "released current script. Exact equality is therefore not asserted. The valid "
-            "convergence comparison is baseline versus higher max_iter produced together "
-            "by this script, with all other inputs held fixed."
-        ),
-        "checks": checks,
-    }
-
-
 def create_report(result_path: Path, report_path: Path) -> None:
     obj = json.loads(result_path.read_text(encoding="utf-8"))
     lines = [
@@ -363,13 +396,12 @@ def create_report(result_path: Path, report_path: Path) -> None:
         "",
         "## 目的与原则",
         "",
-        "本检查重放冻结结果中的 3 个 outer fold × 4 个 subset seed 清单，并在同一次当前代码运行内只改变 MLP 的 `max_iter`。数据、因果特征、物理先验、模型结构、随机种子、早停参数、分组切分和统计单位均保持不变；每个 test route/scene 内的重复评估先平均，再做组级比较。",
+        "本检查重放主校准实验中的 3 个 outer fold × 4 个 subset seed 划分。基线条件首先逐组复现主结果，随后仅提高 MLP 的 `max_iter`；数据、因果特征、物理先验、模型结构、随机种子、早停参数、分组切分和统计单位均保持不变。每个 test route/scene 内的重复评估先平均，再做组级比较。",
         "",
         "- 当前代码基线：comma `max_iter=250`，nuScenes `max_iter=300`；",
         f"- higher 条件：两个平台均为 `max_iter={obj['configuration']['higher_max_iter']}`；",
         "- 早停：`early_stopping=True`、`tol=1e-4`、`n_iter_no_change=10`；",
-        "- 严格受控比较是当前代码基线与高迭代条件；历史冻结 JSON 仅作快照审计。",
-        "- 由于历史结果记录的脚本 SHA 与当前开源脚本不一致，本文不声称当前代码逐数值复现历史快照。",
+        "- 基线条件逐 test group 复现主结果后，再与高迭代条件作配对比较。",
         "",
         "## 结果摘要",
         "",
@@ -396,8 +428,7 @@ def create_report(result_path: Path, report_path: Path) -> None:
             for method in (FULL, SHRUNK, "squared_analytic_clipped", "validation_group_fde_grid"):
                 row.append(item["method_sensitivity_high_minus_baseline"][method]["mean_gain_ref_minus_candidate_m"] * -1.0)
             lines.append(f"| {dataset} | {n} | {row[0]:.5f} | {row[1]:.5f} | {row[2]:.5f} | {row[3]:.5f} |")
-    audit = obj["historical_snapshot_reproduction"]
-    lines += ["", "## 历史快照审计", "", f"逐数值核对通过：`{audit['all_pass']}`。该核对只用于披露历史脚本快照与当前开源代码之间的版本差异，不参与受控敏感性结论。", "", "## 解释边界", "", "1. 当前代码基线与 higher 条件的比较只说明结果对所检查 `max_iter` 范围的敏感性，不证明神经网络优化达到全局最优。", "2. 历史冻结主结果与当前代码基线不是严格受控的一对，二者不得用于归因 `max_iter` 的效果。", "3. `warning` 与 `hit_max_iter` 只反映 sklearn 训练停止诊断；早停会在达到 patience 时停止，因此 `n_iter < max_iter` 不必然表示损失已完全收敛。", "4. comma 与 nuScenes 仍按各自平台的 route/scene 统计单位解释，不将窗口数当作独立样本。", ""]
+    lines += ["", "## 主结果复现检查", "", "所有平台和预算下，基线条件均逐 test group 复现主校准结果（绝对差不超过 1e-10 m）。", "", "## 解释边界", "", "1. 基线与 higher 条件的比较只说明结果对所检查 `max_iter` 范围的敏感性，不证明神经网络优化达到全局最优。", "2. `warning` 与 `hit_max_iter` 只反映 sklearn 训练停止诊断；早停会在达到 patience 时停止，因此 `n_iter < max_iter` 不必然表示损失已完全收敛。", "3. comma 与 nuScenes 仍按各自平台的 route/scene 统计单位解释，不将窗口数当作独立样本。", ""]
     report_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
@@ -423,10 +454,9 @@ def main() -> int:
         "configuration": {"higher_max_iter": int(args.higher_max_iter)},
         "controlled_pair_valid": True,
         "interpretation_scope": (
-            "Same current-code execution, same frozen split manifests and seeds; "
+            "Same execution, same main-experiment splits and seeds; "
             "only MLPRegressor.max_iter differs between baseline and higher conditions."
         ),
-        "historical_snapshot_reproduction": None,
         "provenance": {
             "script": str(Path(__file__).relative_to(ROOT)).replace("\\", "/"),
             "script_sha256": sha256(Path(__file__).resolve()),
@@ -438,20 +468,18 @@ def main() -> int:
             "baseline_max_iter": {"comma": 250, "nuscenes": 300},
             "higher_max_iter": int(args.higher_max_iter),
             "model": {"hidden_layer_sizes": [48, 24], "alpha": 1e-3, "random_state": 0, "early_stopping": True, "tol": 1e-4, "n_iter_no_change": 10},
-            "split_replay": "exact split_manifests from canonical result; no new split or seed",
+            "split_replay": "exact ordered reconstruction of main-experiment splits; no new split or seed",
             "primary_statistical_unit": "comma route; nuScenes scene",
             "bootstrap": "paired percentile bootstrap over independent groups, 5000 replicates",
         },
         "per_dataset": per_dataset,
     }
-    output["historical_snapshot_reproduction"] = historical_snapshot_reproduction(output, canonical)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(output, ensure_ascii=False, indent=2), encoding="utf-8")
     create_report(args.output, args.report)
     print(f"Wrote {args.output}")
     print(f"Wrote {args.report}")
     print(f"controlled pair valid={output['controlled_pair_valid']}")
-    print(f"historical snapshot reproduction all_pass={output['historical_snapshot_reproduction']['all_pass']}")
     return 0
 
 
