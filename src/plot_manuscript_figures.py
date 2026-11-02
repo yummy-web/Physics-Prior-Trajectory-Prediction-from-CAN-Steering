@@ -62,7 +62,7 @@ def fig_shrinkage(out: Path) -> None:
     ax.set_ylabel("FDE gain over full residual (m)")
     ax.set_title("FDE gain from residual shrinkage across training budgets")
     style_axis(ax); ax.legend(frameon=False)
-    save(fig, out, "Fig_3_nuscenes_shrinkage_gain")
+    save(fig, out, "Fig_2_nuscenes_shrinkage_gain")
 
 
 def fig_transfer(out: Path) -> None:
@@ -97,7 +97,7 @@ def fig_transfer(out: Path) -> None:
     ax.set_ylabel("nuScenes FDE (m)")
     ax.set_title("Cross-platform transfer: direction transfers, level needs recalibration")
     style_axis(ax); ax.legend(frameon=False, fontsize=8)
-    save(fig, out, "Fig_5_cross_platform_transfer")
+    save(fig, out, "Fig_3_cross_platform_transfer")
 
 
 def fig_cristal_grouped(out: Path) -> None:
@@ -125,7 +125,7 @@ def fig_cristal_grouped(out: Path) -> None:
     ax.set_title("CRIStAL/LOCSP grouped external validation across seven acquisitions")
     ax.set_ylim(0, max(3.2, ax.get_ylim()[1])); style_axis(ax)
     ax.legend(frameon=False, ncol=2, fontsize=8)
-    save(fig, out, "Fig_6_crisal_grouped_external_3s")
+    save(fig, out, "Fig_4_crisal_grouped_external_3s")
 
 
 def fig_cristal_rollout(out: Path, endpoints_path: Path | None) -> None:
@@ -155,7 +155,7 @@ def fig_cristal_rollout(out: Path, endpoints_path: Path | None) -> None:
     axz.set_xticks([1, 2, 3]); axz.set_xlabel("Horizon (s)"); axz.set_ylabel("Lateral endpoint coordinate (m)")
     axz.set_title("Lateral detail"); style_axis(axz)
     fig.suptitle("Representative CRIStAL/LOCSP three-horizon endpoint rollout")
-    save(fig, out, "Fig_7_representative_crisal_endpoint_rollout")
+    save(fig, out, "Fig_5_representative_crisal_endpoint_rollout")
 
 
 def main() -> int:
