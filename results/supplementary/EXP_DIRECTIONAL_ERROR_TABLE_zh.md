@@ -4,13 +4,13 @@
 
 | 平台 | 分支 | 时域 | 纵向误差 m [95% CI] | 横向误差 m [95% CI] | 横/纵 |
 |---|---|---:|---:|---:|---:|
-| comma2k19 | causal_physics_prior | 1 s | 0.290 [0.278, 0.301] | 0.069 [0.063, 0.074] | 0.230 |
-| comma2k19 | causal_physics_prior | 2 s | 0.773 [0.722, 0.826] | 0.323 [0.301, 0.347] | 0.432 |
-| comma2k19 | causal_physics_prior | 3 s | 1.482 [1.342, 1.629] | 0.841 [0.787, 0.904] | 0.609 |
-| comma2k19 | causal_full_residual | 3 s | 0.910 [0.760, 1.060] | 0.724 [0.685, 0.766] | 0.878 |
-| nuscenes | causal_physics_prior | 1 s | 0.307 [0.294, 0.321] | 0.054 [0.050, 0.057] | 0.175 |
-| nuscenes | causal_physics_prior | 2 s | 1.004 [0.959, 1.054] | 0.256 [0.239, 0.275] | 0.255 |
-| nuscenes | causal_physics_prior | 3 s | 2.063 [1.968, 2.173] | 0.695 [0.645, 0.749] | 0.337 |
-| nuscenes | causal_full_residual | 3 s | 1.766 [1.692, 1.853] | 0.651 [0.608, 0.696] | 0.369 |
+| comma2k19 | causal_physics_prior | 1 s | 0.297 [0.286, 0.309] | 0.071 [0.066, 0.077] | 0.234 |
+| comma2k19 | causal_physics_prior | 2 s | 0.792 [0.738, 0.851] | 0.335 [0.312, 0.360] | 0.439 |
+| comma2k19 | causal_physics_prior | 3 s | 1.513 [1.368, 1.663] | 0.867 [0.812, 0.931] | 0.618 |
+| comma2k19 | causal_full_residual | 3 s | 0.805 [0.696, 0.916] | 0.753 [0.713, 0.799] | 1.027 |
+| nuscenes | causal_physics_prior | 1 s | 0.420 [0.401, 0.441] | 0.067 [0.063, 0.071] | 0.159 |
+| nuscenes | causal_physics_prior | 2 s | 1.232 [1.169, 1.299] | 0.318 [0.297, 0.342] | 0.258 |
+| nuscenes | causal_physics_prior | 3 s | 2.387 [2.261, 2.524] | 0.831 [0.776, 0.894] | 0.348 |
+| nuscenes | causal_full_residual | 3 s | 1.667 [1.607, 1.742] | 0.762 [0.714, 0.816] | 0.457 |
 
 该表用于描述误差在局部纵横轴上的分配，不据此推断传感器因果性、系统可观测性或普适机制。

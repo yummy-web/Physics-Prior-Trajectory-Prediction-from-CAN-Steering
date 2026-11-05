@@ -4,14 +4,14 @@ This is a descriptive audit of frozen results; it does not retrain or select mod
 
 | Dataset | N | Full FDE | Shrunk FDE | Oracle FDE | Shrunk gain vs full | Full-to-oracle gap closed |
 |---|---:|---:|---:|---:|---:|---:|
-| comma2k19 | 3 | 2.103 | 1.824 | 1.809 | 0.279 | 0.948 |
-| comma2k19 | 5 | 1.833 | 1.749 | 1.727 | 0.084 | 0.789 |
-| comma2k19 | 10 | 1.689 | 1.686 | 1.665 | 0.002 | 0.104 |
-| comma2k19 | 20 | 1.587 | 1.588 | 1.582 | -0.001 | -0.147 |
-| nuScenes | 3 | 4.146 | 2.483 | 2.451 | 1.663 | 0.981 |
-| nuScenes | 5 | 3.405 | 2.445 | 2.428 | 0.960 | 0.983 |
-| nuScenes | 10 | 2.844 | 2.425 | 2.422 | 0.420 | 0.994 |
-| nuScenes | 20 | 2.489 | 2.352 | 2.334 | 0.137 | 0.885 |
+| comma2k19 | 3 | 2.195 | 1.868 | 1.858 | 0.327 | 0.971 |
+| comma2k19 | 5 | 1.854 | 1.799 | 1.772 | 0.055 | 0.667 |
+| comma2k19 | 10 | 1.733 | 1.747 | 1.708 | -0.014 | -0.538 |
+| comma2k19 | 20 | 1.580 | 1.584 | 1.578 | -0.004 | -2.098 |
+| nuScenes | 3 | 4.653 | 2.868 | 2.832 | 1.785 | 0.980 |
+| nuScenes | 5 | 3.769 | 2.822 | 2.800 | 0.947 | 0.977 |
+| nuScenes | 10 | 3.318 | 2.792 | 2.772 | 0.526 | 0.964 |
+| nuScenes | 20 | 2.850 | 2.686 | 2.662 | 0.164 | 0.869 |
 
 Interpretation:
 - The oracle uses test-set information and is only a descriptive upper bound.

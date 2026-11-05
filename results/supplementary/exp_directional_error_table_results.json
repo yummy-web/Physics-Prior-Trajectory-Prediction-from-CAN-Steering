@@ -11,129 +11,129 @@
       "platform": "comma2k19",
       "prediction_branch": "causal_physics_prior",
       "horizon_s": 1,
-      "longitudinal_abs_endpoint_error_mean_m": 0.28965791723227874,
+      "longitudinal_abs_endpoint_error_mean_m": 0.29739842830260105,
       "longitudinal_group_bootstrap_CI95_m": [
-        0.27837056190555803,
-        0.3008733364722007
+        0.28554002580140597,
+        0.30888270583315625
       ],
-      "lateral_abs_endpoint_error_mean_m": 0.06859726492881466,
+      "lateral_abs_endpoint_error_mean_m": 0.07103459243878027,
       "lateral_group_bootstrap_CI95_m": [
-        0.063386759419529,
-        0.0742292320396732
+        0.06578427160114977,
+        0.07687643279035607
       ],
-      "lateral_over_longitudinal_ratio": 0.22990442287638535
+      "lateral_over_longitudinal_ratio": 0.23386518775503776
     },
     {
       "platform": "comma2k19",
       "prediction_branch": "causal_physics_prior",
       "horizon_s": 2,
-      "longitudinal_abs_endpoint_error_mean_m": 0.7725932870868261,
+      "longitudinal_abs_endpoint_error_mean_m": 0.7918124669497385,
       "longitudinal_group_bootstrap_CI95_m": [
-        0.7217087283907314,
-        0.825952695913848
+        0.7375910926510492,
+        0.8511126092304812
       ],
-      "lateral_abs_endpoint_error_mean_m": 0.3229302616661076,
+      "lateral_abs_endpoint_error_mean_m": 0.33505261413110543,
       "lateral_group_bootstrap_CI95_m": [
-        0.3005236046189276,
-        0.34706499426888116
+        0.31236083574874685,
+        0.3602275926983757
       ],
-      "lateral_over_longitudinal_ratio": 0.43152123959032757
+      "lateral_over_longitudinal_ratio": 0.4393382739035891
     },
     {
       "platform": "comma2k19",
       "prediction_branch": "causal_physics_prior",
       "horizon_s": 3,
-      "longitudinal_abs_endpoint_error_mean_m": 1.481877282048887,
+      "longitudinal_abs_endpoint_error_mean_m": 1.5126223898627014,
       "longitudinal_group_bootstrap_CI95_m": [
-        1.3422984929737891,
-        1.6285608107183516
+        1.3676567954849679,
+        1.6631792351139394
       ],
-      "lateral_abs_endpoint_error_mean_m": 0.8411523941494914,
+      "lateral_abs_endpoint_error_mean_m": 0.867461952201514,
       "lateral_group_bootstrap_CI95_m": [
-        0.7873833730609476,
-        0.9038763427075798
+        0.8116917165118195,
+        0.9311188375571978
       ],
-      "lateral_over_longitudinal_ratio": 0.6090353354654264
+      "lateral_over_longitudinal_ratio": 0.6175526591893852
     },
     {
       "platform": "comma2k19",
       "prediction_branch": "causal_full_residual",
       "horizon_s": 3,
-      "longitudinal_abs_endpoint_error_mean_m": 0.9100677362791982,
+      "longitudinal_abs_endpoint_error_mean_m": 0.8045485682095532,
       "longitudinal_group_bootstrap_CI95_m": [
-        0.759842427432292,
-        1.0596104989241442
+        0.6958242794924995,
+        0.9164158894146162
       ],
-      "lateral_abs_endpoint_error_mean_m": 0.7238864311743198,
+      "lateral_abs_endpoint_error_mean_m": 0.7534965214053775,
       "lateral_group_bootstrap_CI95_m": [
-        0.685407457943143,
-        0.7660017834724173
+        0.7129433034806799,
+        0.7985624116083938
       ],
-      "lateral_over_longitudinal_ratio": 0.8781638171945374
+      "lateral_over_longitudinal_ratio": 1.0265982630067443
     },
     {
       "platform": "nuscenes",
       "prediction_branch": "causal_physics_prior",
       "horizon_s": 1,
-      "longitudinal_abs_endpoint_error_mean_m": 0.3067509832012749,
+      "longitudinal_abs_endpoint_error_mean_m": 0.4199164412762808,
       "longitudinal_group_bootstrap_CI95_m": [
-        0.2941038386691401,
-        0.320827912368039
+        0.4006450588086836,
+        0.4412133572725082
       ],
-      "lateral_abs_endpoint_error_mean_m": 0.053624536979097276,
+      "lateral_abs_endpoint_error_mean_m": 0.06679426758938742,
       "lateral_group_bootstrap_CI95_m": [
-        0.050471362316810514,
-        0.05719672177952514
+        0.06305586285176257,
+        0.0710756911631227
       ],
-      "lateral_over_longitudinal_ratio": 0.174959536010693
+      "lateral_over_longitudinal_ratio": 0.1589910365881837
     },
     {
       "platform": "nuscenes",
       "prediction_branch": "causal_physics_prior",
       "horizon_s": 2,
-      "longitudinal_abs_endpoint_error_mean_m": 1.003559083675097,
+      "longitudinal_abs_endpoint_error_mean_m": 1.2317253107773234,
       "longitudinal_group_bootstrap_CI95_m": [
-        0.9593737951417267,
-        1.0541316594257277
+        1.1694333366249896,
+        1.2993726544451056
       ],
-      "lateral_abs_endpoint_error_mean_m": 0.25576104256363047,
+      "lateral_abs_endpoint_error_mean_m": 0.3179263368347248,
       "lateral_group_bootstrap_CI95_m": [
-        0.23890021530812364,
-        0.2750060314918135
+        0.29704760592838786,
+        0.34210583755048424
       ],
-      "lateral_over_longitudinal_ratio": 0.2550324092289771
+      "lateral_over_longitudinal_ratio": 0.2580292772896798
     },
     {
       "platform": "nuscenes",
       "prediction_branch": "causal_physics_prior",
       "horizon_s": 3,
-      "longitudinal_abs_endpoint_error_mean_m": 2.0625501166698843,
+      "longitudinal_abs_endpoint_error_mean_m": 2.3865165283337944,
       "longitudinal_group_bootstrap_CI95_m": [
-        1.9683626640070644,
-        2.1733641286026524
+        2.261330285529447,
+        2.524202745639797
       ],
-      "lateral_abs_endpoint_error_mean_m": 0.6948251554374971,
+      "lateral_abs_endpoint_error_mean_m": 0.8313135652857491,
       "lateral_group_bootstrap_CI95_m": [
-        0.6454025595281235,
-        0.7486614758700646
+        0.7755668771694527,
+        0.894403317734153
       ],
-      "lateral_over_longitudinal_ratio": 0.3370767258840885
+      "lateral_over_longitudinal_ratio": 0.3482725812046326
     },
     {
       "platform": "nuscenes",
       "prediction_branch": "causal_full_residual",
       "horizon_s": 3,
-      "longitudinal_abs_endpoint_error_mean_m": 1.7655909494348179,
+      "longitudinal_abs_endpoint_error_mean_m": 1.6671681833549676,
       "longitudinal_group_bootstrap_CI95_m": [
-        1.6919462127049991,
-        1.8531682663562852
+        1.6071581926704006,
+        1.7421511100319906
       ],
-      "lateral_abs_endpoint_error_mean_m": 0.6508843345370202,
+      "lateral_abs_endpoint_error_mean_m": 0.7624076911735048,
       "lateral_group_bootstrap_CI95_m": [
-        0.6080506513342265,
-        0.6960605355536529
+        0.7136068533946304,
+        0.8161202765711554
       ],
-      "lateral_over_longitudinal_ratio": 0.36873637588661473
+      "lateral_over_longitudinal_ratio": 0.45688050732859764
     }
   ]
 }

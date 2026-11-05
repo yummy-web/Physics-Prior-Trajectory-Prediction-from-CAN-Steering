@@ -13,7 +13,8 @@ nuScenes TARGET test scenes never influence schedule selection.
 
 On nuScenes nested grouped CV (identical splits to exp_lambda_analytic_nusc),
 evaluate the SAME untouched test scenes under four lambda policies:
-  1. source   : comma analytic-shrunk schedule  {3:.35,5:.52,10:.72,20:.89}
+  1. source   : comma analytic-shrunk schedule loaded from the current
+                canonical comma result
   2. universal: fixed lambda = 1 (naive full residual)
   3. target_val: nuScenes own validation analytic-shrunk lambda (re-estimated here)
   4. target_oracle: nuScenes grid oracle (lower bound)
@@ -39,8 +40,24 @@ DT = 0.02; H = 3.0
 N_LIST = [3, 5, 10, 20]; FOLDS = 3; SUBSET_SEEDS = 4
 LAMBDAS = [0.0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5]
 KAPPA = 300
-# source schedule learned on comma (exp_lambda_analytic, analytic-shrunk means):
-SOURCE_SCHED = {3: 0.35, 5: 0.52, 10: 0.72, 20: 0.89}
+SOURCE_RESULT = os.path.join(
+    os.path.dirname(__file__), "..", "results", "canonical",
+    "exp_lambda_analytic_results.json",
+)
+
+
+def load_source_schedule():
+    """Load the comma-only schedule from the current canonical result."""
+    with open(SOURCE_RESULT, "r", encoding="utf-8") as f:
+        result = json.load(f)
+    schedule = {
+        int(n): float(row["lhat_shrunk_mean"])
+        for n, row in result["per_N"].items()
+    }
+    missing = set(N_LIST) - set(schedule)
+    if missing:
+        raise ValueError(f"canonical comma result lacks budgets: {sorted(missing)}")
+    return schedule
 
 
 def rmf_scene(P_, G_, grp):
@@ -87,17 +104,18 @@ def main():
     global N_LIST
     if len(sys.argv) > 1:
         N_LIST = [int(x) for x in sys.argv[1].split(",")]
+    source_sched = load_source_schedule()
     data = NU.load()
     items_all = [(NU.key_of(df, k), df) for k, df in data.items()]
     gids = [k for k, _ in items_all]; byg = {k: df for k, df in items_all}
     rng = np.random.default_rng(0); rng.shuffle(gids)
     folds = [gids[i::FOLDS] for i in range(FOLDS)]
-    out = {"horizon_s": H, "dt": DT, "N_list": N_LIST, "source_schedule": SOURCE_SCHED,
+    out = {"horizon_s": H, "dt": DT, "N_list": N_LIST, "source_schedule": source_sched,
            "provenance": {"run_date": datetime.datetime.now().isoformat(timespec="seconds"),
                           "folds": FOLDS, "subset_seeds": SUBSET_SEEDS, "dataset": "nuscenes(target) <- comma(source)",
                           "causal": True, "speed_src": "can_speed", "yawrate_src": "backward_diff",
                           "collect_from": "exp_lambda_nusc_causal", "gain_from": "gain_causal",
-                          "source_schedule_origin": "comma only (exp_lambda_analytic); target test never used for selection",
+                          "source_schedule_origin": "current canonical comma-only exp_lambda_analytic result; target test never used for selection",
                           "stat_unit": "scene (clustered bootstrap over test scenes); draw-level CI non-independent "
                                        "(4 subset seeds reuse same test scenes per fold)",
                           "scope": "temporally-causal; localisation pose + CAN at anchor; NOT real-vehicle sensor-only",
@@ -110,7 +128,7 @@ def main():
         except Exception: pass
     for N in N_LIST:
         if N < 2: continue
-        lam_src = SOURCE_SCHED.get(N, 0.75)
+        lam_src = source_sched[N]
         R = {"source": [], "universal": [], "tval": [], "oracle": []}
         S = {}  # per-scene accumulators for clustered CIs
         for fo in range(FOLDS):

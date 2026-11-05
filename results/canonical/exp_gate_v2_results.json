@@ -1,7 +1,7 @@
 {
   "horizon_s": 3.0,
-  "gain_a": 0.00022698010817025048,
-  "diag_corr_histStd_vs_true_physErr": 0.26537545711739585,
+  "gain_a": 0.00022780830479113127,
+  "diag_corr_histStd_vs_true_physErr": 0.26791829729353844,
   "note": "all gates causal (history std / causal features); threshold on validation",
   "val_threshold": 0.2,
   "learn_scalar_ab": [
@@ -9,15 +9,15 @@
     3.0
   ],
   "gate_mean_opening": {
-    "heuristic": 0.5314726360802093,
-    "scalar": 0.9777880390182662,
-    "mlp": 0.752167799911516
+    "heuristic": 0.5312706825818297,
+    "scalar": 0.9777548675015798,
+    "mlp": 0.6897354065633804
   },
   "fde_by_gate": {
-    "PurePhysics": 1.7620348390835683,
-    "NoGate": 1.0730927470966514,
-    "Heuristic": 1.261206988139453,
-    "Learn-Scalar": 1.0733579785936682,
-    "Learn-MLP": 1.1236669821703293
+    "PurePhysics": 1.7981569145938392,
+    "NoGate": 1.4686657439953987,
+    "Heuristic": 1.5502158661266248,
+    "Learn-Scalar": 1.4681909595287423,
+    "Learn-MLP": 1.4897777691997358
   }
 }

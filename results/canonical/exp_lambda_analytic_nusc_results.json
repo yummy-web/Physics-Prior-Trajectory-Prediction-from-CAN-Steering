@@ -25,7 +25,7 @@
     1.5
   ],
   "provenance": {
-    "run_date": "2026-10-08T16:50:47",
+    "run_date": "2026-11-04T20:11:28",
     "folds": 3,
     "subset_seeds": 4,
     "dataset": "nuscenes",
@@ -45,78 +45,78 @@
     "3": {
       "N": 3,
       "n_draws": 12,
-      "fde_prior": 2.4714334429980194,
-      "fde_full": 4.146380945979515,
-      "fde_grid": 2.7518274964688274,
-      "fde_analytic": 2.6838308709499863,
-      "fde_analytic_shrunk": 2.4829838233633987,
-      "fde_oracle": 2.451038767241457,
-      "shrunk_gain_vs_full": 1.6633971226161162,
+      "fde_prior": 2.847860475370729,
+      "fde_full": 4.653322173380544,
+      "fde_grid": 3.304111831295056,
+      "fde_analytic": 3.2356498913385145,
+      "fde_analytic_shrunk": 2.8684606870139944,
+      "fde_oracle": 2.832494348296104,
+      "shrunk_gain_vs_full": 1.784861486366551,
       "shrunk_gain_CI95_draw_nonindep": [
-        0.7398314648608953,
-        2.8775705523288564
+        1.085406595556397,
+        2.7166338462858493
       ],
       "shrunk_gain_CI95_scene": [
-        1.461054132327674,
-        1.8765293478193739
+        1.6635054695350435,
+        1.9186869806170541
       ],
       "shrunk_gain_scene_detail": {
         "n_scenes": 566,
-        "mean_diff": 1.6608434413841102,
+        "mean_diff": 1.7844858320264283,
         "CI95": [
-          1.461054132327674,
-          1.8765293478193739
+          1.6635054695350435,
+          1.9186869806170541
         ],
-        "frac_scenes_positive": 0.9876325088339223
+        "frac_scenes_positive": 0.9946996466431095
       },
       "stat_unit": "scene (clustered); draw-level CI retained but non-independent",
-      "lhat_grid_mean": 0.5,
-      "lhat_analytic_mean": 0.4754544525991144,
-      "lhat_shrunk_mean": 0.16726594989305332,
+      "lhat_grid_mean": 0.5208333333333334,
+      "lhat_analytic_mean": 0.5078778734067312,
+      "lhat_shrunk_mean": 0.1769452792931416,
       "kappa_sweep": {
         "100": {
-          "fde_shrunk": 2.542136418883274,
-          "lhat_shrunk_mean": 0.29454797974869645,
-          "gain_vs_full": 1.6042445270962407,
+          "fde_shrunk": 2.979988200556958,
+          "lhat_shrunk_mean": 0.3128311922033819,
+          "gain_vs_full": 1.6733339728235872,
           "gain_vs_full_CI95_scene": [
-            1.4051004855569282,
-            1.8132414160104886
+            1.5577015200244455,
+            1.801189119175981
           ]
         },
         "200": {
-          "fde_shrunk": 2.49993037828792,
-          "lhat_shrunk_mean": 0.21336634294377047,
-          "gain_vs_full": 1.6464505676915948,
+          "fde_shrunk": 2.9010758646433072,
+          "lhat_shrunk_mean": 0.22603624717329027,
+          "gain_vs_full": 1.752246308737238,
           "gain_vs_full_CI95_scene": [
-            1.4455600323597964,
-            1.8580010957650603
+            1.6326424325379438,
+            1.8839048133570533
           ]
         },
         "300": {
-          "fde_shrunk": 2.4829838233633987,
-          "lhat_shrunk_mean": 0.16726594989305332,
-          "gain_vs_full": 1.6633971226161162,
+          "fde_shrunk": 2.8684606870139944,
+          "lhat_shrunk_mean": 0.1769452792931416,
+          "gain_vs_full": 1.784861486366551,
           "gain_vs_full_CI95_scene": [
-            1.461054132327674,
-            1.8765293478193739
+            1.6635054695350435,
+            1.9186869806170541
           ]
         },
         "500": {
-          "fde_shrunk": 2.4707567953565053,
-          "lhat_shrunk_mean": 0.11679591618738998,
-          "gain_vs_full": 1.6756241506230098,
+          "fde_shrunk": 2.844668683425626,
+          "lhat_shrunk_mean": 0.12336262028280971,
+          "gain_vs_full": 1.8086534899549183,
           "gain_vs_full_CI95_scene": [
-            1.4709751749579767,
-            1.8900893078807115
+            1.686596626892739,
+            1.9449208094109325
           ]
         },
         "800": {
-          "fde_shrunk": 2.466345512965592,
-          "lhat_shrunk_mean": 0.08040467471749654,
-          "gain_vs_full": 1.6800354330139224,
+          "fde_shrunk": 2.83638457945448,
+          "lhat_shrunk_mean": 0.08483064281243581,
+          "gain_vs_full": 1.8169375939260644,
           "gain_vs_full_CI95_scene": [
-            1.4731028998360804,
-            1.8951513120132453
+            1.6940023286963397,
+            1.9542066833491347
           ]
         }
       }
@@ -124,78 +124,78 @@
     "5": {
       "N": 5,
       "n_draws": 12,
-      "fde_prior": 2.4661546214249515,
-      "fde_full": 3.4048246741565964,
-      "fde_grid": 2.467524209637549,
-      "fde_analytic": 2.4655039312535965,
-      "fde_analytic_shrunk": 2.445039476279224,
-      "fde_oracle": 2.4283994242831004,
-      "shrunk_gain_vs_full": 0.9597851978773716,
+      "fde_prior": 2.8408294358537263,
+      "fde_full": 3.7694246091269314,
+      "fde_grid": 2.896867336492629,
+      "fde_analytic": 2.8631285320961752,
+      "fde_analytic_shrunk": 2.822361965428873,
+      "fde_oracle": 2.800307698708977,
+      "shrunk_gain_vs_full": 0.9470626436980581,
       "shrunk_gain_CI95_draw_nonindep": [
-        0.4242249306160442,
-        1.5454361927061178
+        0.5215946095019736,
+        1.5104638186076902
       ],
       "shrunk_gain_CI95_scene": [
-        0.8602689272609313,
-        1.069113425057707
+        0.8644719307667794,
+        1.0423009056048893
       ],
       "shrunk_gain_scene_detail": {
         "n_scenes": 566,
-        "mean_diff": 0.960684946603622,
+        "mean_diff": 0.9478257355569802,
         "CI95": [
-          0.8602689272609313,
-          1.069113425057707
+          0.8644719307667794,
+          1.0423009056048893
         ],
-        "frac_scenes_positive": 0.9240282685512368
+        "frac_scenes_positive": 0.9275618374558304
       },
       "stat_unit": "scene (clustered); draw-level CI retained but non-independent",
-      "lhat_grid_mean": 0.20833333333333334,
-      "lhat_analytic_mean": 0.22082699781267814,
-      "lhat_shrunk_mean": 0.11476328070928205,
+      "lhat_grid_mean": 0.25,
+      "lhat_analytic_mean": 0.23913432720938363,
+      "lhat_shrunk_mean": 0.12301992245432379,
       "kappa_sweep": {
         "100": {
-          "fde_shrunk": 2.451001638103948,
-          "lhat_shrunk_mean": 0.16881811385561377,
-          "gain_vs_full": 0.9538230360526478,
+          "fde_shrunk": 2.836665066027038,
+          "lhat_shrunk_mean": 0.18190104779176383,
+          "gain_vs_full": 0.9327595430998935,
           "gain_vs_full_CI95_scene": [
-            0.8555088719686489,
-            1.061392622448997
+            0.8534933812215925,
+            1.0247099503899604
           ]
         },
         "200": {
-          "fde_shrunk": 2.446300356630782,
-          "lhat_shrunk_mean": 0.13663857616935624,
-          "gain_vs_full": 0.9585243175258135,
+          "fde_shrunk": 2.8264557412207996,
+          "lhat_shrunk_mean": 0.14677494693120327,
+          "gain_vs_full": 0.9429688679061323,
           "gain_vs_full_CI95_scene": [
-            0.8594109988816985,
-            1.0670225285983148
+            0.8616447858374159,
+            1.0372940869258878
           ]
         },
         "300": {
-          "fde_shrunk": 2.445039476279224,
-          "lhat_shrunk_mean": 0.11476328070928205,
-          "gain_vs_full": 0.9597851978773716,
+          "fde_shrunk": 2.822361965428873,
+          "lhat_shrunk_mean": 0.12301992245432379,
+          "gain_vs_full": 0.9470626436980581,
           "gain_vs_full_CI95_scene": [
-            0.8602689272609313,
-            1.069113425057707
+            0.8644719307667794,
+            1.0423009056048893
           ]
         },
         "500": {
-          "fde_shrunk": 2.4458121824126224,
-          "lhat_shrunk_mean": 0.08692959516731595,
-          "gain_vs_full": 0.9590124917439734,
+          "fde_shrunk": 2.8205785900680915,
+          "lhat_shrunk_mean": 0.0929374747090919,
+          "gain_vs_full": 0.9488460190588403,
           "gain_vs_full_CI95_scene": [
-            0.8592764308100419,
-            1.0688730116372411
+            0.8648834913374825,
+            1.045084867431374
           ]
         },
         "800": {
-          "fde_shrunk": 2.4485335788829246,
-          "lhat_shrunk_mean": 0.06374109357536327,
-          "gain_vs_full": 0.956291095273671,
+          "fde_shrunk": 2.8220705683089284,
+          "lhat_shrunk_mean": 0.06799677486000365,
+          "gain_vs_full": 0.9473540408180036,
           "gain_vs_full_CI95_scene": [
-            0.8560909475045909,
-            1.0669637548140507
+            0.8624795980929123,
+            1.0444253060822672
           ]
         }
       }
@@ -203,78 +203,78 @@
     "10": {
       "N": 10,
       "n_draws": 12,
-      "fde_prior": 2.4745588533892264,
-      "fde_full": 2.8442513313203217,
-      "fde_grid": 2.4406576504521516,
-      "fde_analytic": 2.435514664677998,
-      "fde_analytic_shrunk": 2.4246361795550837,
-      "fde_oracle": 2.422134048147415,
-      "shrunk_gain_vs_full": 0.4196151517652383,
+      "fde_prior": 2.841647738940145,
+      "fde_full": 3.31830647351291,
+      "fde_grid": 2.842278175112129,
+      "fde_analytic": 2.8291790040691485,
+      "fde_analytic_shrunk": 2.7918734553500553,
+      "fde_oracle": 2.7724132661927974,
+      "shrunk_gain_vs_full": 0.5264330181628539,
       "shrunk_gain_CI95_draw_nonindep": [
-        0.299405100364651,
-        0.5497893178021509
+        0.319311231380803,
+        0.753069192790664
       ],
       "shrunk_gain_CI95_scene": [
-        0.38019379534190606,
-        0.464331297429494
+        0.4762654826512651,
+        0.5818670950194171
       ],
       "shrunk_gain_scene_detail": {
         "n_scenes": 566,
-        "mean_diff": 0.41984173077208436,
+        "mean_diff": 0.5266167181536621,
         "CI95": [
-          0.38019379534190606,
-          0.464331297429494
+          0.4762654826512651,
+          0.5818670950194171
         ],
-        "frac_scenes_positive": 0.8798586572438163
+        "frac_scenes_positive": 0.8851590106007067
       },
       "stat_unit": "scene (clustered); draw-level CI retained but non-independent",
-      "lhat_grid_mean": 0.2916666666666667,
-      "lhat_analytic_mean": 0.32083155541859953,
-      "lhat_shrunk_mean": 0.21936173190085284,
+      "lhat_grid_mean": 0.375,
+      "lhat_analytic_mean": 0.3464893960245255,
+      "lhat_shrunk_mean": 0.2355288765033572,
       "kappa_sweep": {
         "100": {
-          "fde_shrunk": 2.4284651447031407,
-          "lhat_shrunk_mean": 0.2779706442969054,
-          "gain_vs_full": 0.41578618661718075,
+          "fde_shrunk": 2.8089627128808075,
+          "lhat_shrunk_mean": 0.29946117456332405,
+          "gain_vs_full": 0.5093437606321017,
           "gain_vs_full_CI95_scene": [
-            0.37773783209740663,
-            0.4588732659774004
+            0.4613464676682408,
+            0.5619578675142541
           ]
         },
         "200": {
-          "fde_shrunk": 2.42548030797065,
-          "lhat_shrunk_mean": 0.24521256329323962,
-          "gain_vs_full": 0.41877102334967137,
+          "fde_shrunk": 2.797890599705772,
+          "lhat_shrunk_mean": 0.263674598178999,
+          "gain_vs_full": 0.5204158738071373,
           "gain_vs_full_CI95_scene": [
-            0.3797457290177649,
-            0.4629298440931309
+            0.47116268564334396,
+            0.5744710162266315
           ]
         },
         "300": {
-          "fde_shrunk": 2.4246361795550837,
-          "lhat_shrunk_mean": 0.21936173190085284,
-          "gain_vs_full": 0.4196151517652383,
+          "fde_shrunk": 2.7918734553500553,
+          "lhat_shrunk_mean": 0.2355288765033572,
+          "gain_vs_full": 0.5264330181628539,
           "gain_vs_full_CI95_scene": [
-            0.38019379534190606,
-            0.464331297429494
+            0.4762654826512651,
+            0.5818670950194171
           ]
         },
         "500": {
-          "fde_shrunk": 2.425897484228567,
-          "lhat_shrunk_mean": 0.1811646987135717,
-          "gain_vs_full": 0.4183538470917549,
+          "fde_shrunk": 2.78746055783922,
+          "lhat_shrunk_mean": 0.1940932881346991,
+          "gain_vs_full": 0.5308459156736893,
           "gain_vs_full_CI95_scene": [
-            0.3782029106980709,
-            0.46390241591282644
+            0.47918617645052486,
+            0.5867850936473196
           ]
         },
         "800": {
-          "fde_shrunk": 2.4301197677442326,
-          "lhat_shrunk_mean": 0.14364598671578435,
-          "gain_vs_full": 0.41413156357608916,
+          "fde_shrunk": 2.7883298761973907,
+          "lhat_shrunk_mean": 0.1535691490637874,
+          "gain_vs_full": 0.5299765973155185,
           "gain_vs_full_CI95_scene": [
-            0.3731270143677226,
-            0.46024146047825987
+            0.4774154874274394,
+            0.5870479830969767
           ]
         }
       }
@@ -282,104 +282,81 @@
     "20": {
       "N": 20,
       "n_draws": 12,
-      "fde_prior": 2.474495616630898,
-      "fde_full": 2.4893246461835834,
-      "fde_grid": 2.356365023820309,
-      "fde_analytic": 2.344650419591652,
-      "fde_analytic_shrunk": 2.3518341170938233,
-      "fde_oracle": 2.333955048308671,
-      "shrunk_gain_vs_full": 0.13749052908976012,
+      "fde_prior": 2.8496528424315346,
+      "fde_full": 2.8498395542432444,
+      "fde_grid": 2.6857278404516403,
+      "fde_analytic": 2.675625796004287,
+      "fde_analytic_shrunk": 2.686187364455714,
+      "fde_oracle": 2.6615250976528477,
+      "shrunk_gain_vs_full": 0.16365218978753118,
       "shrunk_gain_CI95_draw_nonindep": [
-        0.07568665201530222,
-        0.20283005669258622
+        0.08628652818216791,
+        0.2490092489683603
       ],
       "shrunk_gain_CI95_scene": [
-        0.11372468221374551,
-        0.16251155206330448
+        0.13653403725995508,
+        0.19307785893201443
       ],
       "shrunk_gain_scene_detail": {
         "n_scenes": 566,
-        "mean_diff": 0.1374606852508105,
+        "mean_diff": 0.16363802031140165,
         "CI95": [
-          0.11372468221374551,
-          0.16251155206330448
+          0.13653403725995508,
+          0.19307785893201443
         ],
-        "frac_scenes_positive": 0.6890459363957597
+        "frac_scenes_positive": 0.6996466431095406
       },
       "stat_unit": "scene (clustered); draw-level CI retained but non-independent",
-      "lhat_grid_mean": 0.4375,
-      "lhat_analytic_mean": 0.43682549492737643,
-      "lhat_shrunk_mean": 0.3455887794135996,
+      "lhat_grid_mean": 0.4791666666666667,
+      "lhat_analytic_mean": 0.4535049258918946,
+      "lhat_shrunk_mean": 0.35763650402318964,
       "kappa_sweep": {
         "100": {
-          "fde_shrunk": 2.3461288183705196,
-          "lhat_shrunk_mean": 0.40149348971411136,
-          "gain_vs_full": 0.14319582781306364,
+          "fde_shrunk": 2.6780348730566,
+          "lhat_shrunk_mean": 0.4163063068999497,
+          "gain_vs_full": 0.17180468118664416,
           "gain_vs_full_CI95_scene": [
-            0.12117798957998495,
-            0.16630444149882234
+            0.1464843742618647,
+            0.19926756675076
           ]
         },
         "200": {
-          "fde_shrunk": 2.3486845689559237,
-          "lhat_shrunk_mean": 0.37144941160204364,
-          "gain_vs_full": 0.14064007722765956,
+          "fde_shrunk": 2.6817607764943383,
+          "lhat_shrunk_mean": 0.38474759447302675,
+          "gain_vs_full": 0.16807877774890614,
           "gain_vs_full_CI95_scene": [
-            0.1177442297143496,
-            0.16474839200128388
+            0.1418198158930659,
+            0.1966063075171884
           ]
         },
         "300": {
-          "fde_shrunk": 2.3518341170938233,
-          "lhat_shrunk_mean": 0.3455887794135996,
-          "gain_vs_full": 0.13749052908976012,
+          "fde_shrunk": 2.686187364455714,
+          "lhat_shrunk_mean": 0.35763650402318964,
+          "gain_vs_full": 0.16365218978753118,
           "gain_vs_full_CI95_scene": [
-            0.11372468221374551,
-            0.16251155206330448
+            0.13653403725995508,
+            0.19307785893201443
           ]
         },
         "500": {
-          "fde_shrunk": 2.3588640722543603,
-          "lhat_shrunk_mean": 0.3033499051819922,
-          "gain_vs_full": 0.13046057392922303,
+          "fde_shrunk": 2.6958325390775406,
+          "lhat_shrunk_mean": 0.31346084124688606,
+          "gain_vs_full": 0.15400701516570384,
           "gain_vs_full_CI95_scene": [
-            0.10542812506529721,
-            0.1567795010200679
+            0.1253953785116657,
+            0.185661010348023
           ]
         },
         "800": {
-          "fde_shrunk": 2.369372973847369,
-          "lhat_shrunk_mean": 0.2563519054540259,
-          "gain_vs_full": 0.11995167233621488,
+          "fde_shrunk": 2.7100627158816555,
+          "lhat_shrunk_mean": 0.2644611925703151,
+          "gain_vs_full": 0.1397768383615887,
           "gain_vs_full_CI95_scene": [
-            0.09330988220901744,
-            0.14744677778308132
+            0.10934725540890383,
+            0.17369790130361537
           ]
         }
       }
     }
-  },
-  "lambda_monotonicity_note": {
-    "N_list": [
-      3,
-      5,
-      10,
-      20
-    ],
-    "lhat_grid_mean": [
-      0.5,
-      0.20833333333333334,
-      0.2916666666666667,
-      0.4375
-    ],
-    "grid_strictly_monotonic": false,
-    "lhat_shrunk_mean": [
-      0.16726594989305332,
-      0.11476328070928205,
-      0.21936173190085284,
-      0.3455887794135996
-    ],
-    "shrunk_strictly_monotonic": false,
-    "interpretation": "Neither grid-optimal nor analytic-shrunk lambda is strictly monotonic in N. Grid-optimal lambda is non-monotonic and NOT even a clean low-to-high trend here (N=3=0.50 is the max, N=5=0.21 the min). Analytic-shrunk lambda rises overall from N=3=0.167 to N=20=0.346 but dips at N=5=0.115, so it is a trend between endpoints, NOT a strict step-by-step monotone law. The ROBUST claim is the FDE GAIN of shrinkage vs full-residual, which decreases monotonically with N (1.663>0.960>0.420>0.137, all scene-CIs exclude 0) i.e. the VALUE of shrinkage shrinks as budget grows. Do NOT claim a monotone lambda law; frame as empirical, platform-dependent calibration."
   }
 }

@@ -1,5 +1,6 @@
 # Caches (rebuilt locally from public datasets)
 *.pkl
+*.strict_pvh_v1
 .comma_cache.pkl
 .nusc_cache.pkl
 .nusc_build.pkl
