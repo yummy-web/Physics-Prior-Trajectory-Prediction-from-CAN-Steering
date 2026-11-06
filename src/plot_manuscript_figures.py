@@ -86,17 +86,17 @@ def fig_transfer(out: Path) -> None:
     oracle = vals("oracle_fde_mean", "fde_oracle", "target_oracle_fde", "fde_target_oracle")
     fig, ax = plt.subplots(figsize=(5.5, 3.35), constrained_layout=True)
     for y, label, color in [
-        (universal, "Universal lambda=1", "#A9A9A9"),
-        (source, "comma2k19 source schedule", "#2E75B6"),
-        (target, "Target validation", "#70AD47"),
-        (oracle, "Target oracle", "#C00000"),
+        (universal, "Fixed λ = 1", "#A9A9A9"),
+        (source, "comma2k19 source-platform coefficient schedule", "#2E75B6"),
+        (target, "Target-validation calibration", "#70AD47"),
+        (oracle, "Target-test oracle", "#C00000"),
     ]:
         ax.plot(ns, y, marker="o", linewidth=2, label=label, color=color)
     ax.set_xticks(ns, [str(n) for n in ns])
     ax.set_xlabel("Training-group budget N")
     ax.set_ylabel("nuScenes FDE (m)")
     ax.set_title("Cross-platform transfer: direction transfers, level needs recalibration")
-    style_axis(ax); ax.legend(frameon=False, fontsize=8)
+    style_axis(ax); ax.legend(frameon=False, fontsize=7.5, ncol=2)
     save(fig, out, "Fig_3_cross_platform_transfer")
 
 
